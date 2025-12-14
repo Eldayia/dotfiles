@@ -92,14 +92,60 @@ mount "/dev/${PART_PREFIX}2" /mnt
 mkdir -p /mnt/boot
 mount "/dev/${PART_PREFIX}1" /mnt/boot
 
-# --- 4. CONFIGURATION ---
+#!/bin/sh
+set -e
+
+# --- 4. GÉNÉRATION CONFIGURATION MATÉRIELLE ---
 echo ""
-echo "[4/4] Génération de la configuration..."
+echo "[4/5] Génération de la configuration de base..."
 nixos-generate-config --root /mnt
+
+# --- 5. COPIE DES DOTFILES ---
+echo ""
+echo "[5/5] Récupération de vos fichiers de configuration..."
+
+# On demande le lien du repo (ou dossier local)
+read -p "Avez-vous un dépôt Git pour vos dotfiles ? (Laissez vide si non) : " GIT_REPO
+
+if [ -n "$GIT_REPO" ]; then
+    echo "Clonage du dépôt..."
+    # On installe git temporairement s'il n'est pas là
+    nix-env -iA nixos.git
+    
+    # On clone dans un dossier temporaire
+    git clone "$GIT_REPO" /mnt/tmp/dotfiles
+    
+    echo "Copie des fichiers vers /mnt/etc/nixos..."
+    # On copie tout le contenu du dossier 'nixos' du repo vers la destination
+    # ATTENTION : Adaptez le chemin '/mnt/tmp/dotfiles/nixos/*' si votre structure est différente
+    sudo cp -r /mnt/tmp/dotfiles/nixos/* /mnt/etc/nixos/
+    
+    # On supprime le dossier temporaire
+    rm -rf /mnt/tmp/dotfiles
+    
+    echo "✅ Configuration importée !"
+else
+    # Si vous avez copié le dossier "dotfiles" manuellement dans le dossier home de l'utilisateur
+    if [ -d "$HOME/dotfiles/nixos" ]; then
+        echo "Dossier local détecté. Copie en cours..."
+        sudo cp -r "$HOME/dotfiles/nixos/"* /mnt/etc/nixos/
+        echo "✅ Fichiers locaux copiés."
+    else
+        echo "⚠️  Aucun dotfile trouvé. Vous devrez éditer configuration.nix manuellement."
+    fi
+fi
+
+# Petite sécurité : On s'assure que hardware-configuration.nix est bien présent
+# (Au cas où vos dotfiles l'auraient écrasé avec une version incompatible)
+if [ ! -f /mnt/etc/nixos/hardware-configuration.nix ]; then
+    echo "⚠️  Attention : hardware-configuration.nix manquant ! Régénération..."
+    nixos-generate-config --root /mnt
+fi
 
 echo ""
 echo "============================================"
 echo "✅ TERMINÉ !"
-echo "Vous pouvez maintenant éditer la configuration :"
-echo "nano /mnt/etc/nixos/configuration.nix"
+echo "Vérifiez vos fichiers avant d'installer :"
+echo "ls -la /mnt/etc/nixos/"
+echo "Puis lancez : nixos-install"
 echo "============================================"

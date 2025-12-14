@@ -21,8 +21,10 @@
     libxcursor
 
     # Support pour Wayland
+    qt5.full
+    qt6.full
     libsForQt5.wayland
-    qt6.wayland
+    libsForQt6.wayland
   ];
 
   # Configuration XDG pour les applications

@@ -20,11 +20,11 @@
     # Cursors et thèmes
     libxcursor
 
-    # Support pour Wayland
+    # Support pour Wayland (Qt5 et Qt6 avec support Wayland)
     qt5.full
     qt6.full
-    libsForQt5.wayland
-    libsForQt6.wayland
+    libsForQt5.qt5.qtwayland
+    kdePackages.qtwayland
   ];
 
   # Configuration XDG pour les applications

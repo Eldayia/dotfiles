@@ -29,9 +29,7 @@ if [ "$ASK_WIFI" = "o" ] || [ "$ASK_WIFI" = "O" ] || [ "$ASK_WIFI" = "y" ] || [ 
     echo ""
 
     echo "Connexion en cours..."
-    # Création de la config wpa_supplicant
     wpa_passphrase "$WIFI_SSID" "$WIFI_PASS" > /etc/wpa_supplicant.conf
-    # Lancement en arrière-plan
     wpa_supplicant -B -i "$WIFI_INTERFACE" -c /etc/wpa_supplicant.conf
 
     echo "Attente de la connexion (5 secondes)..."
@@ -65,7 +63,7 @@ if [ "$CONFIRM" != "oui" ]; then
     exit 1
 fi
 
-# Logique pour nommage des partitions (nvme0n1p1 vs sda1)
+# Logique pour nommage des partitions
 if echo "$DISK_NAME" | grep -qE "[0-9]$"; then
     PART_PREFIX="${DISK_NAME}p"  # nvme0n1 -> nvme0n1p
 else
@@ -73,23 +71,26 @@ else
 fi
 
 echo "Création de la table de partition GPT..."
-parted "$TARGET_DISK" -- mklabel gpt
+parted -s "$TARGET_DISK" -- mklabel gpt
 
-echo "Création de la partition BOOT (512 Mo)..."
-parted "$TARGET_DISK" -- mkpart ESP fat32 1MB 512MB
-parted "$TARGET_DISK" -- set 1 esp on
+echo "Création des partitions..."
+parted -s "$TARGET_DISK" -- mkpart ESP fat32 1MB 512MB
+parted -s "$TARGET_DISK" -- set 1 esp on
+parted -s "$TARGET_DISK" -- mkpart primary 512MB 100%
 
-echo "Création de la partition ROOT (Reste du disque)..."
-parted "$TARGET_DISK" -- mkpart primary 512MB 100%
+# On force le système à relire la table des partitions
+partprobe "$TARGET_DISK" 2>/dev/null || true
+sleep 2
 
 echo "Formatage des partitions..."
 mkfs.fat -F 32 -n boot "/dev/${PART_PREFIX}1"
 mkfs.ext4 -L nixos "/dev/${PART_PREFIX}2"
 
 echo "Montage des partitions..."
-mount "/dev/disk/by-label/nixos" /mnt
+# CORRECTION ICI : On utilise le chemin direct au lieu du label pour éviter l'erreur
+mount "/dev/${PART_PREFIX}2" /mnt
 mkdir -p /mnt/boot
-mount "/dev/disk/by-label/boot" /mnt/boot
+mount "/dev/${PART_PREFIX}1" /mnt/boot
 
 # --- 4. CONFIGURATION ---
 echo ""

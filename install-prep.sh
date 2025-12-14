@@ -16,28 +16,34 @@ echo "Clavier passé en AZERTY."
 # --- 2. WIFI ---
 echo ""
 echo "[2/4] Configuration du Wi-Fi..."
-echo "Liste des interfaces :"
-ip link | grep -E '^[0-9]+: ' | cut -d: -f2 | grep -v "lo"
-echo ""
+read -p "Voulez-vous configurer le Wi-Fi ? (o/n) : " ASK_WIFI
 
-read -p "Entrez le nom de l'interface WiFi (ex: wlan0) : " WIFI_INTERFACE
-read -p "Entrez le nom du SSID (Nom du WiFi) : " WIFI_SSID
-read -s -p "Entrez le mot de passe WiFi : " WIFI_PASS
-echo ""
+if [ "$ASK_WIFI" = "o" ] || [ "$ASK_WIFI" = "O" ] || [ "$ASK_WIFI" = "y" ] || [ "$ASK_WIFI" = "Y" ]; then
+    echo "Liste des interfaces :"
+    ip link | grep -E '^[0-9]+: ' | cut -d: -f2 | grep -v "lo"
+    echo ""
 
-echo "Connexion en cours..."
-# Création de la config wpa_supplicant
-wpa_passphrase "$WIFI_SSID" "$WIFI_PASS" > /etc/wpa_supplicant.conf
-# Lancement en arrière-plan
-wpa_supplicant -B -i "$WIFI_INTERFACE" -c /etc/wpa_supplicant.conf
+    read -p "Entrez le nom de l'interface WiFi (ex: wlan0) : " WIFI_INTERFACE
+    read -p "Entrez le nom du SSID (Nom du WiFi) : " WIFI_SSID
+    read -s -p "Entrez le mot de passe WiFi : " WIFI_PASS
+    echo ""
 
-echo "Attente de la connexion (5 secondes)..."
-sleep 5
-if ping -c 1 google.com > /dev/null 2>&1; then
-    echo "✅ Connecté à Internet !"
+    echo "Connexion en cours..."
+    # Création de la config wpa_supplicant
+    wpa_passphrase "$WIFI_SSID" "$WIFI_PASS" > /etc/wpa_supplicant.conf
+    # Lancement en arrière-plan
+    wpa_supplicant -B -i "$WIFI_INTERFACE" -c /etc/wpa_supplicant.conf
+
+    echo "Attente de la connexion (5 secondes)..."
+    sleep 5
+    if ping -c 1 google.com > /dev/null 2>&1; then
+        echo "✅ Connecté à Internet !"
+    else
+        echo "⚠️ Pas de connexion détectée. Vérifiez le mot de passe."
+        read -p "Appuyez sur Entrée pour continuer quand même ou Ctrl+C pour arrêter..."
+    fi
 else
-    echo "⚠️ Pas de connexion détectée. Vérifiez le mot de passe."
-    read -p "Appuyez sur Entrée pour continuer quand même ou Ctrl+C pour arrêter..."
+    echo "⏭️  Configuration Wi-Fi ignorée."
 fi
 
 # --- 3. DISQUE & FORMATAGE ---

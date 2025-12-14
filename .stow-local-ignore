@@ -1,0 +1,24 @@
+# Fichiers à ignorer lors du déploiement avec Stow
+
+# Documentation
+README\.md
+CLAUDE\.md
+STOW\.md
+
+# Git
+\.git
+\.gitignore
+\.gitattributes
+
+# Fichiers système
+\.DS_Store
+Thumbs\.db
+
+# Images
+.*\.jpg
+.*\.png
+.*\.gif
+.*\.svg
+
+# NixOS (géré manuellement)
+nixos/

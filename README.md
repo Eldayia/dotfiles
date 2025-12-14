@@ -2,9 +2,26 @@
   <img src="nixos.jpg" alt="dotfiles Banner">
 </p>
 
+<p align="center">
+  <a href="https://nixos.org/"><img src="https://img.shields.io/badge/NixOS-blue?logo=nixos&logoColor=white&style=flat-square"></a>
+  <a href="https://www.gnu.org/software/stow/"><img src="https://img.shields.io/badge/Stow-portable-green?logo=gnu&style=flat-square"></a>
+  <a href="https://github.com/ghostty-org/ghostty"><img src="https://img.shields.io/badge/Ghostty-terminal-7B7B7B?logo=terminal&style=flat-square"></a>
+  <a href="https://hyprland.org/"><img src="https://img.shields.io/badge/Hyprland-wayland-6C63FF?logo=wayland&style=flat-square"></a>
+  <a href="https://neovim.io/"><img src="https://img.shields.io/badge/Neovim-lazyvim-57A143?logo=neovim&style=flat-square"></a>
+  <a href="https://www.nushell.sh/"><img src="https://img.shields.io/badge/Nushell-shell-4E9996?logo=nushell&logoColor=white&style=flat-square"></a>
+  <a href="https://starship.rs/"><img src="https://img.shields.io/badge/Starship-fast-7d5fff?logo=starship&style=flat-square"></a>
+  <a href="https://catppuccin.com/"><img src="https://img.shields.io/badge/Theme-Catppuccin-F5C2E7?logo=paintpalette&logoColor=white&style=flat-square"></a>
+</p>
+
 # dotfiles NixOS by Eldayia
 
 Configuration complète pour NixOS avec environnement Hyprland (Wayland). Cette branche est dédiée exclusivement à NixOS et utilise GNU Stow pour la gestion des dotfiles.
+
+---
+
+> Merci à <b>RikiLaNeko</b> de m’avoir fait découvrir NixOS et pour sa base de config <a href="https://gitlab.com/RikiLaNeko/dotfiles.git">dotfiles</a>
+
+---
 
 ## 📦 Stack technique
 

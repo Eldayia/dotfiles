@@ -30,6 +30,7 @@
       # Services
       ./services/audio.nix
       ./services/display-manager.nix
+      ./services/ssh.nix
     ];
 
   # Version de l'état (Ne pas toucher)

@@ -60,7 +60,8 @@ dotfiles/
 │   │   └── web.nix               # Navigateurs
 │   └── services/                 # Services système
 │       ├── audio.nix             # PipeWire et son
-│       └── display-manager.nix   # Ly display manager
+│       ├── display-manager.nix   # Ly display manager
+│       └── ssh.nix                # OpenSSH serveur
 ├── .config/                      # Configurations utilisateur
 │   ├── hypr/                     # Hyprland (window manager)
 │   ├── nvim/                     # Neovim
@@ -236,6 +237,7 @@ Le fichier `nixos/configuration.nix` est le **point d'entrée** qui importe tous
 #### **Services système**
 - `audio.nix` : PipeWire (ALSA + PulseAudio + RTKit)
 - `display-manager.nix` : Ly (display manager minimaliste)
+- `ssh.nix` : OpenSSH (serveur SSH avec configuration sécurisée)
 
 ### Avantages de cette architecture
 

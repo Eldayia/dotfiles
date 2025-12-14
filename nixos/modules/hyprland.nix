@@ -2,5 +2,34 @@
 
 {
   # --- ENVIRONNEMENT GRAPHIQUE (HYPRLAND) ---
-  programs.hyprland.enable = true; # Active Hyprland
+  programs.hyprland = {
+    enable = true;
+    # Force la disponibilité des paquets dans l'environnement
+    package = pkgs.hyprland;
+  };
+
+  # --- PAQUETS GRAPHIQUES REQUIS PAR HYPRLAND ---
+  # Ces paquets doivent être disponibles au système pour Hyprland
+  environment.systemPackages = with pkgs; [
+    # Paquets Hyprland essentiels
+    hyprland
+    xwayland
+    wlroots
+    wayland-protocols
+
+    # Cursors et thèmes
+    libxcursor
+
+    # Support pour Wayland
+    libsForQt5.wayland
+    qt6.wayland
+  ];
+
+  # Configuration XDG pour les applications
+  environment.variables = {
+    # Force les applications Qt à utiliser Wayland
+    QT_QPA_PLATFORM = "wayland";
+    # Désactive le hardcursor pour VM
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
 }

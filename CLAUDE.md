@@ -10,17 +10,29 @@ Dépôt de dotfiles pour une installation NixOS avec environnement Hyprland (Way
 
 Le dépôt est organisé comme suit :
 
-- **nixos/** : Configuration système NixOS
-  - `configuration.nix` : Configuration principale du système (bootloader, réseau, utilisateurs, paquets)
+- **nixos/** : Configuration système NixOS (modulaire)
+  - `configuration.nix` : Point d'entrée (importe tous les modules)
   - `hardware-configuration.nix` : Configuration matérielle générée automatiquement
+  - `modules/` : Modules de configuration par thème (boot, network, locale, users, packages, etc.)
+  - `services/` : Services système (audio, display-manager)
 
-- **.config/hypr/** : Configuration Hyprland (gestionnaire de fenêtres Wayland)
-  - `hyprland.conf` : Raccourcis clavier, apparence, animations, workspaces
+- **.config/** : Configurations utilisateur
+  - `hypr/` : Configuration Hyprland (gestionnaire de fenêtres Wayland)
+  - `nvim/` : Configuration Neovim
+  - `waybar/` : Configuration Waybar (barre d'état)
 
-- **Futurs ajouts prévus** :
-  - Configurations Waybar, Dunst, Wofi
-  - Dotfiles Nushell
-  - Configurations Neovim, Yazi, Zellij
+- **Scripts de gestion** :
+  - `install-prep.sh` : Préparation installation NixOS (clavier, wifi, partitionnement, génération config)
+  - `install-update.sh` : Copie la config du dépôt vers `/etc/nixos/` (avec sauvegarde)
+  - `sync-nixos.sh` : Copie `/etc/nixos/` vers le dépôt puis commit/push
+  - `sync-dotfiles.sh` : Commit/push les modifications des dotfiles
+  - `sync-all.sh` : Exécute sync-dotfiles.sh puis sync-nixos.sh
+
+- **Documentation** :
+  - `README.md` : Documentation principale
+  - `CLAUDE.md` : Directives pour IA
+  - `STOW.md` : Documentation GNU Stow
+  - `.stow-local-ignore` : Fichiers à ignorer lors du déploiement Stow
 
 ## Stack technique
 
@@ -88,11 +100,44 @@ git status
 
 ## Workflow de modification
 
+### Workflow automatisé (recommandé)
+
+#### Synchroniser tout (dotfiles + NixOS)
+```bash
+./sync-all.sh
+```
+Ce script exécute `sync-dotfiles.sh` puis `sync-nixos.sh`.
+
+#### Synchroniser uniquement les dotfiles
+```bash
+./sync-dotfiles.sh
+```
+- Stage tous les changements dans le dépôt
+- Affiche les différences avec diff-so-fancy
+- Demande un message de commit
+- Commit et push sur la branche nixos
+
+#### Synchroniser uniquement la config NixOS
+```bash
+./sync-nixos.sh
+```
+- Copie `/etc/nixos/` vers `./nixos` (avec sudo)
+- Change le propriétaire et permissions
+- Affiche les différences avec diff-so-fancy
+- Demande confirmation pour ajouter à git
+- Demande un message de commit
+- Commit et push
+
+### Workflow manuel
+
 1. Modifier les fichiers dans ce dépôt
-2. Copier vers `/etc/nixos/` (pour configuration.nix) ou `~/.config/` (pour dotfiles)
-3. Tester avec `nixos-rebuild test` (pour NixOS) ou relancer l'application
-4. Si OK, commit et push sur le dépôt
-5. Pour NixOS : `sudo nixos-rebuild switch` pour activer définitivement
+2. Pour NixOS : copier vers `/etc/nixos/` avec `./install-update.sh`
+3. Pour dotfiles : les modifications sont automatiques (symlinks Stow)
+4. Tester :
+   - NixOS : `sudo nixos-rebuild test`
+   - Dotfiles : Relancer l'application concernée
+5. Versionner : `git add . && git commit -m "message" && git push origin nixos`
+6. Pour NixOS : `sudo nixos-rebuild switch` pour activer définitivement
 
 ## Notes de développement
 

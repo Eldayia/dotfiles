@@ -39,115 +39,263 @@ Configuration complète pour NixOS avec environnement Hyprland (Wayland). Cette 
 
 ```
 dotfiles/
-├── nixos/                  # Configuration système NixOS
-│   ├── configuration.nix   # Configuration principale du système
-│   └── hardware-configuration.nix  # Configuration matérielle (auto-générée)
-├── .config/                # Configurations utilisateur
-│   ├── hypr/               # Hyprland (window manager)
-│   ├── nvim/               # Neovim
-│   └── waybar/             # Barre d'état
-├── CLAUDE.md               # Directives pour IA (WARP + Claude)
-├── README.md               # Ce fichier
-└── STOW.md                 # Documentation GNU Stow
+├── nixos/                        # Configuration système NixOS
+│   ├── configuration.nix         # Point d'entrée (importe tous les modules)
+│   ├── hardware-configuration.nix # Configuration matérielle (auto-générée)
+│   ├── modules/                  # Modules de configuration par thème
+│   │   ├── boot.nix              # Bootloader UEFI
+│   │   ├── network.nix           # Réseau et hostname
+│   │   ├── locale.nix            # Localisation et clavier
+│   │   ├── users.nix             # Utilisateurs et shell
+│   │   ├── fonts.nix             # Polices système
+│   │   ├── hyprland.nix          # Configuration Hyprland
+│   │   ├── packages.nix          # Paquets système de base
+│   │   ├── archives.nix          # Outils de compression
+│   │   ├── communication.nix     # Discord, Telegram, etc.
+│   │   ├── cybersecurity.nix     # Outils de sécurité
+│   │   ├── development.nix       # Outils de développement
+│   │   ├── multimedia.nix        # Lecteurs audio/vidéo
+│   │   ├── network-tools.nix     # Wireshark, nmap, etc.
+│   │   ├── terminal-utils.nix    # Outils CLI
+│   │   └── web.nix               # Navigateurs
+│   └── services/                 # Services système
+│       ├── audio.nix             # PipeWire et son
+│       └── display-manager.nix   # Ly display manager
+├── .config/                      # Configurations utilisateur
+│   ├── hypr/                     # Hyprland (window manager)
+│   ├── nvim/                     # Neovim
+│   └── waybar/                   # Barre d'état
+├── install-prep.sh               # Script de préparation installation initiale
+├── install-update.sh             # Script de mise à jour de la config NixOS
+├── sync-all.sh                   # Synchronise dotfiles + NixOS vers Git
+├── sync-dotfiles.sh              # Synchronise uniquement les dotfiles vers Git
+├── sync-nixos.sh                 # Copie /etc/nixos vers le dépôt et synchronise
+├── .stow-local-ignore            # Fichiers à ignorer lors du déploiement Stow
+├── CLAUDE.md                     # Directives pour IA (WARP + Claude)
+├── README.md                     # Ce fichier
+└── STOW.md                       # Documentation GNU Stow
 ```
 
-## 🚀 Installation rapide
+## 🚀 Installation complète
 
-### 1. Cloner le dépôt
+### 1. Préparation de l'environnement NixOS
+
+Lors de l'installation de NixOS, après le partitionnement et avant la première configuration :
 
 ```bash
-cd ~
-git clone https://github.com/VOTRE_USERNAME/dotfiles.git
+# Monter les partitions (exemple avec UEFI)
+mount /dev/sdaX /mnt
+mkdir -p /mnt/boot
+mount /dev/sdaY /mnt/boot
+
+# Générer la configuration de base
+nixos-generate-config --root /mnt
+```
+
+### 2. Cloner le dépôt (branche nixos)
+
+**Important :** Ce dépôt utilise la branche `nixos` pour la configuration NixOS.
+
+```bash
+# Depuis l'environnement d'installation NixOS
+cd /mnt/home
+
+# Cloner directement la branche nixos
+git clone -b nixos https://github.com/VOTRE_USERNAME/dotfiles.git
 cd dotfiles
-git checkout nixos
 ```
 
-### 2. Installer la configuration NixOS
+### 3. Préparer l'installation avec le script
+
+Le script `install-prep.sh` automatise la copie de la configuration vers `/mnt/etc/nixos/` :
 
 ```bash
-# Copier la configuration système
-sudo cp nixos/configuration.nix /etc/nixos/
+# Rendre le script exécutable
+chmod +x install-prep.sh
 
-# Tester la configuration (sans l'activer au démarrage)
-sudo nixos-rebuild test
-
-# Si tout fonctionne, activer définitivement
-sudo nixos-rebuild switch
+# Exécuter le script (copie les modules et configuration.nix)
+sudo ./install-prep.sh
 ```
 
-### 3. Déployer les dotfiles avec Stow
+### 4. Adapter la configuration matérielle
+
+**IMPORTANT :** Préservez votre configuration matérielle générée :
 
 ```bash
-# Déployer toutes les configurations
-stow -v -t ~/ .
+# Le script install-prep.sh ne touche PAS à hardware-configuration.nix
+# Votre hardware-configuration.nix généré reste intact dans /mnt/etc/nixos/
 
-# Ou sélectivement (exemple pour Hyprland uniquement)
-stow -v -t ~/ --dir=. --target=~/.config/hypr .config/hypr
+# Vérifier que les deux fichiers sont présents
+ls -la /mnt/etc/nixos/
+# Vous devriez voir :
+# - configuration.nix (copié depuis le dépôt)
+# - hardware-configuration.nix (généré par nixos-generate-config)
+# - modules/ (copié depuis le dépôt)
+# - services/ (copié depuis le dépôt)
 ```
+
+### 5. Personnaliser la configuration
+
+Avant l'installation, modifiez les paramètres selon vos besoins :
+
+```bash
+# Éditer le nom d'hôte
+sudo nvim /mnt/etc/nixos/modules/network.nix
+
+# Éditer le nom d'utilisateur et le shell
+sudo nvim /mnt/etc/nixos/modules/users.nix
+
+# Ajuster le fuseau horaire si nécessaire
+sudo nvim /mnt/etc/nixos/modules/locale.nix
+```
+
+### 6. Installer NixOS
+
+```bash
+# Installation du système avec la configuration
+sudo nixos-install
+
+# Définir le mot de passe root
+# (le script vous demandera de le faire)
+
+# Redémarrer
+reboot
+```
+
+### 7. Post-installation : Déployer les dotfiles avec Stow
+
+Après le redémarrage et la connexion, déployez les configurations utilisateur :
+
+```bash
+# Se connecter avec votre utilisateur
+# Aller dans le dépôt dotfiles
+cd ~/dotfiles
+
+# Méthode 1 : Tout déployer (recommandé)
+# Le fichier .stow-local-ignore exclut automatiquement nixos/, README.md, etc.
+stow -v -t ~ .
+
+# Méthode 2 : Déployer uniquement .config/
+stow -v -t ~ .config
+
+# Méthode 3 : Sélectif par application
+stow -v -t ~ .config/hypr
+stow -v -t ~ .config/waybar
+stow -v -t ~ .config/nvim
+
+# Vérifier les liens symboliques créés
+ls -la ~/.config/
+```
+
+**Note :**
+- Stow crée des liens symboliques depuis `~/dotfiles/.config/*` vers `~/.config/*`
+- Le fichier `.stow-local-ignore` gère automatiquement l'exclusion des fichiers système, documentation et `nixos/`
+- La configuration NixOS (`nixos/`) n'est **pas** gérée par Stow (elle va dans `/etc/nixos/`)
 
 Pour plus de détails sur l'utilisation de Stow, consultez [STOW.md](STOW.md).
 
-## 🔧 Configuration NixOS
+### 8. Appliquer les configurations
 
-Le fichier `nixos/configuration.nix` configure :
+```bash
+# Relancer Hyprland (depuis le display manager ou)
+# Appuyez sur SUPER+SHIFT+Q puis reconnectez-vous
 
-### 1. **Bootloader UEFI**
-- Utilise systemd-boot pour le démarrage
-- Active la modification des variables EFI
+# Ou redémarrer le système pour tout charger proprement
+sudo reboot
+```
 
-### 2. **Réseau**
-- Nom d'hôte : `nixos-hypr`
-- NetworkManager activé pour la gestion simple du réseau
+## 🔧 Architecture de la configuration NixOS
 
-### 3. **Localisation**
-- Fuseau horaire : Europe/Paris
-- Locale : fr_FR.UTF-8
-- Clavier : AZERTY français
+La configuration est désormais **modulaire** pour faciliter la maintenance et la personnalisation.
 
-### 4. **Utilisateur et Shell**
-- Nushell défini comme shell par défaut du système
-- Utilisateur `eldayia` avec droits sudo (groupe `wheel`)
-- Accès NetworkManager pour gestion réseau
+### Structure modulaire
 
-### 5. **Logiciels propriétaires**
-- `allowUnfree = true` pour autoriser Warp Terminal, Chrome, etc.
+Le fichier `nixos/configuration.nix` est le **point d'entrée** qui importe tous les modules thématiques :
 
-### 6. **Environnement graphique**
-- **Hyprland** : Gestionnaire de fenêtres Wayland moderne et performant
-- **Ly** : Display manager minimaliste en mode texte
+#### **Modules système de base**
+- `boot.nix` : Bootloader UEFI (systemd-boot)
+- `network.nix` : Hostname et NetworkManager
+- `locale.nix` : Fuseau horaire (Europe/Paris), locale (fr_FR.UTF-8), clavier AZERTY
+- `users.nix` : Utilisateur principal, shell (Nushell), groupes (wheel, networkmanager)
+- `fonts.nix` : Nerd Fonts et Font Awesome
 
-### 7. **Paquets installés**
+#### **Environnement graphique**
+- `hyprland.nix` : Configuration Hyprland (Wayland compositor)
+- `packages.nix` : Paquets système essentiels (Wofi, Waybar, Dunst, etc.)
 
-**GUI / Core :**
-- Warp Terminal (principal)
-- Chromium (navigateur)
-- Wofi (lanceur d'applications)
-- Waybar (barre d'état)
-- Dunst (notifications)
-- Kitty (terminal de secours)
+#### **Applications par catégorie**
+- `archives.nix` : Outils de compression (zip, unzip, tar, etc.)
+- `communication.nix` : Discord, Telegram, Signal
+- `cybersecurity.nix` : Wireshark, nmap, metasploit, hashcat, etc.
+- `development.nix` : VS Code, Docker, Git, Python, NodeJS, etc.
+- `multimedia.nix` : VLC, MPV, ffmpeg, OBS
+- `network-tools.nix` : tcpdump, iperf, netcat, etc.
+- `terminal-utils.nix` : btop, fastfetch, fd, ripgrep, zellij, yazi, zoxide
+- `web.nix` : Chromium, Firefox, Warp Terminal
 
-**CLI Tools :**
-- `btop` : Monitoring système
-- `fastfetch` : Information système
-- `fd` : Alternative moderne à `find`
-- `git` : Gestion de version
-- `stow` : Gestion de dotfiles
-- `neovim` : Éditeur de texte
-- `ripgrep` : Alternative à `grep`
-- `zellij` : Multiplexeur de terminal
-- `yazi` : Gestionnaire de fichiers TUI
-- `zoxide` : Navigation intelligente (`cd` amélioré)
+#### **Services système**
+- `audio.nix` : PipeWire (ALSA + PulseAudio + RTKit)
+- `display-manager.nix` : Ly (display manager minimaliste)
 
-**Audio :**
-- `pavucontrol` : Contrôle du volume
+### Avantages de cette architecture
 
-### 8. **Polices**
-- Nerd Fonts (icônes pour terminal et applications)
-- Font Awesome (icônes supplémentaires)
+✅ **Modularité** : Chaque aspect du système est dans un fichier dédié
+✅ **Clarté** : Facile de trouver où modifier une configuration
+✅ **Maintenabilité** : Modifications isolées sans toucher au reste
+✅ **Réutilisabilité** : Modules réutilisables entre différentes machines
+✅ **Versionning** : Historique Git plus clair avec des fichiers séparés
 
-### 9. **Son**
-- PipeWire activé avec support ALSA et PulseAudio
-- RTKit activé pour la gestion des priorités temps-réel
+## 🔄 Scripts de synchronisation
+
+Pour faciliter la gestion des dotfiles et de la configuration NixOS, plusieurs scripts sont disponibles :
+
+### sync-all.sh - Tout synchroniser (recommandé)
+
+Synchronise les dotfiles ET la configuration NixOS en une seule commande :
+
+```bash
+cd ~/dotfiles
+./sync-all.sh
+```
+
+**Ce script exécute :**
+1. `sync-dotfiles.sh` (synchronise les modifications dans le dépôt)
+2. `sync-nixos.sh` (copie `/etc/nixos/` vers le dépôt et synchronise)
+
+### sync-dotfiles.sh - Dotfiles uniquement
+
+Pour versionner les modifications des dotfiles (`.config/`, scripts, documentation) :
+
+```bash
+cd ~/dotfiles
+./sync-dotfiles.sh
+```
+
+**Fonctionnalités :**
+- Stage automatiquement tous les changements
+- Affiche les différences avec `diff-so-fancy`
+- Demande un message de commit
+- Commit et push sur la branche `nixos`
+- Ne fait rien si aucun changement détecté
+
+### sync-nixos.sh - Configuration NixOS uniquement
+
+Pour récupérer la configuration NixOS depuis `/etc/nixos/` et la versionner :
+
+```bash
+cd ~/dotfiles
+./sync-nixos.sh
+```
+
+**Fonctionnalités :**
+- Copie `/etc/nixos/` vers `./nixos` (avec sudo)
+- Ajuste les permissions (propriétaire = utilisateur courant)
+- Affiche les différences avec `diff-so-fancy`
+- Demande confirmation avant d'ajouter à git
+- Demande un message de commit
+- Commit et push sur la branche courante
+
+**Note :** Ce script est utile si vous avez modifié directement les fichiers dans `/etc/nixos/` et voulez les sauvegarder dans le dépôt.
 
 ## 📝 Commandes NixOS essentielles
 
@@ -170,15 +318,70 @@ sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
 
 ## 🛠️ Workflow de modification
 
-1. **Modifier** les fichiers dans ce dépôt
-2. **Déployer** :
-   - Pour NixOS : `sudo cp nixos/configuration.nix /etc/nixos/`
-   - Pour dotfiles : `stow -v -t ~/ .` (voir STOW.md)
-3. **Tester** :
-   - NixOS : `sudo nixos-rebuild test`
-   - Dotfiles : Relancer l'application concernée
-4. **Versionner** : `git add . && git commit -m "description" && git push`
-5. **Activer** (NixOS) : `sudo nixos-rebuild switch`
+### ⚡ Workflow rapide (recommandé)
+
+Pour versionner rapidement toutes vos modifications :
+
+```bash
+cd ~/dotfiles
+./sync-all.sh
+```
+
+Ou de manière sélective :
+- Dotfiles uniquement : `./sync-dotfiles.sh`
+- Config NixOS uniquement : `./sync-nixos.sh`
+
+Ces scripts gèrent automatiquement git add, commit et push avec un affichage des différences.
+
+---
+
+### 📋 Workflow détaillé
+
+#### Pour les dotfiles utilisateur (.config/*)
+
+1. **Modifier** les fichiers dans `~/dotfiles/.config/`
+2. Les modifications sont **automatiquement** visibles (grâce aux symlinks créés par Stow)
+3. **Tester** : Relancer l'application concernée (ou recharger la config)
+   - Hyprland : `SUPER+SHIFT+C` (reload config)
+   - Waybar : `pkill waybar && waybar &`
+4. **Versionner** :
+   ```bash
+   cd ~/dotfiles
+   ./sync-dotfiles.sh
+   # Ou manuellement :
+   git add .
+   git commit -m "description"
+   git push origin nixos
+   ```
+
+#### Pour la configuration NixOS (nixos/*)
+
+**Méthode 1 : Modifier depuis le dépôt (recommandé)**
+
+1. **Modifier** les fichiers dans `~/dotfiles/nixos/`
+2. **Copier** vers `/etc/nixos/` :
+   ```bash
+   cd ~/dotfiles
+   sudo ./install-update.sh
+   ```
+3. **Tester** : `sudo nixos-rebuild test`
+4. **Activer** : `sudo nixos-rebuild switch`
+5. **Versionner** (si OK) :
+   ```bash
+   ./sync-dotfiles.sh
+   ```
+
+**Méthode 2 : Modifier directement dans /etc/nixos/**
+
+1. **Modifier** les fichiers dans `/etc/nixos/`
+2. **Tester** : `sudo nixos-rebuild test`
+3. **Activer** : `sudo nixos-rebuild switch`
+4. **Synchroniser vers le dépôt** :
+   ```bash
+   cd ~/dotfiles
+   ./sync-nixos.sh
+   ```
+   Le script copie automatiquement `/etc/nixos/` vers `./nixos` et versionne les changements.
 
 ## 📚 Documentation
 

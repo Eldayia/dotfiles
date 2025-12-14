@@ -1,0 +1,201 @@
+/* Waybar - Design Mica moderne et minimaliste */
+/* Inspiré du design Windows 11 Mica */
+/* Thème : Catppuccin Mocha */
+
+* {
+  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+}
+
+/* Barre principale - Effet Mica */
+window#waybar {
+  background: rgba(30, 30, 46, 0.75); /* Catppuccin Mocha base avec transparence */
+  color: #cdd6f4; /* Catppuccin Mocha text */
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Tous les modules */
+#workspaces,
+#window,
+#clock,
+#tray,
+#pulseaudio,
+#network,
+#battery,
+#custom-power {
+  padding: 0 12px;
+  margin: 6px 4px;
+  background: rgba(49, 50, 68, 0.5); /* Catppuccin Mocha surface0 */
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Effet hover sur les modules */
+#workspaces button:hover,
+#tray > .passive:hover,
+#tray > .active:hover,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover,
+#custom-power:hover {
+  background: rgba(88, 91, 112, 0.6); /* Catppuccin Mocha surface1 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ===================== WORKSPACES ===================== */
+#workspaces {
+  padding: 0 8px;
+}
+
+#workspaces button {
+  padding: 0 10px;
+  margin: 0 2px;
+  background: transparent;
+  color: #6c7086; /* Catppuccin Mocha overlay0 - inactif */
+  border-radius: 10px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#workspaces button.active {
+  color: #89b4fa; /* Catppuccin Mocha blue - actif */
+  background: rgba(137, 180, 250, 0.15);
+  font-weight: 600;
+}
+
+#workspaces button.urgent {
+  color: #f38ba8; /* Catppuccin Mocha red */
+  background: rgba(243, 139, 168, 0.15);
+  animation: urgent-blink 1s ease-in-out infinite;
+}
+
+@keyframes urgent-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ===================== WINDOW TITLE ===================== */
+#window {
+  color: #bac2de; /* Catppuccin Mocha subtext1 */
+  font-weight: 500;
+  padding: 0 16px;
+}
+
+#window.empty {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+/* ===================== CLOCK ===================== */
+#clock {
+  color: #cdd6f4; /* Catppuccin Mocha text */
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0 20px;
+  background: rgba(137, 180, 250, 0.12); /* Léger accent bleu */
+  border: 1px solid rgba(137, 180, 250, 0.2);
+}
+
+/* ===================== TRAY ===================== */
+#tray {
+  padding: 0 12px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  color: #f38ba8; /* Catppuccin Mocha red */
+}
+
+/* ===================== PULSEAUDIO ===================== */
+#pulseaudio {
+  color: #89b4fa; /* Catppuccin Mocha blue */
+}
+
+#pulseaudio.muted {
+  color: #6c7086; /* Catppuccin Mocha overlay0 */
+  opacity: 0.6;
+}
+
+/* ===================== NETWORK ===================== */
+#network {
+  color: #a6e3a1; /* Catppuccin Mocha green */
+}
+
+#network.disconnected {
+  color: #f38ba8; /* Catppuccin Mocha red */
+  opacity: 0.6;
+}
+
+/* ===================== BATTERY ===================== */
+#battery {
+  color: #a6e3a1; /* Catppuccin Mocha green */
+}
+
+#battery.charging {
+  color: #f9e2af; /* Catppuccin Mocha yellow */
+}
+
+#battery.warning:not(.charging) {
+  color: #fab387; /* Catppuccin Mocha peach */
+  animation: battery-warning 1.5s ease-in-out infinite;
+}
+
+#battery.critical:not(.charging) {
+  color: #f38ba8; /* Catppuccin Mocha red */
+  background: rgba(243, 139, 168, 0.15);
+  animation: battery-critical 0.8s ease-in-out infinite;
+}
+
+@keyframes battery-warning {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes battery-critical {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+  }
+}
+
+/* ===================== POWER BUTTON ===================== */
+#custom-power {
+  color: #f38ba8; /* Catppuccin Mocha red */
+  font-size: 15px;
+  padding: 0 14px;
+  margin-right: 6px;
+}
+
+#custom-power:hover {
+  background: rgba(243, 139, 168, 0.2);
+  box-shadow: 0 4px 12px rgba(243, 139, 168, 0.3);
+}
+
+/* ===================== TOOLTIPS ===================== */
+tooltip {
+  background: rgba(30, 30, 46, 0.95); /* Catppuccin Mocha base */
+  border: 1px solid rgba(137, 180, 250, 0.3);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+tooltip label {
+  color: #cdd6f4; /* Catppuccin Mocha text */
+  font-size: 12px;
+}

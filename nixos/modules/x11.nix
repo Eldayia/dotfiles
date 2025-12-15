@@ -14,9 +14,6 @@
       variant = "";
     };
 
-    # Désactiver le touchpad par défaut (VM)
-    libinput.enable = false;
-
     # Window Manager - i3
     windowManager.i3 = {
       enable = true;
@@ -25,12 +22,13 @@
         dmenu  # Lanceur d'applications spécifique i3
       ];
     };
-
-    # Configuration d'affichage
-    displayManager = {
-      defaultSession = "none+i3";
-    };
   };
+
+  # Désactiver le touchpad par défaut (VM)
+  services.libinput.enable = false;
+
+  # Configuration d'affichage (session par défaut)
+  services.displayManager.defaultSession = "none+i3";
 
   # Paquets spécifiques X11
   # Note: Les applications d'interface communes sont dans interface.nix

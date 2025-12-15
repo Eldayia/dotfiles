@@ -2,13 +2,13 @@
 
 {
   # --- UTILISATEUR & SHELL ---
-  # On définit Nushell comme shell par défaut ici
-  users.defaultUserShell = pkgs.nushell;
+  # Utiliser Bash comme shell de login pour compatibilité avec Ly/Hyprland
+  # Nushell peut toujours être lancé manuellement depuis Bash
+  users.defaultUserShell = pkgs.bash;
 
   users.users.eldayia = {
     isNormalUser = true;
     description = "Admin";
     extraGroups = [ "networkmanager" "wheel" ]; # "wheel" pour sudo
-    # Pas besoin de définir shell ici si defaultUserShell est mis
   };
 }

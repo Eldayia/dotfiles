@@ -65,7 +65,7 @@ $env.config = {
     }
 
     # Couleurs
-    color_config: $dark_theme
+    # color_config: $dark_theme  # Variable non définie - utiliser le thème par défaut
     use_grid_icons: true
     footer_mode: 25
     float_precision: 2

@@ -8,9 +8,6 @@
     headless = false;  # VM avec interface graphique
   };
 
-  # Services VMware Tools
-  services.open-vm-tools.enable = true;
-
   # Paquets VMware
   environment.systemPackages = with pkgs; [
     open-vm-tools

@@ -6,12 +6,6 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;  # Support 32-bit (Wine, Steam, etc.)
-
-    # Drivers Mesa pour VMware
-    extraPackages = with pkgs; [
-      mesa
-      mesa.drivers
-    ];
   };
 
   # Activer X11 pour XWayland (nécessaire même en Wayland)

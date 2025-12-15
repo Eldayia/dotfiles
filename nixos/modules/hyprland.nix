@@ -80,6 +80,10 @@
     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     # Fix Java applications
     _JAVA_AWT_WM_NONREPARENTING = "1";
+    # Support EGL pour Wayland
+    EGL_PLATFORM = "wayland";
+    # Forcer Mesa software rendering comme fallback si GPU fail
+    LIBGL_ALWAYS_SOFTWARE = "0";
   };
 
   # Services XDG essentiels pour le lancement d'applications

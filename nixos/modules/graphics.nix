@@ -15,9 +15,11 @@
     videoDrivers = [ "vmware" ];
   };
 
-  # Paquets de diagnostic graphique
+  # Paquets de diagnostic graphique et support EGL
   environment.systemPackages = with pkgs; [
     mesa-demos  # Tests Mesa (glxgears, glxinfo, etc.)
     vulkan-tools  # Diagnostic Vulkan
+    mesa-utils  # Utilitaires Mesa supplémentaires
+    egl-wayland  # Support EGL pour Wayland
   ];
 }

@@ -6,29 +6,25 @@
 
 Dépôt centralisant mes fichiers de configuration et scripts d'installation pour Windows et Linux.
 
-## Structure du projet
 
-A remplir
+## 🚨 Attention : choisissez la bonne branche !
 
-## Contenu
+Ce dépôt a des branches spécifiques pour différents systèmes d'exploitation.
 
-### Windows
+- **`main`** : Sert juste ce README
+- **`nixos`** : Pour les configurations spécifiques à NixOS.
+- **`windows`** : Pour les configurations spécifiques à Windows
+Assurez-vous de cloner et d'utiliser la branche qui correspond à votre système.
 
-* Scripts PowerShell pour l'installation automatique de logiciels
-* Fichiers de configuration d'applications Windows
-* Scripts de setup d'environnement de développement
 
-### Linux
+```bash
+# Pour NixOS
+git clone --branch nixos https://github.com/Eldayia/dotfiles.git
 
-* Scripts Bash pour l'installation de paquets
-* Dotfiles et configurations système
-* Scripts de setup d'environnement de développement
+# Pour Arch
+git clone --branch windows https://github.com/Eldayia/dotfiles.git
+```
 
-### Partagé
-
-* Configurations d'applications cross-platform
-* Listes de logiciels recommandés
-* Documentation commune
 
 ## Contribuer
 

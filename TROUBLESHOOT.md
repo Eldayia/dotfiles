@@ -1,5 +1,34 @@
 # Guide de dépannage Hyprland
 
+## ⚠️ IMPORTANT: Hyprland doit être démarré!
+
+Si le diagnostic montre:
+- `WAYLAND_DISPLAY: [non défini]`
+- `XDG_CURRENT_DESKTOP: [non défini]`
+- `Hyprland ne tourne pas!`
+
+**Vous n'êtes pas dans une session Hyprland!** Vous êtes en TTY (terminal texte).
+
+### Solution rapide:
+
+```bash
+cd ~/dotfiles
+./start-hyprland.sh
+```
+
+Ou manuellement:
+```bash
+# Démarrer le display manager
+sudo systemctl start display-manager
+
+# OU lancer Hyprland directement
+Hyprland
+```
+
+Voir la section "Démarrer Hyprland" ci-dessous pour plus de détails.
+
+---
+
 ## Symptômes actuels
 
 - ✓ Wofi se lance (Ctrl+Space)
@@ -221,6 +250,58 @@ hyprctl dispatch killactive
 # Voir toutes les commandes disponibles
 hyprctl --help
 ```
+
+## Démarrer Hyprland
+
+### Via le Display Manager (Ly) - Méthode recommandée
+
+1. **Vérifier que Ly est activé:**
+   ```bash
+   systemctl status display-manager
+   ```
+
+2. **Si pas actif, le démarrer:**
+   ```bash
+   sudo systemctl enable display-manager
+   sudo systemctl start display-manager
+   ```
+
+3. **Redémarrer ou se déconnecter:**
+   ```bash
+   sudo reboot
+   # ou
+   logout
+   ```
+
+4. **Au démarrage**, Ly devrait afficher un écran de connexion graphique
+
+5. **Se connecter** et Hyprland démarrera automatiquement
+
+### Lancement manuel (sans display manager)
+
+```bash
+# Méthode 1: Simple
+Hyprland
+
+# Méthode 2: Avec dbus (recommandé)
+dbus-run-session Hyprland
+
+# Méthode 3: Avec variables d'environnement
+XDG_SESSION_TYPE=wayland dbus-run-session Hyprland
+```
+
+### Script automatique
+
+```bash
+cd ~/dotfiles
+./start-hyprland.sh
+```
+
+Ce script:
+- Vérifie que vous êtes en TTY
+- Vérifie que Hyprland est installé
+- Démarre le display manager si nécessaire
+- Propose de lancer Hyprland manuellement
 
 ## Si tout échoue
 

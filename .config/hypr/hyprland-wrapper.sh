@@ -19,12 +19,7 @@ export XDG_SESSION_TYPE=wayland
 export XDG_SESSION_DESKTOP=Hyprland
 export XDG_CURRENT_DESKTOP=Hyprland
 
-# Variables Wayland essentielles
-export WAYLAND_DISPLAY=wayland-1
-export QT_QPA_PLATFORM=wayland
-export GDK_BACKEND=wayland
-export CLUTTER_BACKEND=wayland
-export SDL_VIDEODRIVER=wayland
+# NE PAS définir WAYLAND_DISPLAY ici - Hyprland le fait automatiquement
 
 # Variables pour VM
 export WLR_NO_HARDWARE_CURSORS=1

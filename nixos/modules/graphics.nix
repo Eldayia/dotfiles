@@ -17,8 +17,7 @@
 
   # Paquets de diagnostic graphique
   environment.systemPackages = with pkgs; [
-    glxinfo  # Diagnostic OpenGL
+    mesa-demos  # Tests Mesa (glxgears, glxinfo, etc.)
     vulkan-tools  # Diagnostic Vulkan
-    mesa-demos  # Tests Mesa (glxgears, etc.)
   ];
 }

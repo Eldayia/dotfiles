@@ -141,6 +141,45 @@ git pull
 - `Ctrl+1,2,3,4,5` - Changer de workspace
 - `Ctrl+Shift+1,2,3,4,5` - Déplacer fenêtre vers workspace
 
+## Résoudre les conflits Stow
+
+### Erreur: "over existing target"
+
+Si Stow refuse de créer les liens symboliques avec l'erreur "over existing target", cela signifie que des fichiers existent déjà et ne sont pas des symlinks.
+
+**Solution automatique:**
+```bash
+cd ~/dotfiles
+./fix-stow-conflicts.sh
+```
+
+Ce script va:
+- Détecter tous les conflits
+- Sauvegarder les fichiers existants dans `~/dotfiles-backup-[date]/`
+- Vous permettre de relancer Stow
+
+**Solution manuelle:**
+```bash
+# Sauvegarder les fichiers en conflit
+mkdir -p ~/dotfiles-backup
+mv ~/.config/nushell/config.nu ~/dotfiles-backup/ 2>/dev/null || true
+mv ~/.config/nushell/env.nu ~/dotfiles-backup/ 2>/dev/null || true
+
+# Redéployer avec Stow
+cd ~/dotfiles
+stow -v -t ~/ .
+```
+
+**Solution avec --adopt (avancé):**
+```bash
+# Adopter les fichiers existants dans le dépôt
+cd ~/dotfiles
+stow --adopt -v -t ~/ .
+
+# ATTENTION: Cela remplace les fichiers du dépôt par ceux de votre home
+# Vérifiez les différences avec git diff avant de commit
+```
+
 ## En cas de problème persistant
 
 ```bash

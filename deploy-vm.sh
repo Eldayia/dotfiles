@@ -21,6 +21,33 @@ echo "✓ Système: NixOS"
 echo "✓ Répertoire: $(pwd)"
 echo ""
 
+# Sauvegarder les fichiers existants qui pourraient causer des conflits
+echo "💾 Sauvegarde des fichiers existants..."
+BACKUP_DIR=~/dotfiles-backup-$(date +%Y%m%d-%H%M%S)
+mkdir -p "$BACKUP_DIR"
+
+# Liste des fichiers/dossiers qui peuvent causer des conflits
+CONFLICT_PATHS=(
+    ".config/nushell/config.nu"
+    ".config/nushell/env.nu"
+)
+
+for path in "${CONFLICT_PATHS[@]}"; do
+    if [ -e ~/"$path" ] && [ ! -L ~/"$path" ]; then
+        echo "  Sauvegarde: $path"
+        mkdir -p "$BACKUP_DIR/$(dirname "$path")"
+        mv ~/"$path" "$BACKUP_DIR/$path"
+    fi
+done
+
+if [ -d "$BACKUP_DIR/.config" ]; then
+    echo "✓ Fichiers sauvegardés dans: $BACKUP_DIR"
+else
+    rmdir "$BACKUP_DIR" 2>/dev/null || true
+    echo "✓ Aucun fichier à sauvegarder"
+fi
+echo ""
+
 # Déployer les dotfiles avec Stow
 echo "📦 Déploiement des dotfiles avec Stow..."
 stow -v -t ~/ .

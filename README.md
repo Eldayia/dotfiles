@@ -17,6 +17,25 @@
 
 Configuration complète pour NixOS avec environnement Hyprland (Wayland). Cette branche est dédiée exclusivement à NixOS et utilise GNU Stow pour la gestion des dotfiles.
 
+## 🆕 Nouveautés récentes
+
+### Outils de déploiement et diagnostic
+- ✅ **Script de déploiement VM automatique** (`deploy-vm.sh`) - Déploiement complet en une commande
+- ✅ **Outils de diagnostic Hyprland** - Suite complète de scripts de débogage
+- ✅ **Résolution automatique des conflits Stow** - Plus de problèmes de liens symboliques
+- ✅ **Collecte automatique des logs** - Envoi vers Hastebin pour partage facile
+
+### Configurations complètes
+- ✅ **20+ applications configurées** - Atuin, Bat, Btop, Direnv, Dunst, Fastfetch, GH CLI, Git, Ghostty, Hypr, Kitty, Nushell, Nvim, Starship, Waybar, Wofi, Yazi, Zellij
+- ✅ **Configuration Hyprland optimisée** - Raccourcis clavier, workspaces, animations
+- ✅ **Hyprland défini comme session par défaut** - Démarrage automatique dans le display manager
+- ✅ **Thème cohérent** - Apparence harmonieuse sur toutes les applications
+
+### Documentation enrichie
+- ✅ **Guide de déploiement VM** (`DEPLOY-VM.md`)
+- ✅ **Guide de dépannage** (`TROUBLESHOOT.md`)
+- ✅ **Configuration minimale de test** - Pour diagnostiquer rapidement
+
 ---
 
 > Merci à <b>RikiLaNeko</b> de m’avoir fait découvrir NixOS et pour sa base de config <a href="https://gitlab.com/RikiLaNeko/dotfiles.git">dotfiles</a>
@@ -25,15 +44,67 @@ Configuration complète pour NixOS avec environnement Hyprland (Wayland). Cette 
 
 ## 📦 Stack technique
 
+### Système de base
 - **OS** : NixOS 24.05
 - **Display Manager** : Ly
 - **Window Manager** : Hyprland (Wayland)
 - **Shell** : Nushell (défaut système)
-- **Terminal** : Warp Terminal (principal), Kitty (secours)
+- **Audio** : PipeWire (ALSA + PulseAudio + RTKit)
+
+### Environnement graphique
+- **Terminal** : Warp Terminal (principal), Kitty, Ghostty
 - **Launcher** : Wofi
 - **Status Bar** : Waybar
 - **Notifications** : Dunst
-- **Outils CLI** : btop, fastfetch, fd, git, stow, neovim, ripgrep, zellij, yazi, zoxide
+- **Clipboard** : wl-clipboard
+
+### Éditeurs & Développement
+- **Éditeurs** : Neovim
+- **Gestion de code** : Git, GitHub CLI (gh)
+- **Nix** : nixpkgs-fmt
+
+### Navigateurs & Communication
+- **Navigateurs** : Microsoft Edge, Chromium
+- **Communication** : Vesktop (Discord client)
+
+### Multimédia
+- **Audio** : playerctl, pavucontrol, pulsemixer
+- **Vidéo** : VLC
+- **Graphisme** : GIMP
+- **Téléchargement** : qBittorrent
+
+### Outils CLI - Productivité
+- **Monitoring** : btop, glances, iotop, dool, procs, lsof
+- **Info système** : fastfetch, lsb-release
+- **Navigation** : yazi (file manager), zoxide (cd intelligent), fzf, fd, tree
+- **Recherche** : ripgrep, fzf
+- **Visualisation** : bat, eza
+- **Stockage** : ncdu, dysk
+- **Prompt** : Starship
+- **History** : Atuin
+- **Multiplexeur** : Zellij
+- **Dotfiles** : GNU Stow
+- **Environnements** : direnv
+- **Documentation** : tldr
+- **Recording** : asciinema, asciinema-agg
+- **Utilitaires** : pay-respects, progress, libnotify
+
+### Outils réseau
+- **Téléchargement** : wget, curl
+- **DNS** : dnsmasq, dog
+- **HTTP** : httpie
+- **Scan** : nmap
+- **Monitoring** : mtr, mosh
+- **Utilitaires** : ipcalc, openssl
+
+### Cybersécurité
+- **Reconnaissance** : naabu, amass, masscan, theharvester, dnsenum, dnsrecon
+- **Web Testing** : ffuf, httpx, Burp Suite
+- **Cracking** : Hydra, John the Ripper, Hashcat
+- **Analyse réseau** : Wireshark, netcat
+
+### Archives & Compression
+- **Outils** : zip, unzip, unp, p7zip
 
 ## 📁 Structure du dépôt
 
@@ -63,16 +134,41 @@ dotfiles/
 │       ├── display-manager.nix   # Ly display manager
 │       └── ssh.nix                # OpenSSH serveur
 ├── .config/                      # Configurations utilisateur
-│   ├── hypr/                     # Hyprland (window manager)
-│   ├── nvim/                     # Neovim
-│   └── waybar/                   # Barre d'état
+├   ├── hypr/                     # Hyprland (window manager)
+├   ├── nvim/                     # Neovim
+├   ├── waybar/                   # Barre d'état
+├   ├── wofi/                     # Lanceur d'applications
+├   ├── dunst/                    # Gestionnaire de notifications
+├   ├── kitty/                    # Terminal Kitty
+├   ├── ghostty/                  # Terminal Ghostty
+├   ├── nushell/                  # Shell Nushell
+├   ├── git/                      # Configuration Git globale
+├   ├── gh/                       # GitHub CLI
+├   ├── btop/                     # Moniteur système
+├   ├── fastfetch/                # Affichage infos système
+├   ├── yazi/                     # File manager TUI
+├   ├── zellij/                   # Multiplexeur de terminal
+├   ├── atuin/                    # Historique de commandes
+├   ├── bat/                      # Cat avec coloration syntaxique
+├   ├── direnv/                   # Gestion d'environnements
+└   └── starship.toml             # Prompt Starship
 ├── install-prep.sh               # Script de préparation installation initiale
 ├── install-update.sh             # Script de mise à jour de la config NixOS
 ├── sync-all.sh                   # Synchronise dotfiles + NixOS vers Git
 ├── sync-dotfiles.sh              # Synchronise uniquement les dotfiles vers Git
 ├── sync-nixos.sh                 # Copie /etc/nixos vers le dépôt et synchronise
+├── deploy-vm.sh                  # Déploiement automatique sur VM (Stow + rebuild)
+├── fix-stow-conflicts.sh         # Résolution automatique des conflits Stow
+├── diagnose-hyprland.sh          # Diagnostic complet Hyprland
+├── check-status.sh               # Vérification rapide de l'état
+├── start-hyprland.sh             # Lancement assisté de Hyprland
+├── collect-logs.sh               # Collecte et envoi des logs
+├── test-hyprland.sh              # Test automatique des fonctionnalités
+├── hyprland-minimal.conf         # Configuration Hyprland minimale de test
 ├── .stow-local-ignore            # Fichiers à ignorer lors du déploiement Stow
 ├── CLAUDE.md                     # Directives pour IA (WARP + Claude)
+├── DEPLOY-VM.md                  # Guide de déploiement sur VM
+├── TROUBLESHOOT.md               # Guide de dépannage Hyprland
 ├── README.md                     # Ce fichier
 └── STOW.md                       # Documentation GNU Stow
 ```
@@ -385,8 +481,101 @@ Ces scripts gèrent automatiquement git add, commit et push avec un affichage de
    ```
    Le script copie automatiquement `/etc/nixos/` vers `./nixos` et versionne les changements.
 
+## 🛠️ Outils de déploiement et diagnostic
+
+### Déploiement rapide sur VM
+
+Le script `deploy-vm.sh` automatise le déploiement complet :
+
+```bash
+cd ~/dotfiles
+./deploy-vm.sh
+```
+
+**Actions effectuées :**
+- ✓ Sauvegarde automatique des fichiers en conflit
+- ✓ Déploiement avec Stow
+- ✓ Copie de la config NixOS vers `/etc/nixos/`
+- ✓ Rebuild automatique du système
+- ✓ Instructions post-déploiement
+
+### Résolution des conflits Stow
+
+En cas d'erreur "over existing target" avec Stow :
+
+```bash
+cd ~/dotfiles
+./fix-stow-conflicts.sh
+```
+
+Le script détecte, sauvegarde et résout automatiquement les conflits.
+
+### Diagnostic Hyprland
+
+Plusieurs outils de diagnostic sont disponibles :
+
+#### Diagnostic complet
+```bash
+cd ~/dotfiles
+./diagnose-hyprland.sh
+```
+
+Vérifie :
+- ✓ État du système NixOS
+- ✓ Variables d'environnement Wayland
+- ✓ Processus Hyprland et services (Waybar, Dunst)
+- ✓ Applications installées
+- ✓ Configuration et liens symboliques
+- ✓ Logs et erreurs récentes
+- ✓ Keybindings actifs
+
+#### Vérification rapide
+```bash
+./check-status.sh
+```
+
+Vérification express de l'état actuel d'Hyprland.
+
+#### Lancement assisté
+```bash
+./start-hyprland.sh
+```
+
+Démarre Hyprland avec vérifications et diagnostics.
+
+#### Collecte de logs
+```bash
+./collect-logs.sh
+```
+
+Collecte toutes les informations de debug et les envoie automatiquement sur Hastebin pour partage.
+
+#### Test des fonctionnalités
+```bash
+./test-hyprland.sh
+```
+
+Test automatique des applications et services.
+
+### Configuration minimale de test
+
+En cas de problème, utilisez la configuration minimale :
+
+```bash
+cp ~/dotfiles/hyprland-minimal.conf ~/.config/hypr/hyprland.conf
+hyprctl reload
+```
+
+Configuration simplifiée :
+- Animations désactivées
+- Kitty au lieu de Warp
+- Pas de workspace bindings
+- Décoration minimale
+
 ## 📚 Documentation
 
+- [DEPLOY-VM.md](DEPLOY-VM.md) : Guide complet de déploiement sur VM
+- [TROUBLESHOOT.md](TROUBLESHOOT.md) : Guide de dépannage Hyprland
 - [CLAUDE.md](CLAUDE.md) : Directives pour l'IA WARP et Claude
 - [STOW.md](STOW.md) : Guide complet sur GNU Stow
 - [NixOS Manual](https://nixos.org/manual/nixos/stable/)

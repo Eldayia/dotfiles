@@ -1,0 +1,54 @@
+@echo off
+REM ===============================================
+REM Module: Productivité
+REM ===============================================
+
+call "%~dp0..\common\functions.bat"
+
+echo.
+echo === PRODUCTIVITÉ ===
+echo.
+
+REM 1Password
+call :DownloadSoftware "1Password" "AgileBits.1Password" "https://downloads.1password.com/win/1PasswordSetup-latest.exe" "1PasswordSetup.exe"
+
+REM 1Password CLI
+call :DownloadSoftware "1Password CLI" "AgileBits.1Password.CLI" "https://downloads.1password.com/win/1password-cli-latest.zip" "1password-cli.zip"
+
+REM PowerToys
+call :DownloadSoftware "PowerToys" "Microsoft.PowerToys" "" ""
+
+REM Rainmeter
+call :DownloadSoftware "Rainmeter" "Rainmeter.Rainmeter" "" ""
+
+REM FileZilla
+call :DownloadSoftware "FileZilla" "TimKosse.FileZilla.Client" "" ""
+
+REM WinSCP
+call :DownloadSoftware "WinSCP" "WinSCP.WinSCP" "" ""
+
+REM eM Client
+call :DownloadSoftware "eM Client" "eMClient.eMClient" "" ""
+
+REM TreeSize
+call :DownloadSoftware "TreeSize" "JAMSoftware.TreeSize.Free" "" ""
+
+REM UltraSearch
+call :DownloadSoftware "UltraSearch" "JAMSoftware.UltraSearch" "" ""
+
+REM UniGetUI
+call :DownloadSoftware "UniGetUI" "MartiCliment.UniGetUI" "" ""
+
+REM Warp Terminal
+call :DownloadSoftware "Warp" "Warp.Warp" "" ""
+
+REM UPDF
+call :DownloadSoftware "UPDF" "Superace.UPDF" "https://www.updf.com/downloads/updf-win.exe" "UPDF-Setup.exe"
+
+REM Wondershare Recoverit
+call :ManualDownloadRequired "Wondershare Recoverit" "https://recoverit.wondershare.com/"
+
+REM ReNamer
+call :DownloadSoftware "ReNamer" "DenisKozlov.ReNamer" "" ""
+
+goto :eof

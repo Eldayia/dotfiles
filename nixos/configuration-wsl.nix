@@ -1,26 +1,29 @@
 { config, pkgs, ... }:
 
 {
+  # --- CONFIGURATION NIXOS POUR WSL2 ---
+  # Version adaptée pour Windows Subsystem for Linux 2
+
   imports =
     [
-      # Configuration matérielle
+      # Configuration matérielle WSL2 (à générer)
       ./hardware-configuration.nix
 
+      # Module WSL2 spécifique
+      ./modules/wsl.nix
+
       # Modules système de base
-      ./modules/boot.nix
       ./modules/network.nix
       ./modules/locale.nix
       ./modules/users.nix
       ./modules/fonts.nix
-      ./modules/vmware.nix
       ./modules/graphics.nix
       ./modules/session.nix
 
-      # Environnement graphique
-      # ./modules/x11.nix       # Configuration X11 + i3 - OPTIONNEL
-      ./modules/wayland.nix     # Configuration Wayland pure (protocoles, libs) - ACTIF
-      ./modules/hyprland.nix    # Hyprland window manager - ACTIF
-      ./modules/interface.nix   # Applications d'interface (wofi, waybar, etc.)
+      # Environnement graphique (Wayland/Hyprland via WSLg)
+      ./modules/wayland.nix     # Configuration Wayland pure
+      ./modules/hyprland.nix    # Hyprland window manager
+      ./modules/interface.nix   # Applications d'interface
       ./modules/packages.nix
 
       # Applications par catégorie
@@ -37,7 +40,7 @@
 
       # Services
       ./services/audio.nix
-      ./services/display-manager.nix
+      # Note: pas de display-manager sur WSL2 (géré par WSLg)
       ./services/ssh.nix
     ];
 

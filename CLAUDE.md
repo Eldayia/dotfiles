@@ -4,31 +4,34 @@ Ce fichier fournit des directives à WARP (warp.dev) et Claude lors du travail a
 
 ## Vue d'ensemble du projet
 
-Dépôt de dotfiles pour une installation NixOS avec environnement X11 + i3 window manager. Configuration complète pour un poste de développement moderne avec shell Nushell et terminal Warp. Support Hyprland (Wayland) disponible en option.
+Dépôt de dotfiles pour une installation NixOS avec environnement Hyprland (Wayland). Configuration complète pour un poste de développement moderne avec shell Nushell et terminal Warp. Compatible WSL2 et VM (VMware). Support X11 + i3 disponible en option.
 
 ## Structure du dépôt
 
 Le dépôt est organisé comme suit :
 
 - **nixos/** : Configuration système NixOS (modulaire)
-  - `configuration.nix` : Point d'entrée (importe tous les modules)
+  - `configuration.nix` : Point d'entrée standard (VM/bare metal)
+  - `configuration-wsl.nix` : Point d'entrée pour WSL2
   - `hardware-configuration.nix` : Configuration matérielle générée automatiquement
   - `modules/` : Modules de configuration par thème
-    - Système de base : boot, network, locale, users, fonts, vmware, graphics, session
-    - Environnement graphique : x11.nix (ACTIF), interface.nix, packages.nix, wayland.nix (optionnel), hyprland.nix (optionnel)
+    - Système de base : boot, network, locale, users, fonts, graphics, session
+    - Plateforme : vmware.nix (VM), wsl.nix (WSL2)
+    - Environnement graphique : wayland.nix (ACTIF), hyprland.nix (ACTIF), x11.nix (optionnel), interface.nix, packages.nix
     - Applications : archives, communication, cybersecurity, development, multimedia, network-tools, terminal-utils, web, screenshot, lockscreen
   - `services/` : Services système (audio, display-manager, ssh)
 
 - **.config/** : Configurations utilisateur
-  - `i3/` : Configuration i3 (window manager X11) - **ACTIF**
-    - `config` : Configuration principale i3
-    - `debug-env.sh` : Script de diagnostic des variables d'environnement
-    - `check-graphics.sh` : Script de diagnostic graphique complet
-  - `hypr/` : Configuration Hyprland (gestionnaire de fenêtres Wayland) - OPTIONNEL
+  - `hypr/` : Configuration Hyprland (gestionnaire de fenêtres Wayland) - **ACTIF**
     - `hyprland.conf` : Configuration principale
     - `hyprland-wrapper.sh` : Wrapper de lancement (variables d'environnement)
     - `debug-env.sh` : Script de diagnostic des variables d'environnement
     - `check-graphics.sh` : Script de diagnostic graphique complet
+  - `i3/` : Configuration i3 (window manager X11) - OPTIONNEL
+    - `config` : Configuration principale i3
+    - `i3status.conf` : Configuration barre de statut
+    - `debug-env.sh` : Script de diagnostic X11
+    - `check-graphics.sh` : Script de diagnostic graphique X11
   - `nvim/` : Configuration Neovim
   - `waybar/` : Configuration Waybar (barre d'état Wayland)
   - `kitty/` : Configuration Kitty terminal
@@ -56,20 +59,22 @@ Le dépôt est organisé comme suit :
   - `CLAUDE.md` : Directives pour IA
   - `STOW.md` : Documentation GNU Stow
   - `DEPLOY-VM.md` : Guide de déploiement sur VM
+  - `WSL2-SETUP.md` : Guide d'installation sur WSL2
   - `TROUBLESHOOT.md` : Guide de dépannage Hyprland
   - `.stow-local-ignore` : Fichiers à ignorer lors du déploiement Stow
 
 ## Stack technique
 
 - **OS** : NixOS 24.05
-- **Display Manager** : Ly
-- **Window Manager** : i3 (X11) - **ACTIF** | Hyprland (Wayland) disponible en option
+- **Plateforme** : WSL2 (principal), VMware (supporté)
+- **Display Manager** : Ly (VM) | WSLg (WSL2)
+- **Window Manager** : Hyprland (Wayland) - **ACTIF** | i3 (X11) disponible en option
 - **Shell** : Nushell (par défaut système)
 - **Terminal** : Warp Terminal (principal), Kitty (secondaire), Ghostty (alternatif)
-- **Launcher** : dmenu (i3), rofi (compatible), wofi (Hyprland)
-- **Status Bar** : i3status/i3blocks (i3), waybar (Hyprland)
+- **Launcher** : wofi (Hyprland), rofi (compatible), dmenu (i3)
+- **Status Bar** : waybar (Hyprland), i3status/i3blocks (i3)
 - **Notifications** : Dunst
-- **Graphics** : Mesa avec driver vmwgfx (VMware), support X11
+- **Graphics** : Mesa avec WSLg (WSL2) ou vmwgfx/modesetting (VMware)
 - **Outils CLI** : btop, fastfetch, fd, git, stow, neovim, ripgrep, zellij, yazi, zoxide
 
 ## Commandes NixOS

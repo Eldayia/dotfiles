@@ -1,0 +1,22 @@
+# --- CONFIGURATION DIRENV ---
+# Chargement automatique d'environnements par répertoire
+
+[global]
+# Désactiver les avertissements lors du chargement
+warn_timeout = "5s"
+
+# Fichiers à charger automatiquement
+load_dotenv = true
+
+# Strict mode (évite les variables non déclarées)
+strict_env = false
+
+# Afficher les différences d'environnement
+hide_env_diff = false
+
+[whitelist]
+# Whitelist de patterns de chemins sécurisés
+# prefix = [ "/home/username/projets/" ]
+
+# Exemple:
+# prefix = [ "/home/eldayia/Dev/" ]

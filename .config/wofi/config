@@ -1,0 +1,101 @@
+# --- CONFIGURATION WOFI ---
+# Lanceur d'applications pour Wayland
+
+# Mode d'affichage (drun, run, dmenu)
+mode=drun
+
+# Largeur (pixels ou %)
+width=40%
+
+# Hauteur (pixels ou %)
+height=30%
+
+# Position (top, center, bottom, top_left, etc.)
+location=center
+
+# Permettre les images (icônes d'applications)
+allow_images=true
+
+# Permettre le markup
+allow_markup=true
+
+# Insensible à la casse
+insensitive=true
+
+# Afficher toutes les entrées
+show=drun
+
+# Nombre de colonnes
+columns=2
+
+# Tri des résultats
+sort_order=default
+
+# GTK dark theme
+gtk_dark=true
+
+# Prompt
+prompt=Rechercher...
+
+# Pas de scrollbar
+no_actions=false
+
+# Term pour lancer les applications terminal
+term=warp-terminal
+
+# Matcher (contains, fuzzy, multi-contains)
+matching=fuzzy
+
+# Pas de cache (pour toujours avoir les dernières apps)
+cache_file=/dev/null
+
+# Afficher les applications cachées
+show_all=false
+
+# Orientation (horizontal, vertical)
+orientation=vertical
+
+# Halign (fill, start, end, center)
+halign=fill
+
+# Normal window
+normal_window=false
+
+# Layer (background, bottom, top, overlay)
+layer=overlay
+
+# Content halign
+content_halign=fill
+
+# Image size (pixels)
+image_size=32
+
+# Dynamic lines (ajuster la hauteur selon le contenu)
+dynamic_lines=false
+
+# Hide scroll
+hide_scroll=true
+
+# Key pour exécuter
+key_exec=Return
+
+# Key pour quitter
+key_exit=Escape
+
+# Key pour aller à la ligne précédente
+key_up=Up
+
+# Key pour aller à la ligne suivante
+key_down=Down
+
+# Key pour aller à gauche
+key_left=Left
+
+# Key pour aller à droite
+key_right=Right
+
+# Key pour mode forward
+key_forward=Tab
+
+# Key pour mode backward
+key_backward=ISO_Left_Tab

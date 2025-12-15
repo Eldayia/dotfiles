@@ -1,0 +1,145 @@
+# --- CONFIGURATION GIT ---
+# Contrôle de version
+
+[user]
+    # À personnaliser avec vos informations
+    name = Eldayia
+    email = votre.email@example.com
+
+[core]
+    # Éditeur par défaut
+    editor = nvim
+
+    # Ignorer les changements de permissions
+    filemode = false
+
+    # Autocrlf (false pour Unix/Linux)
+    autocrlf = input
+
+    # Pager
+    pager = less -FRX
+
+    # Whitespace
+    whitespace = trailing-space,space-before-tab
+
+[init]
+    # Branche par défaut
+    defaultBranch = main
+
+[pull]
+    # Stratégie de pull (rebase pour éviter les merge commits)
+    rebase = true
+
+[push]
+    # Push automatiquement les tags
+    followTags = true
+
+    # Push seulement la branche courante
+    default = current
+
+[fetch]
+    # Supprimer les branches distantes supprimées
+    prune = true
+
+[rebase]
+    # Autostash avant rebase
+    autoStash = true
+
+[merge]
+    # Outil de merge
+    tool = nvimdiff
+
+    # Conflictstyle
+    conflictStyle = diff3
+
+[diff]
+    # Outil de diff
+    tool = nvimdiff
+
+    # Algorithme de diff
+    algorithm = histogram
+
+    # Colorer les diffs déplacés
+    colorMoved = default
+
+[color]
+    # Activer les couleurs
+    ui = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+
+[alias]
+    # Raccourcis courts
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    cp = cherry-pick
+    df = diff
+    dc = diff --cached
+    lg = log --oneline --graph --decorate
+    lga = log --oneline --graph --decorate --all
+    last = log -1 HEAD
+    unstage = reset HEAD --
+    undo = reset --soft HEAD^
+
+    # Logs améliorés
+    hist = log --pretty=format:'%C(yellow)%h%C(reset) %C(blue)%ad%C(reset) | %C(green)%s%C(reset) %C(bold red)[%an]%C(reset)%C(auto)%d%C(reset)' --graph --date=short
+    tree = log --all --graph --decorate --oneline --simplify-by-decoration
+
+    # Statut court
+    s = status -s
+
+    # Différences
+    d = diff --color-words
+    dw = diff --word-diff
+
+    # Commit
+    ca = commit -a
+    cam = commit -am
+    amend = commit --amend
+
+    # Branches
+    branches = branch -a
+    remotes = remote -v
+
+    # Stash
+    sl = stash list
+    sa = stash apply
+    ss = stash save
+
+    # Show
+    sh = show --pretty=format:'%C(yellow)%h%C(reset) %C(blue)%ad%C(reset) | %C(green)%s%C(reset) %C(bold red)[%an]%C(reset)%C(auto)%d%C(reset)' --date=short
+
+[help]
+    # Correction automatique des commandes
+    autocorrect = 10
+
+[credential]
+    # Cache des credentials (15 minutes)
+    helper = cache --timeout=900
+
+[filter "lfs"]
+    # Git LFS
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+# Inclure des configs locales (non versionnées)
+[include]
+    path = ~/.config/git/config.local

@@ -1,0 +1,86 @@
+/* --- STYLE WOFI (Nord Theme) --- */
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+}
+
+/* Fenêtre principale */
+window {
+    background-color: rgba(46, 52, 64, 0.95);
+    border: 2px solid #88C0D0;
+    border-radius: 10px;
+}
+
+/* Liste des entrées */
+#outer-box {
+    margin: 5px;
+    padding: 10px;
+    background-color: transparent;
+}
+
+#input {
+    margin: 5px;
+    padding: 10px 15px;
+    border: 2px solid #4C566A;
+    border-radius: 5px;
+    background-color: #3B4252;
+    color: #ECEFF4;
+}
+
+#input:focus {
+    border-color: #88C0D0;
+}
+
+/* Scrollbar */
+#scroll {
+    margin: 5px 0;
+}
+
+/* Liste interne */
+#inner-box {
+    background-color: transparent;
+}
+
+/* Entrées */
+#entry {
+    padding: 8px 10px;
+    margin: 2px;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #D8DEE9;
+}
+
+/* Entrée survolée */
+#entry:hover {
+    background-color: #4C566A;
+}
+
+/* Entrée sélectionnée */
+#entry:selected {
+    background-color: #88C0D0;
+    color: #2E3440;
+    font-weight: bold;
+}
+
+/* Icônes */
+#img {
+    margin-right: 10px;
+    padding: 2px;
+}
+
+/* Texte */
+#text {
+    color: inherit;
+}
+
+/* Text de l'entrée sélectionnée */
+#entry:selected #text {
+    color: #2E3440;
+}
+
+/* Pas de résultats */
+#no-results {
+    color: #BF616A;
+    padding: 10px;
+}

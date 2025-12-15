@@ -1,0 +1,88 @@
+# --- CONFIGURATION ATUIN ---
+# Historique de commandes amélioré avec synchronisation
+
+## Synchronisation
+# sync_address = "https://api.atuin.sh"
+# sync_frequency = "5m"
+auto_sync = false
+
+## Base de données
+db_path = "~/.local/share/atuin/history.db"
+
+## Keybindings
+# Mode de recherche: ctrl-r pour recherche, up arrow pour navigation
+keymap_mode = "vim-normal"
+keymap_cursor = "blink-bar"
+
+## Recherche
+# Stratégie de recherche
+search_mode = "fuzzy"
+
+# Inclure les commandes en échec
+filter_mode = "global"
+filter_mode_shell_up_key_binding = "session"
+
+# Style de la recherche
+inline_height = 20
+show_preview = true
+max_preview_height = 4
+
+# Afficher les infos supplémentaires
+show_help = true
+
+# Format de date
+# Options: %Y-%m-%d %H:%M:%S
+style = "compact"
+
+## Statistiques
+# Activer les statistiques
+stats {
+    common_subcommands = [
+        "cargo",
+        "git",
+        "npm",
+        "yarn",
+        "pnpm",
+        "kubectl",
+        "docker",
+        "nix",
+    ]
+    common_prefix = [
+        "sudo",
+    ]
+}
+
+## Historique
+# Ignorer les commandes commençant par un espace
+history_filter = [
+    "^ls",
+    "^cd",
+    "^pwd",
+    "^exit",
+]
+
+# Enregistrer les timestamps
+store_failed = true
+
+## Interface
+# Coloration syntaxique
+word_jump_mode = "emacs"
+word_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-"
+
+# Scroll context lines
+scroll_context_lines = 1
+
+## Ordre de tri
+# Options: command, directory, time
+exit_mode = "return-original"
+
+## Shell intégration
+update_check = false
+
+## Démons
+daemon {
+    enabled = false
+}
+
+## Dialectes
+dialect = "us"

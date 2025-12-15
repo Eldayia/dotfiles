@@ -1,0 +1,149 @@
+# --- RACCOURCIS CLAVIER YAZI ---
+# Configuration des keybindings
+
+[manager]
+keymap = [
+    # Navigation
+    { on = ["h"], run = "leave", desc = "Go back" },
+    { on = ["l"], run = "enter", desc = "Enter directory" },
+    { on = ["k"], run = "arrow -1", desc = "Move up" },
+    { on = ["j"], run = "arrow 1", desc = "Move down" },
+
+    { on = ["K"], run = "arrow -5", desc = "Move up 5 lines" },
+    { on = ["J"], run = "arrow 5", desc = "Move down 5 lines" },
+
+    { on = ["g", "g"], run = "arrow -99999999", desc = "Move to top" },
+    { on = ["G"], run = "arrow 99999999", desc = "Move to bottom" },
+
+    # Sélection
+    { on = ["<Space>"], run = "select --state=none", desc = "Toggle selection" },
+    { on = ["v"], run = "visual_mode", desc = "Enter visual mode" },
+    { on = ["V"], run = "visual_mode --unset", desc = "Enter visual mode (unset)" },
+    { on = ["<C-a>"], run = "select_all --state=true", desc = "Select all" },
+    { on = ["<C-r>"], run = "select_all --state=none", desc = "Inverse selection" },
+
+    # Opérations
+    { on = ["o"], run = "open", desc = "Open" },
+    { on = ["O"], run = "open --interactive", desc = "Open interactively" },
+    { on = ["<Enter>"], run = "open", desc = "Open" },
+
+    { on = ["y"], run = "yank", desc = "Copy" },
+    { on = ["x"], run = "yank --cut", desc = "Cut" },
+    { on = ["p"], run = "paste", desc = "Paste" },
+    { on = ["P"], run = "paste --force", desc = "Paste (overwrite)" },
+
+    { on = ["d"], run = "remove", desc = "Delete" },
+    { on = ["D"], run = "remove --permanently", desc = "Delete permanently" },
+
+    { on = ["c"], run = "create", desc = "Create" },
+    { on = ["r"], run = "rename", desc = "Rename" },
+
+    # Recherche
+    { on = ["/"], run = "find --smart", desc = "Find" },
+    { on = ["n"], run = "find_arrow", desc = "Next match" },
+    { on = ["N"], run = "find_arrow --previous", desc = "Previous match" },
+
+    # Tri
+    { on = [",", "m"], run = "sort modified --dir-first", desc = "Sort by modified" },
+    { on = [",", "M"], run = "sort modified --reverse --dir-first", desc = "Sort by modified (reverse)" },
+    { on = [",", "n"], run = "sort natural --dir-first", desc = "Sort naturally" },
+    { on = [",", "N"], run = "sort natural --reverse --dir-first", desc = "Sort naturally (reverse)" },
+    { on = [",", "s"], run = "sort size --dir-first", desc = "Sort by size" },
+    { on = [",", "S"], run = "sort size --reverse --dir-first", desc = "Sort by size (reverse)" },
+
+    # Affichage
+    { on = ["z", "h"], run = "hidden toggle", desc = "Toggle hidden" },
+    { on = ["z", "p"], run = "preview --toggle", desc = "Toggle preview" },
+
+    # Shell
+    { on = ["!"], run = "shell", desc = "Shell" },
+    { on = [";"], run = "shell --block", desc = "Shell (blocking)" },
+
+    # Autres
+    { on = ["~"], run = "help", desc = "Help" },
+    { on = ["q"], run = "quit", desc = "Quit" },
+    { on = ["Q"], run = "quit --no-cwd-file", desc = "Quit without cd" },
+    { on = ["<C-z>"], run = "suspend", desc = "Suspend" },
+]
+
+[tasks]
+keymap = [
+    { on = ["k"], run = "arrow -1", desc = "Move up" },
+    { on = ["j"], run = "arrow 1", desc = "Move down" },
+
+    { on = ["<Enter>"], run = "inspect", desc = "Inspect" },
+    { on = ["x"], run = "cancel", desc = "Cancel" },
+
+    { on = ["~"], run = "help", desc = "Help" },
+    { on = ["<Esc>"], run = "close", desc = "Close" },
+]
+
+[select]
+keymap = [
+    { on = ["k"], run = "arrow -1", desc = "Move up" },
+    { on = ["j"], run = "arrow 1", desc = "Move down" },
+
+    { on = ["K"], run = "arrow -5", desc = "Move up 5 lines" },
+    { on = ["J"], run = "arrow 5", desc = "Move down 5 lines" },
+
+    { on = ["<Enter>"], run = "close --submit", desc = "Submit" },
+    { on = ["<Esc>"], run = "close", desc = "Cancel" },
+
+    { on = ["~"], run = "help", desc = "Help" },
+]
+
+[input]
+keymap = [
+    { on = ["<Esc>"], run = "close", desc = "Cancel" },
+    { on = ["<Enter>"], run = "close --submit", desc = "Submit" },
+
+    # Navigation
+    { on = ["<Left>"], run = "move -1", desc = "Move left" },
+    { on = ["<Right>"], run = "move 1", desc = "Move right" },
+    { on = ["<C-b>"], run = "move -1", desc = "Move left" },
+    { on = ["<C-f>"], run = "move 1", desc = "Move right" },
+    { on = ["<C-a>"], run = "move -999", desc = "Move to start" },
+    { on = ["<C-e>"], run = "move 999", desc = "Move to end" },
+
+    # Édition
+    { on = ["<Backspace>"], run = "backspace", desc = "Backspace" },
+    { on = ["<Delete>"], run = "backspace --under", desc = "Delete" },
+    { on = ["<C-h>"], run = "backspace", desc = "Backspace" },
+    { on = ["<C-d>"], run = "backspace --under", desc = "Delete" },
+
+    { on = ["<C-u>"], run = "kill bol", desc = "Kill to start" },
+    { on = ["<C-k>"], run = "kill eol", desc = "Kill to end" },
+    { on = ["<C-w>"], run = "kill backward", desc = "Kill word" },
+
+    # Historique
+    { on = ["<Up>"], run = "history -1", desc = "Previous history" },
+    { on = ["<Down>"], run = "history 1", desc = "Next history" },
+
+    { on = ["~"], run = "help", desc = "Help" },
+]
+
+[completion]
+keymap = [
+    { on = ["<C-q>"], run = "close", desc = "Cancel" },
+    { on = ["<Tab>"], run = "close --submit", desc = "Submit" },
+
+    { on = ["k"], run = "arrow -1", desc = "Move up" },
+    { on = ["j"], run = "arrow 1", desc = "Move down" },
+
+    { on = ["~"], run = "help", desc = "Help" },
+]
+
+[help]
+keymap = [
+    { on = ["<Esc>"], run = "escape", desc = "Close" },
+    { on = ["q"], run = "close", desc = "Close" },
+
+    { on = ["k"], run = "arrow -1", desc = "Move up" },
+    { on = ["j"], run = "arrow 1", desc = "Move down" },
+
+    { on = ["K"], run = "arrow -5", desc = "Move up 5 lines" },
+    { on = ["J"], run = "arrow 5", desc = "Move down 5 lines" },
+
+    { on = ["g", "g"], run = "arrow -99999999", desc = "Move to top" },
+    { on = ["G"], run = "arrow 99999999", desc = "Move to bottom" },
+]

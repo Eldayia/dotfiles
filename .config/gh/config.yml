@@ -1,0 +1,63 @@
+# --- CONFIGURATION GITHUB CLI ---
+# CLI officiel de GitHub
+
+# Version de la configuration
+version: 1
+
+# Git protocol (https ou ssh)
+git_protocol: ssh
+
+# Éditeur par défaut
+editor: nvim
+
+# Prompt (enabled ou disabled)
+prompt: enabled
+
+# Pager (less par défaut)
+pager: less -FRX
+
+# Navigateur par défaut
+browser: ""
+
+# Aliases
+aliases:
+    # Pull requests
+    prs: pr list
+    prv: pr view
+    prc: pr create
+    prco: pr checkout
+
+    # Issues
+    ils: issue list
+    iv: issue view
+    ic: issue create
+
+    # Repos
+    rv: repo view
+    rc: repo clone
+    rf: repo fork
+
+    # Gists
+    gl: gist list
+    gv: gist view
+    gc: gist create
+
+    # Run
+    runs: run list
+    runv: run view
+
+    # Workflow
+    wl: workflow list
+    wv: workflow view
+    wr: workflow run
+
+# HTTP Unix Socket
+http_unix_socket: ""
+
+# Options par défaut pour certaines commandes
+# pr:
+#   create:
+#     fill: true
+
+# Thème (auto, dark, light)
+# theme: auto

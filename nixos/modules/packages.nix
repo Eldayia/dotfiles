@@ -13,5 +13,6 @@
     wofi           # Lanceur d'applications (menu)
     waybar         # Barre d'état
     dunst          # Notifications
+    wl-clipboard   # Clipboard pour Wayland (wl-copy, wl-paste)
   ];
 }

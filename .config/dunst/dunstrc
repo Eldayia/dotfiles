@@ -1,0 +1,185 @@
+# --- CONFIGURATION DUNST ---
+# Serveur de notifications pour Wayland/X11
+
+[global]
+    ### Affichage ###
+
+    # Monitor sur lequel afficher les notifications (0 = primaire)
+    monitor = 0
+
+    # Position des notifications (top-left, top-center, top-right, bottom-left, bottom-center, bottom-right)
+    origin = top-right
+
+    # Offset depuis le coin (x, y)
+    offset = 10x30
+
+    # Empiler les notifications (vertical, horizontal)
+    notification_limit = 3
+
+    ### Progression ###
+
+    # Afficher une barre de progression
+    progress_bar = true
+    progress_bar_height = 10
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+
+    ### Géométrie ###
+
+    # Largeur des notifications
+    width = (200, 400)
+    height = 300
+
+    # Transparence (0-100)
+    transparency = 10
+
+    # Padding
+    padding = 8
+    horizontal_padding = 8
+
+    # Bordure
+    frame_width = 2
+
+    # Coins arrondis
+    corner_radius = 10
+
+    # Gap entre notifications
+    gap_size = 5
+
+    ### Texte ###
+
+    # Police
+    font = JetBrainsMono Nerd Font 10
+
+    # Hauteur de ligne
+    line_height = 0
+
+    # Format du texte
+    # %a: appname
+    # %s: summary
+    # %b: body
+    # %i: iconname (with path)
+    # %I: iconname (without path)
+    # %p: progress value if set
+    # %n: progress value if set without any extra characters
+    # %%: Literal %
+    markup = full
+    format = "<b>%s</b>\n%b"
+
+    # Alignement (left, center, right)
+    alignment = left
+    vertical_alignment = center
+
+    # Afficher l'âge si > show_age_threshold
+    show_age_threshold = 60
+
+    # Découper le texte long
+    ellipsize = middle
+
+    # Ignorer les newlines
+    ignore_newline = no
+
+    # Empiler les duplicatas
+    stack_duplicates = true
+    hide_duplicate_count = false
+
+    # Afficher les indicateurs
+    show_indicators = yes
+
+    ### Icônes ###
+
+    # Activer les icônes
+    enable_recursive_icon_lookup = true
+    icon_theme = "Papirus-Dark, Adwaita"
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 64
+
+    # Chemins des icônes
+    icon_path = /usr/share/icons/Papirus-Dark/16x16/status/:/usr/share/icons/Papirus-Dark/16x16/devices/:/usr/share/icons/Papirus-Dark/16x16/apps/
+
+    ### Historique ###
+
+    # Longueur de l'historique
+    history_length = 20
+
+    ### Comportement ###
+
+    # Durée d'affichage (secondes, 0 = infini)
+    # Peut être overridden par l'application
+    idle_threshold = 120
+
+    # Interaction souris
+    # none: ignorer
+    # do_action: exécuter l'action
+    # open_url: ouvrir l'URL
+    # close_current: fermer la notification
+    # close_all: fermer toutes les notifications
+    # context: ouvrir le menu contextuel
+    # context_all: ouvrir le menu pour toutes
+    mouse_left_click = do_action
+    mouse_middle_click = close_current
+    mouse_right_click = close_all
+
+    ### Raccourcis ###
+
+    # Format: "ctrl+shift+space"
+    # close = ctrl+space
+    # close_all = ctrl+shift+space
+    # history = ctrl+grave
+    # context = ctrl+shift+period
+
+    ### Divers ###
+
+    # Surligner les URLs
+    browser = /usr/bin/xdg-open
+
+    # Always run rule-defined scripts, even if the notification is suppressed
+    always_run_script = true
+
+    # Titre des notifications
+    title = Dunst
+    class = Dunst
+
+    # Ignorer DBus closeNotification
+    ignore_dbusclose = false
+
+    ### Wayland ###
+    force_xwayland = false
+
+    ### Legacy ###
+    force_xinerama = false
+
+# Styles par urgence
+[urgency_low]
+    background = "#2E3440"
+    foreground = "#D8DEE9"
+    frame_color = "#4C566A"
+    timeout = 5
+
+[urgency_normal]
+    background = "#3B4252"
+    foreground = "#ECEFF4"
+    frame_color = "#88C0D0"
+    timeout = 10
+
+[urgency_critical]
+    background = "#BF616A"
+    foreground = "#ECEFF4"
+    frame_color = "#D08770"
+    timeout = 0
+
+# Règles spécifiques
+[experimental]
+    per_monitor_dpi = false
+
+# Exemples de règles personnalisées
+# [discord]
+#     appname = "discord"
+#     urgency = low
+#
+# [spotify]
+#     appname = "Spotify"
+#     urgency = low
+#     format = "<b>%s</b>\n%b"

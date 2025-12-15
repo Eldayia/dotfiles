@@ -1,0 +1,95 @@
+// --- CONFIGURATION ZELLIJ ---
+// Multiplexeur de terminal moderne
+
+// Thème
+theme "nord"
+
+// Copie vers le clipboard système
+copy_command "wl-copy"
+
+// Clipboard Wayland
+copy_clipboard "primary"
+
+// Désactiver la souris
+mouse_mode true
+
+// Scroll buffer
+scroll_buffer_size 10000
+
+// Position de la barre de statut
+pane_frames false
+
+// Auto layout
+auto_layout true
+
+// Comportement du layout
+default_layout "compact"
+
+// Session
+session_serialization true
+
+// Simplifier l'interface
+simplified_ui true
+
+// Raccourcis personnalisés
+keybinds {
+    normal {
+        // Désactiver Ctrl+q pour éviter de quitter par erreur
+        unbind "Ctrl q"
+    }
+
+    shared_except "locked" {
+        // Mode de navigation avec Ctrl+g
+        bind "Ctrl g" { SwitchToMode "locked"; }
+    }
+
+    locked {
+        // Retour au mode normal avec Ctrl+g
+        bind "Ctrl g" { SwitchToMode "normal"; }
+    }
+
+    pane {
+        // Navigation entre panes
+        bind "h" "Left" { MoveFocus "Left"; }
+        bind "l" "Right" { MoveFocus "Right"; }
+        bind "j" "Down" { MoveFocus "Down"; }
+        bind "k" "Up" { MoveFocus "Up"; }
+
+        // Redimensionner les panes
+        bind "H" { Resize "Increase Left"; }
+        bind "L" { Resize "Increase Right"; }
+        bind "J" { Resize "Increase Down"; }
+        bind "K" { Resize "Increase Up"; }
+
+        // Nouveau pane
+        bind "n" { NewPane; SwitchToMode "normal"; }
+        bind "x" { CloseFocus; SwitchToMode "normal"; }
+        bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
+    }
+
+    tab {
+        // Navigation entre tabs
+        bind "h" "Left" { GoToPreviousTab; }
+        bind "l" "Right" { GoToNextTab; }
+
+        // Nouveau tab
+        bind "n" { NewTab; SwitchToMode "normal"; }
+        bind "x" { CloseTab; SwitchToMode "normal"; }
+        bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
+    }
+}
+
+// UI Configuration
+ui {
+    pane_frames {
+        rounded_corners true
+    }
+}
+
+// Plugins
+plugins {
+    tab-bar { path "tab-bar"; }
+    status-bar { path "status-bar"; }
+    strider { path "strider"; }
+    compact-bar { path "compact-bar"; }
+}

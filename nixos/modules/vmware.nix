@@ -8,8 +8,10 @@
     headless = false;  # VM avec interface graphique
   };
 
-  # Driver vidéo VMware pour X11
-  services.xserver.videoDrivers = [ "vmware" ];
+  # Driver vidéo pour X11
+  # Note: "modesetting" est plus stable que "vmware" dans certains cas
+  # Essayer "vmware" si modesetting ne fonctionne pas
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   # Paquets VMware
   environment.systemPackages = with pkgs; [

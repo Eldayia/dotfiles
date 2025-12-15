@@ -119,6 +119,8 @@ dotfiles/
 │   │   ├── locale.nix            # Localisation et clavier
 │   │   ├── users.nix             # Utilisateurs et shell
 │   │   ├── fonts.nix             # Polices système
+│   │   ├── graphics.nix          # Configuration graphique (Mesa, VMware, EGL)
+│   │   ├── vmware.nix            # Support VMware (open-vm-tools)
 │   │   ├── hyprland.nix          # Configuration Hyprland
 │   │   ├── packages.nix          # Paquets système de base
 │   │   ├── archives.nix          # Outils de compression
@@ -134,37 +136,44 @@ dotfiles/
 │       ├── display-manager.nix   # Ly display manager
 │       └── ssh.nix                # OpenSSH serveur
 ├── .config/                      # Configurations utilisateur
-├   ├── hypr/                     # Hyprland (window manager)
-├   ├── nvim/                     # Neovim
-├   ├── waybar/                   # Barre d'état
-├   ├── wofi/                     # Lanceur d'applications
-├   ├── dunst/                    # Gestionnaire de notifications
-├   ├── kitty/                    # Terminal Kitty
-├   ├── ghostty/                  # Terminal Ghostty
-├   ├── nushell/                  # Shell Nushell
-├   ├── git/                      # Configuration Git globale
-├   ├── gh/                       # GitHub CLI
-├   ├── btop/                     # Moniteur système
-├   ├── fastfetch/                # Affichage infos système
-├   ├── yazi/                     # File manager TUI
-├   ├── zellij/                   # Multiplexeur de terminal
-├   ├── atuin/                    # Historique de commandes
-├   ├── bat/                      # Cat avec coloration syntaxique
-├   ├── direnv/                   # Gestion d'environnements
-└   └── starship.toml             # Prompt Starship
-├── install-prep.sh               # Script de préparation installation initiale
-├── install-update.sh             # Script de mise à jour de la config NixOS
-├── sync-all.sh                   # Synchronise dotfiles + NixOS vers Git
-├── sync-dotfiles.sh              # Synchronise uniquement les dotfiles vers Git
-├── sync-nixos.sh                 # Copie /etc/nixos vers le dépôt et synchronise
-├── deploy-vm.sh                  # Déploiement automatique sur VM (Stow + rebuild)
-├── fix-stow-conflicts.sh         # Résolution automatique des conflits Stow
-├── diagnose-hyprland.sh          # Diagnostic complet Hyprland
-├── check-status.sh               # Vérification rapide de l'état
-├── start-hyprland.sh             # Lancement assisté de Hyprland
-├── collect-logs.sh               # Collecte et envoi des logs
-├── test-hyprland.sh              # Test automatique des fonctionnalités
-├── hyprland-minimal.conf         # Configuration Hyprland minimale de test
+│   ├── hypr/                     # Hyprland (window manager)
+│   │   ├── hyprland.conf         # Configuration principale
+│   │   ├── hyprland-wrapper.sh   # Wrapper de lancement
+│   │   ├── debug-env.sh          # Diagnostic variables d'env (Ctrl+D)
+│   │   └── check-graphics.sh     # Diagnostic graphique (Ctrl+Shift+D)
+│   ├── nvim/                     # Neovim
+│   ├── waybar/                   # Barre d'état
+│   ├── wofi/                     # Lanceur d'applications
+│   ├── dunst/                    # Gestionnaire de notifications
+│   ├── kitty/                    # Terminal Kitty
+│   ├── ghostty/                  # Terminal Ghostty
+│   ├── nushell/                  # Shell Nushell
+│   ├── git/                      # Configuration Git globale
+│   ├── gh/                       # GitHub CLI
+│   ├── btop/                     # Moniteur système
+│   ├── fastfetch/                # Affichage infos système
+│   ├── yazi/                     # File manager TUI
+│   ├── zellij/                   # Multiplexeur de terminal
+│   ├── atuin/                    # Historique de commandes
+│   ├── bat/                      # Cat avec coloration syntaxique
+│   ├── direnv/                   # Gestion d'environnements
+│   └── starship.toml             # Prompt Starship
+├── scripts/                      # Scripts d'installation et synchronisation
+│   ├── install-prep.sh           # Préparation installation initiale
+│   ├── install-update.sh         # Mise à jour config NixOS vers /etc/nixos/
+│   ├── deploy-vm.sh              # Déploiement automatique sur VM
+│   ├── fix-stow-conflicts.sh     # Résolution conflits Stow
+│   ├── sync-all.sh               # Sync dotfiles + NixOS vers Git
+│   ├── sync-dotfiles.sh          # Sync uniquement dotfiles vers Git
+│   └── sync-nixos.sh             # Copie /etc/nixos vers dépôt + sync
+├── debug/                        # Scripts et documentation de diagnostic
+│   ├── check-vmware-3d.sh        # Vérification accélération 3D VMware
+│   ├── diagnose-hyprland.sh      # Diagnostic complet Hyprland
+│   ├── check-status.sh           # Vérification rapide état
+│   ├── start-hyprland.sh         # Lancement assisté Hyprland
+│   ├── collect-logs.sh           # Collecte et envoi logs vers Hastebin
+│   ├── test-hyprland.sh          # Test automatique fonctionnalités
+│   └── HYPRLAND_DEBUG.md         # Documentation débogage
 ├── .stow-local-ignore            # Fichiers à ignorer lors du déploiement Stow
 ├── CLAUDE.md                     # Directives pour IA (WARP + Claude)
 ├── DEPLOY-VM.md                  # Guide de déploiement sur VM
@@ -204,14 +213,14 @@ cd dotfiles
 
 ### 3. Préparer l'installation avec le script
 
-Le script `install-prep.sh` automatise la copie de la configuration vers `/mnt/etc/nixos/` :
+Le script `scripts/install-prep.sh` automatise la copie de la configuration vers `/mnt/etc/nixos/` :
 
 ```bash
 # Rendre le script exécutable
-chmod +x install-prep.sh
+chmod +x scripts/install-prep.sh
 
 # Exécuter le script (copie les modules et configuration.nix)
-sudo ./install-prep.sh
+sudo ./scripts/install-prep.sh
 ```
 
 ### 4. Adapter la configuration matérielle
@@ -353,7 +362,7 @@ Synchronise les dotfiles ET la configuration NixOS en une seule commande :
 
 ```bash
 cd ~/dotfiles
-./sync-all.sh
+./scripts/sync-all.sh
 ```
 
 **Ce script exécute :**
@@ -366,7 +375,7 @@ Pour versionner les modifications des dotfiles (`.config/`, scripts, documentati
 
 ```bash
 cd ~/dotfiles
-./sync-dotfiles.sh
+./scripts/sync-dotfiles.sh
 ```
 
 **Fonctionnalités :**
@@ -382,7 +391,7 @@ Pour récupérer la configuration NixOS depuis `/etc/nixos/` et la versionner :
 
 ```bash
 cd ~/dotfiles
-./sync-nixos.sh
+./scripts/sync-nixos.sh
 ```
 
 **Fonctionnalités :**
@@ -422,12 +431,12 @@ Pour versionner rapidement toutes vos modifications :
 
 ```bash
 cd ~/dotfiles
-./sync-all.sh
+./scripts/sync-all.sh
 ```
 
 Ou de manière sélective :
-- Dotfiles uniquement : `./sync-dotfiles.sh`
-- Config NixOS uniquement : `./sync-nixos.sh`
+- Dotfiles uniquement : `./scripts/sync-dotfiles.sh`
+- Config NixOS uniquement : `./scripts/sync-nixos.sh`
 
 Ces scripts gèrent automatiquement git add, commit et push avec un affichage des différences.
 
@@ -460,13 +469,13 @@ Ces scripts gèrent automatiquement git add, commit et push avec un affichage de
 2. **Copier** vers `/etc/nixos/` :
    ```bash
    cd ~/dotfiles
-   sudo ./install-update.sh
+   sudo ./scripts/install-update.sh
    ```
 3. **Tester** : `sudo nixos-rebuild test`
 4. **Activer** : `sudo nixos-rebuild switch`
 5. **Versionner** (si OK) :
    ```bash
-   ./sync-dotfiles.sh
+   ./scripts/sync-dotfiles.sh
    ```
 
 **Méthode 2 : Modifier directement dans /etc/nixos/**
@@ -477,7 +486,7 @@ Ces scripts gèrent automatiquement git add, commit et push avec un affichage de
 4. **Synchroniser vers le dépôt** :
    ```bash
    cd ~/dotfiles
-   ./sync-nixos.sh
+   ./scripts/sync-nixos.sh
    ```
    Le script copie automatiquement `/etc/nixos/` vers `./nixos` et versionne les changements.
 
@@ -485,11 +494,11 @@ Ces scripts gèrent automatiquement git add, commit et push avec un affichage de
 
 ### Déploiement rapide sur VM
 
-Le script `deploy-vm.sh` automatise le déploiement complet :
+Le script `scripts/deploy-vm.sh` automatise le déploiement complet :
 
 ```bash
 cd ~/dotfiles
-./deploy-vm.sh
+./scripts/deploy-vm.sh
 ```
 
 **Actions effectuées :**
@@ -505,19 +514,26 @@ En cas d'erreur "over existing target" avec Stow :
 
 ```bash
 cd ~/dotfiles
-./fix-stow-conflicts.sh
+./scripts/fix-stow-conflicts.sh
 ```
 
 Le script détecte, sauvegarde et résout automatiquement les conflits.
 
-### Diagnostic Hyprland
+### Diagnostic VMware et Hyprland
 
-Plusieurs outils de diagnostic sont disponibles :
+Plusieurs outils de diagnostic sont disponibles dans le dossier `debug/` :
 
-#### Diagnostic complet
+#### Vérification accélération 3D VMware
+```bash
+./debug/check-vmware-3d.sh
+```
+
+Vérifie si l'accélération 3D VMware est activée et affiche la mémoire vidéo.
+
+#### Diagnostic Hyprland complet
 ```bash
 cd ~/dotfiles
-./diagnose-hyprland.sh
+./debug/diagnose-hyprland.sh
 ```
 
 Vérifie :
@@ -531,31 +547,37 @@ Vérifie :
 
 #### Vérification rapide
 ```bash
-./check-status.sh
+./debug/check-status.sh
 ```
 
 Vérification express de l'état actuel d'Hyprland.
 
 #### Lancement assisté
 ```bash
-./start-hyprland.sh
+./debug/start-hyprland.sh
 ```
 
 Démarre Hyprland avec vérifications et diagnostics.
 
 #### Collecte de logs
 ```bash
-./collect-logs.sh
+./debug/collect-logs.sh
 ```
 
 Collecte toutes les informations de debug et les envoie automatiquement sur Hastebin pour partage.
 
 #### Test des fonctionnalités
 ```bash
-./test-hyprland.sh
+./debug/test-hyprland.sh
 ```
 
 Test automatique des applications et services.
+
+#### Diagnostic depuis Hyprland (sans terminal)
+
+Si vous ne pouvez pas lancer de terminal dans Hyprland :
+- **Ctrl+D** : Diagnostic variables d'environnement (debug-env.sh)
+- **Ctrl+Shift+D** : Diagnostic graphique complet (check-graphics.sh)
 
 ### Configuration minimale de test
 

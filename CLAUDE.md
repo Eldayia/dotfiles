@@ -13,31 +13,36 @@ Le dépôt est organisé comme suit :
 - **nixos/** : Configuration système NixOS (modulaire)
   - `configuration.nix` : Point d'entrée (importe tous les modules)
   - `hardware-configuration.nix` : Configuration matérielle générée automatiquement
-  - `modules/` : Modules de configuration par thème (boot, network, locale, users, packages, etc.)
+  - `modules/` : Modules de configuration par thème (boot, network, locale, users, packages, graphics, hyprland, etc.)
   - `services/` : Services système (audio, display-manager)
 
 - **.config/** : Configurations utilisateur
   - `hypr/` : Configuration Hyprland (gestionnaire de fenêtres Wayland)
+    - `hyprland.conf` : Configuration principale
+    - `hyprland-wrapper.sh` : Wrapper de lancement (variables d'environnement)
+    - `debug-env.sh` : Script de diagnostic des variables d'environnement
+    - `check-graphics.sh` : Script de diagnostic graphique complet
   - `nvim/` : Configuration Neovim
   - `waybar/` : Configuration Waybar (barre d'état)
+  - `kitty/` : Configuration Kitty terminal
 
-- **Scripts de gestion** :
-  - `install-prep.sh` : Préparation installation NixOS (clavier, wifi, partitionnement, génération config)
+- **scripts/** : Scripts d'installation, déploiement et synchronisation
+  - `install-prep.sh` : Préparation installation NixOS (clavier, wifi, partitionnement)
   - `install-update.sh` : Copie la config du dépôt vers `/etc/nixos/` (avec sauvegarde)
+  - `deploy-vm.sh` : Déploiement automatique complet sur VM (Stow + NixOS rebuild)
+  - `fix-stow-conflicts.sh` : Résolution automatique des conflits Stow
   - `sync-nixos.sh` : Copie `/etc/nixos/` vers le dépôt puis commit/push
   - `sync-dotfiles.sh` : Commit/push les modifications des dotfiles
   - `sync-all.sh` : Exécute sync-dotfiles.sh puis sync-nixos.sh
 
-- **Scripts de déploiement VM** :
-  - `deploy-vm.sh` : Déploiement automatique complet sur VM (Stow + NixOS rebuild)
-  - `fix-stow-conflicts.sh` : Résolution automatique des conflits Stow
-
-- **Scripts de diagnostic Hyprland** :
-  - `diagnose-hyprland.sh` : Diagnostic complet (processus, services, apps, logs)
+- **debug/** : Scripts et documentation de diagnostic
+  - `check-vmware-3d.sh` : Vérification accélération 3D VMware
+  - `diagnose-hyprland.sh` : Diagnostic complet Hyprland (processus, services, apps, logs)
   - `check-status.sh` : Vérification rapide de l'état Hyprland
   - `start-hyprland.sh` : Lancement assisté de Hyprland
   - `collect-logs.sh` : Collecte et envoi automatique des logs vers Hastebin
   - `test-hyprland.sh` : Test automatique des fonctionnalités
+  - `HYPRLAND_DEBUG.md` : Documentation de débogage Hyprland
 
 - **Documentation** :
   - `README.md` : Documentation principale
@@ -52,11 +57,12 @@ Le dépôt est organisé comme suit :
 - **OS** : NixOS 24.05
 - **Display Manager** : Ly
 - **Window Manager** : Hyprland (Wayland)
-- **Shell** : Nushell (par défaut système)
-- **Terminal** : Warp Terminal (principal), Kitty (secours)
+- **Shell** : Bash (par défaut système), Nushell disponible
+- **Terminal** : Kitty (principal), Warp Terminal, xterm (fallback)
 - **Launcher** : Wofi
 - **Status Bar** : Waybar
 - **Notifications** : Dunst
+- **Graphics** : Mesa avec driver vmwgfx (VMware), EGL/Wayland support
 - **Outils CLI** : btop, fastfetch, fd, git, stow, neovim, ripgrep, zellij, yazi, zoxide
 
 ## Commandes NixOS
@@ -117,13 +123,13 @@ git status
 
 #### Synchroniser tout (dotfiles + NixOS)
 ```bash
-./sync-all.sh
+./scripts/sync-all.sh
 ```
 Ce script exécute `sync-dotfiles.sh` puis `sync-nixos.sh`.
 
 #### Synchroniser uniquement les dotfiles
 ```bash
-./sync-dotfiles.sh
+./scripts/sync-dotfiles.sh
 ```
 - Stage tous les changements dans le dépôt
 - Affiche les différences avec diff-so-fancy
@@ -132,7 +138,7 @@ Ce script exécute `sync-dotfiles.sh` puis `sync-nixos.sh`.
 
 #### Synchroniser uniquement la config NixOS
 ```bash
-./sync-nixos.sh
+./scripts/sync-nixos.sh
 ```
 - Copie `/etc/nixos/` vers `./nixos` (avec sudo)
 - Change le propriétaire et permissions
@@ -144,7 +150,7 @@ Ce script exécute `sync-dotfiles.sh` puis `sync-nixos.sh`.
 ### Workflow manuel
 
 1. Modifier les fichiers dans ce dépôt
-2. Pour NixOS : copier vers `/etc/nixos/` avec `./install-update.sh`
+2. Pour NixOS : copier vers `/etc/nixos/` avec `./scripts/install-update.sh`
 3. Pour dotfiles : les modifications sont automatiques (symlinks Stow)
 4. Tester :
    - NixOS : `sudo nixos-rebuild test`
@@ -159,7 +165,7 @@ Ce script exécute `sync-dotfiles.sh` puis `sync-nixos.sh`.
 Pour déployer rapidement sur une VM NixOS :
 ```bash
 cd ~/dotfiles
-./deploy-vm.sh
+./scripts/deploy-vm.sh
 ```
 
 Ce script effectue :
@@ -173,33 +179,38 @@ Ce script effectue :
 Si Stow refuse de créer des liens symboliques :
 ```bash
 cd ~/dotfiles
-./fix-stow-conflicts.sh
+./scripts/fix-stow-conflicts.sh
 ```
 
-### Diagnostic Hyprland
+### Diagnostic Hyprland et VMware
 
-Pour diagnostiquer les problèmes Hyprland :
-
+#### Diagnostic accélération 3D VMware
 ```bash
-# Diagnostic complet (vérifie processus, services, apps, logs)
-./diagnose-hyprland.sh
+./debug/check-vmware-3d.sh
+```
+Vérifie si l'accélération 3D VMware est activée et affiche la mémoire vidéo disponible.
+
+#### Diagnostic Hyprland complet
+```bash
+# Diagnostic complet (processus, services, apps, logs)
+./debug/diagnose-hyprland.sh
 
 # Vérification rapide de l'état
-./check-status.sh
+./debug/check-status.sh
 
 # Lancement assisté de Hyprland
-./start-hyprland.sh
+./debug/start-hyprland.sh
 
-# Collecte et envoi des logs pour debug
-./collect-logs.sh
+# Collecte et envoi des logs vers Hastebin
+./debug/collect-logs.sh
 
 # Test des fonctionnalités
-./test-hyprland.sh
+./debug/test-hyprland.sh
 ```
 
-### Configurations spéciales
-
-- `hyprland-minimal.conf` : Configuration Hyprland minimaliste pour tester en cas de problème
+#### Diagnostic depuis Hyprland (sans terminal)
+- **Ctrl+D** : Lance `debug-env.sh` (variables d'environnement)
+- **Ctrl+Shift+D** : Lance `check-graphics.sh` (diagnostic graphique complet)
 
 ## Notes de développement
 

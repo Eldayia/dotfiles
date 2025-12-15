@@ -9,6 +9,6 @@
   users.users.eldayia = {
     isNormalUser = true;
     description = "Admin";
-    extraGroups = [ "networkmanager" "wheel" ]; # "wheel" pour sudo
+    extraGroups = [ "networkmanager" "wheel" "video" ]; # "wheel" pour sudo, "video" pour accès GPU
   };
 }

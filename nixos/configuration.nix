@@ -12,6 +12,9 @@
       ./modules/locale.nix
       ./modules/users.nix
       ./modules/fonts.nix
+      ./modules/vmware.nix
+      ./modules/graphics.nix
+      ./modules/session.nix
 
       # Environnement graphique
       ./modules/hyprland.nix
@@ -26,6 +29,8 @@
       ./modules/network-tools.nix
       ./modules/terminal-utils.nix
       ./modules/web.nix
+      ./modules/screenshot.nix
+      ./modules/lockscreen.nix
 
       # Services
       ./services/audio.nix

@@ -68,16 +68,27 @@
 
   # Configuration XDG pour les applications
   environment.variables = {
-    # Force les applications Qt à utiliser Wayland
-    QT_QPA_PLATFORM = "wayland";
+    # Support Qt Wayland avec fallback X11
+    QT_QPA_PLATFORM = "wayland;xcb";
     # Désactive le hardcursor pour VM
     WLR_NO_HARDWARE_CURSORS = "1";
+    # Support Firefox Wayland
+    MOZ_ENABLE_WAYLAND = "1";
+    # GTK Wayland avec fallback X11
+    GDK_BACKEND = "wayland,x11";
+    # Désactiver décorations Qt Wayland
+    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+    # Fix Java applications
+    _JAVA_AWT_WM_NONREPARENTING = "1";
   };
 
   # Services XDG essentiels pour le lancement d'applications
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gtk
+    ];
     config.common.default = "*";
   };
 }

@@ -82,8 +82,10 @@
     _JAVA_AWT_WM_NONREPARENTING = "1";
     # Support EGL pour Wayland
     EGL_PLATFORM = "wayland";
-    # Forcer Mesa software rendering comme fallback si GPU fail
-    LIBGL_ALWAYS_SOFTWARE = "0";
+    # Forcer Mesa software rendering (VMware 3D acceleration non fonctionnelle)
+    LIBGL_ALWAYS_SOFTWARE = "1";
+    # Force llvmpipe software renderer
+    GALLIUM_DRIVER = "llvmpipe";
   };
 
   # Services XDG essentiels pour le lancement d'applications

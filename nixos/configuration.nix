@@ -12,7 +12,6 @@
       ./modules/locale.nix
       ./modules/users.nix
       ./modules/fonts.nix
-      ./modules/runtime-directory.nix
 
       # Environnement graphique
       ./modules/hyprland.nix

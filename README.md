@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Windows_logo_-_2012.svg/512px-Windows_logo_-_2012.svg.png" width="200" alt="Windows Logo">
+  <img src="windows.jpg" alt="Windows Banner">
 </p>
 
 <p align="center">

@@ -15,7 +15,7 @@
 
 # dotfiles NixOS by Eldayia
 
-Configuration complète pour NixOS avec environnement Hyprland (Wayland). Cette branche est dédiée exclusivement à NixOS et utilise GNU Stow pour la gestion des dotfiles.
+Configuration complète pour NixOS avec environnement X11 + i3. Support optionnel Hyprland/Wayland disponible. Cette branche est dédiée exclusivement à NixOS et utilise GNU Stow pour la gestion des dotfiles.
 
 ## 🆕 Nouveautés récentes
 
@@ -26,9 +26,10 @@ Configuration complète pour NixOS avec environnement Hyprland (Wayland). Cette 
 - ✅ **Collecte automatique des logs** - Envoi vers Hastebin pour partage facile
 
 ### Configurations complètes
-- ✅ **20+ applications configurées** - Atuin, Bat, Btop, Direnv, Dunst, Fastfetch, GH CLI, Git, Ghostty, Hypr, Kitty, Nushell, Nvim, Starship, Waybar, Wofi, Yazi, Zellij
-- ✅ **Configuration Hyprland optimisée** - Raccourcis clavier, workspaces, animations
-- ✅ **Hyprland défini comme session par défaut** - Démarrage automatique dans le display manager
+- ✅ **20+ applications configurées** - Atuin, Bat, Btop, Direnv, Dunst, Edge, Fastfetch, GH CLI, Git, Ghostty, Kitty, Nushell, Nvim, Starship, Warp, i3, Yazi, Zellij
+- ✅ **Configuration X11 + i3 optimisée** - Window manager léger et performant pour VMware
+- ✅ **Architecture modulaire** - Séparation claire X11/Wayland/Interface/Applications
+- ✅ **Support Wayland/Hyprland disponible** - Modules désactivés par défaut, facilement activables
 - ✅ **Thème cohérent** - Apparence harmonieuse sur toutes les applications
 
 ### Documentation enrichie
@@ -47,16 +48,16 @@ Configuration complète pour NixOS avec environnement Hyprland (Wayland). Cette 
 ### Système de base
 - **OS** : NixOS 24.05
 - **Display Manager** : Ly
-- **Window Manager** : Hyprland (Wayland)
+- **Window Manager** : i3 (X11) - **ACTIF** | Hyprland (Wayland) optionnel
 - **Shell** : Nushell (défaut système)
 - **Audio** : PipeWire (ALSA + PulseAudio + RTKit)
 
 ### Environnement graphique
-- **Terminal** : Warp Terminal (principal), Kitty, Ghostty
-- **Launcher** : Wofi
-- **Status Bar** : Waybar
+- **Terminal** : Warp Terminal (principal), Kitty (secondaire), Ghostty
+- **Launcher** : dmenu (i3), rofi, wofi (Hyprland)
+- **Status Bar** : i3status/i3blocks (i3), waybar (Hyprland)
 - **Notifications** : Dunst
-- **Clipboard** : wl-clipboard
+- **Clipboard** : xclip (X11), wl-clipboard (Wayland)
 
 ### Éditeurs & Développement
 - **Éditeurs** : Neovim

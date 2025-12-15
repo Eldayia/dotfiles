@@ -17,8 +17,11 @@
       ./modules/session.nix
 
       # Environnement graphique
-      ./modules/hyprland.nix
+      ./modules/x11.nix         # Configuration X11 + i3 (ACTIF)
+      ./modules/interface.nix   # Applications d'interface (wofi, waybar, etc.)
       ./modules/packages.nix
+      # ./modules/wayland.nix   # Configuration Wayland pure (protocoles, libs) - OPTIONNEL
+      # ./modules/hyprland.nix  # Hyprland window manager - OPTIONNEL
 
       # Applications par catégorie
       ./modules/archives.nix

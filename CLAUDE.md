@@ -4,7 +4,7 @@ Ce fichier fournit des directives à WARP (warp.dev) et Claude lors du travail a
 
 ## Vue d'ensemble du projet
 
-Dépôt de dotfiles pour une installation NixOS avec environnement Hyprland (Wayland compositor). Configuration complète pour un poste de développement moderne avec shell Nushell et terminal Warp.
+Dépôt de dotfiles pour une installation NixOS avec environnement X11 + i3 window manager. Configuration complète pour un poste de développement moderne avec shell Nushell et terminal Warp. Support Hyprland (Wayland) disponible en option.
 
 ## Structure du dépôt
 
@@ -13,17 +13,24 @@ Le dépôt est organisé comme suit :
 - **nixos/** : Configuration système NixOS (modulaire)
   - `configuration.nix` : Point d'entrée (importe tous les modules)
   - `hardware-configuration.nix` : Configuration matérielle générée automatiquement
-  - `modules/` : Modules de configuration par thème (boot, network, locale, users, packages, graphics, hyprland, etc.)
-  - `services/` : Services système (audio, display-manager)
+  - `modules/` : Modules de configuration par thème
+    - Système de base : boot, network, locale, users, fonts, vmware, graphics, session
+    - Environnement graphique : x11.nix (ACTIF), interface.nix, packages.nix, wayland.nix (optionnel), hyprland.nix (optionnel)
+    - Applications : archives, communication, cybersecurity, development, multimedia, network-tools, terminal-utils, web, screenshot, lockscreen
+  - `services/` : Services système (audio, display-manager, ssh)
 
 - **.config/** : Configurations utilisateur
-  - `hypr/` : Configuration Hyprland (gestionnaire de fenêtres Wayland)
+  - `i3/` : Configuration i3 (window manager X11) - **ACTIF**
+    - `config` : Configuration principale i3
+    - `debug-env.sh` : Script de diagnostic des variables d'environnement
+    - `check-graphics.sh` : Script de diagnostic graphique complet
+  - `hypr/` : Configuration Hyprland (gestionnaire de fenêtres Wayland) - OPTIONNEL
     - `hyprland.conf` : Configuration principale
     - `hyprland-wrapper.sh` : Wrapper de lancement (variables d'environnement)
     - `debug-env.sh` : Script de diagnostic des variables d'environnement
     - `check-graphics.sh` : Script de diagnostic graphique complet
   - `nvim/` : Configuration Neovim
-  - `waybar/` : Configuration Waybar (barre d'état)
+  - `waybar/` : Configuration Waybar (barre d'état Wayland)
   - `kitty/` : Configuration Kitty terminal
 
 - **scripts/** : Scripts d'installation, déploiement et synchronisation
@@ -56,13 +63,13 @@ Le dépôt est organisé comme suit :
 
 - **OS** : NixOS 24.05
 - **Display Manager** : Ly
-- **Window Manager** : Hyprland (Wayland)
-- **Shell** : Bash (par défaut système), Nushell disponible
-- **Terminal** : Kitty (principal), Warp Terminal, xterm (fallback)
-- **Launcher** : Wofi
-- **Status Bar** : Waybar
+- **Window Manager** : i3 (X11) - **ACTIF** | Hyprland (Wayland) disponible en option
+- **Shell** : Nushell (par défaut système)
+- **Terminal** : Warp Terminal (principal), Kitty (secondaire), Ghostty (alternatif)
+- **Launcher** : dmenu (i3), rofi (compatible), wofi (Hyprland)
+- **Status Bar** : i3status/i3blocks (i3), waybar (Hyprland)
 - **Notifications** : Dunst
-- **Graphics** : Mesa avec driver vmwgfx (VMware), EGL/Wayland support
+- **Graphics** : Mesa avec driver vmwgfx (VMware), support X11
 - **Outils CLI** : btop, fastfetch, fd, git, stow, neovim, ripgrep, zellij, yazi, zoxide
 
 ## Commandes NixOS
@@ -107,7 +114,13 @@ git status
 - Grouper les paquets par catégorie (GUI, CLI, etc.)
 - Toujours tester avec `nixos-rebuild test` avant `switch`
 
-### Fichiers Hyprland
+### Fichiers i3
+- Utiliser la syntaxe i3 standard pour la configuration
+- Documenter les raccourcis clavier avec commentaires clairs
+- Respecter la structure : Variables → Apparence → Raccourcis → Workspaces
+- Les raccourcis utilisent Control (Ctrl) comme modificateur principal pour cohérence avec l'ancienne config Hyprland
+
+### Fichiers Hyprland (si activé)
 - Utiliser la syntaxe moderne (v0.40+) pour les blocs `decoration.shadow` et `decoration.blur`
 - Documenter les raccourcis clavier avec commentaires clairs
 - Respecter la structure : Variables d'env → Apparence → Raccourcis
@@ -182,7 +195,7 @@ cd ~/dotfiles
 ./scripts/fix-stow-conflicts.sh
 ```
 
-### Diagnostic Hyprland et VMware
+### Diagnostic VMware et graphique
 
 #### Diagnostic accélération 3D VMware
 ```bash
@@ -190,7 +203,12 @@ cd ~/dotfiles
 ```
 Vérifie si l'accélération 3D VMware est activée et affiche la mémoire vidéo disponible.
 
-#### Diagnostic Hyprland complet
+#### Diagnostic i3 et X11
+Raccourcis clavier disponibles dans i3 :
+- **Ctrl+D** : Lance `.config/i3/debug-env.sh` (variables d'environnement)
+- **Ctrl+Shift+D** : Lance `.config/i3/check-graphics.sh` (diagnostic graphique complet X11)
+
+#### Diagnostic Hyprland complet (si Wayland activé)
 ```bash
 # Diagnostic complet (processus, services, apps, logs)
 ./debug/diagnose-hyprland.sh
@@ -208,15 +226,30 @@ Vérifie si l'accélération 3D VMware est activée et affiche la mémoire vidé
 ./debug/test-hyprland.sh
 ```
 
-#### Diagnostic depuis Hyprland (sans terminal)
-- **Ctrl+D** : Lance `debug-env.sh` (variables d'environnement)
-- **Ctrl+Shift+D** : Lance `check-graphics.sh` (diagnostic graphique complet)
-
 ## Notes de développement
 
 - Ce dépôt est personnel mais ouvert aux suggestions via issues/PRs
-- Les configurations sont optimisées pour une VM (notamment `WLR_NO_HARDWARE_CURSORS=1`)
+- Configuration principale : i3 (X11) pour compatibilité VMware optimale
+- Support Hyprland (Wayland) disponible en option (modules wayland.nix et hyprland.nix commentés)
+- Configuration i3 basée sur les raccourcis Hyprland (Ctrl comme modificateur principal)
 - Toujours communiquer en français avec l'utilisateur
 - Le système utilise les polices Nerd Fonts pour l'affichage des icônes
 - Le développement se fait sous Windows, le déploiement sur VM NixOS
 - Des outils complets de diagnostic et déploiement sont disponibles
+
+## Architecture modulaire
+
+La configuration NixOS est organisée en modules thématiques :
+
+### Modules d'environnement graphique
+- **x11.nix** (ACTIF) : Serveur X11, i3 window manager, dmenu, variables d'environnement X11
+- **interface.nix** : Applications d'interface communes (wofi, waybar, rofi, i3status, i3blocks, nautilus, polkit, GTK libs)
+- **packages.nix** : Terminaux (warp-terminal, kitty), notifications (dunst), clipboard (xclip)
+- **wayland.nix** (optionnel) : Protocoles et bibliothèques Wayland pures, XDG portals
+- **hyprland.nix** (optionnel) : Configuration Hyprland compositor avec XWayland
+
+### Organisation des paquets
+- **Terminaux** : warp-terminal et kitty dans packages.nix, ghostty dans terminal-utils.nix
+- **Interface graphique** : Applications partagées dans interface.nix (lanceurs, barres d'état, gestionnaire de fichiers)
+- **Outils spécifiques** : X11 utils dans x11.nix, Wayland utils dans wayland.nix
+- **Pas de doublons** : Chaque paquet est défini une seule fois dans le module le plus approprié

@@ -24,7 +24,7 @@
     stow           # Gestionnaire de symlinks pour dotfiles
     direnv         # Chargement automatique d'environnements
     tree           # Affichage d'arborescence
-    libnotify      # Notifications desktop
+    # libnotify est dans interface.nix
 
     # --- NAVIGATION & RECHERCHE ---
     fzf            # Fuzzy finder

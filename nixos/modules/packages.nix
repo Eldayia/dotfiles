@@ -5,15 +5,19 @@
   # Nécessaire pour certains logiciels (navigateurs, etc.)
   nixpkgs.config.allowUnfree = true;
 
-  # --- PAQUETS HYPRLAND / WAYLAND ---
-  # Paquets spécifiques à l'environnement Hyprland
+  # --- PAQUETS ENVIRONNEMENT GRAPHIQUE ---
+  # Paquets pour l'environnement graphique X11 + i3
+  # Note: Les applications d'interface (wofi, waybar, rofi, etc.) sont dans interface.nix
   environment.systemPackages = with pkgs; [
-    warp-terminal  # Terminal principal
-    kitty          # Terminal de secours
-    xterm          # Terminal X11 de secours (toujours fiable)
-    wofi           # Lanceur d'applications (menu)
-    waybar         # Barre d'état
-    dunst          # Notifications
-    wl-clipboard   # Clipboard pour Wayland (wl-copy, wl-paste)
+    # Terminaux
+    warp-terminal  # Terminal principal (moderne, AI-powered)
+    kitty          # Terminal secondaire (GPU-accelerated)
+    # ghostty est dans terminal-utils.nix
+
+    # Notifications
+    dunst          # Gestionnaire de notifications (X11 et Wayland)
+
+    # Clipboard X11
+    xclip          # Clipboard X11 (xclip -selection clipboard)
   ];
 }

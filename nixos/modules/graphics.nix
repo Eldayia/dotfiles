@@ -8,17 +8,11 @@
     enable32Bit = true;  # Support 32-bit (Wine, Steam, etc.)
   };
 
-  # Activer X11 pour XWayland (nécessaire même en Wayland)
-  services.xserver = {
-    enable = true;
-    # Driver VMware
-    videoDrivers = [ "vmware" ];
-  };
-
-  # Paquets de diagnostic graphique et support EGL
+  # Paquets de diagnostic graphique
   environment.systemPackages = with pkgs; [
-    mesa-demos  # Tests Mesa (glxgears, glxinfo, etc.)
-    vulkan-tools  # Diagnostic Vulkan
-    egl-wayland  # Support EGL pour Wayland
+    mesa-demos     # Tests Mesa (glxgears, glxinfo, etc.)
+    vulkan-tools   # Diagnostic Vulkan
+    xorg.xdpyinfo  # Infos X11
+    xorg.xwininfo  # Infos fenêtres X11
   ];
 }

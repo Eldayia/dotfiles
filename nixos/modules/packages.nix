@@ -10,6 +10,7 @@
   environment.systemPackages = with pkgs; [
     warp-terminal  # Terminal principal
     kitty          # Terminal de secours
+    xterm          # Terminal X11 de secours (toujours fiable)
     wofi           # Lanceur d'applications (menu)
     waybar         # Barre d'état
     dunst          # Notifications

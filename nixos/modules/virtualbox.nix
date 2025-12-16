@@ -7,7 +7,7 @@
   # Activer les Guest Additions VirtualBox
   virtualisation.virtualbox.guest = {
     enable = true;
-    draganddrop = true;
+    dragAndDrop = true;
   };
 
   # Driver vidéo simple pour VirtualBox

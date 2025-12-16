@@ -19,7 +19,13 @@ Le dépôt est organisé comme suit :
     - Plateforme : hyperv.nix (ACTIF), virtualbox.nix (optionnel), vmware.nix (optionnel), wsl.nix (WSL2 uniquement)
     - Environnement graphique : wayland.nix (ACTIF), hyprland.nix (ACTIF), x11.nix (optionnel), interface.nix, packages.nix
     - Applications : archives, communication, cybersecurity, development, multimedia, network-tools, terminal-utils, web, screenshot, lockscreen
-  - `services/` : Services système (audio, display-manager, ssh)
+  - `services/` : Services système
+    - `audio.nix` : Configuration audio (PipeWire)
+    - `display-manager.nix` : Display manager (Ly)
+    - `ssh.nix` : Configuration SSH
+    - `nvidia.nix` : Configuration GPU Nvidia (commenté par défaut)
+    - `amd.nix` : Configuration GPU AMD (commenté par défaut)
+    - `intel.nix` : Configuration GPU Intel (commenté par défaut)
 
 - **.config/** : Configurations utilisateur
   - `hypr/` : Configuration Hyprland (gestionnaire de fenêtres Wayland) - **ACTIF**
@@ -66,7 +72,7 @@ Le dépôt est organisé comme suit :
 ## Stack technique
 
 - **OS** : NixOS 24.05
-- **Plateforme** : Hyper-V avec GPU-PV (principal), WSL2/VirtualBox/VMware (supportés)
+- **Plateforme** : Hyper-V avec GPU-PV (principal), WSL2/VirtualBox/VMware/Bare Metal (supportés)
 - **Display Manager** : Ly
 - **Window Manager** : Hyprland (Wayland) - **ACTIF** | i3 (X11) disponible en option
 - **Shell** : Nushell (par défaut système)
@@ -74,7 +80,10 @@ Le dépôt est organisé comme suit :
 - **Launcher** : wofi (Hyprland), rofi (compatible), dmenu (i3)
 - **Status Bar** : waybar (Hyprland), i3status/i3blocks (i3)
 - **Notifications** : Dunst
-- **Graphics** : Mesa avec driver i915/modesetting + GPU Intel (Hyper-V GPU-PV) ou WSLg (WSL2)
+- **Graphics** :
+  - **Hyper-V/VM** : Mesa avec driver i915/modesetting + GPU Intel (GPU-PV)
+  - **WSL2** : WSLg (Mesa)
+  - **Bare Metal** : Modules GPU dédiés (nvidia.nix, amd.nix, intel.nix) - commentés par défaut
 - **Outils CLI** : btop, fastfetch, fd, git, stow, neovim, ripgrep, zellij, yazi, zoxide
 
 ## Commandes NixOS
@@ -237,11 +246,70 @@ Raccourcis clavier disponibles dans i3 :
 - Configuration principale : Hyprland (Wayland) pour environnement moderne
 - Support i3 (X11) disponible en option (module x11.nix commenté)
 - Plateforme principale : Hyper-V avec GPU-PV (accélération 3D matérielle Intel)
-- Plateformes supportées : WSL2 (configuration-wsl.nix), VirtualBox (virtualbox.nix), VMware (vmware.nix)
+- Plateformes supportées : WSL2 (configuration-wsl.nix), VirtualBox (virtualbox.nix), VMware (vmware.nix), Bare Metal
 - Toujours communiquer en français avec l'utilisateur
 - Le système utilise les polices Nerd Fonts pour l'affichage des icônes
 - Le développement se fait sous Windows, le déploiement sur VM NixOS (Hyper-V)
 - Des outils complets de diagnostic et déploiement sont disponibles
+
+## Configuration GPU (Bare Metal)
+
+Pour une installation bare metal avec carte graphique dédiée, trois modules GPU sont disponibles dans `nixos/services/` :
+
+### Activation d'un module GPU
+
+1. **Éditer `configuration.nix`** :
+   - Décommenter le module GPU correspondant à votre matériel
+   - Commenter le module `./modules/hyperv.nix` (ou autre VM)
+
+2. **Appliquer les changements** :
+   ```bash
+   sudo nixos-rebuild switch
+   ```
+
+### Modules GPU disponibles
+
+#### nvidia.nix - Cartes graphiques Nvidia
+- Pilotes propriétaires ou open-source (configurable)
+- Support versions stable, beta, legacy (série 600/700)
+- Modesetting pour Wayland/Hyprland
+- Power Management pour laptops
+- Configuration PRIME pour GPU hybride Intel+Nvidia
+- Variables d'environnement optimisées pour Wayland
+- Outils : nvtop pour monitoring
+
+#### amd.nix - Cartes graphiques AMD (Radeon)
+- Pilotes AMDGPU open-source
+- Support OpenCL et Vulkan (RADV/AMDVLK)
+- Support VAAPI pour accélération vidéo
+- Support 32-bit pour jeux
+- Options kernel pour FreeSync
+- Outils : nvtop pour AMD, radeontop
+
+#### intel.nix - Cartes graphiques Intel
+- Pilote modesetting moderne (recommandé) ou legacy intel
+- Pilotes VAAPI (nouveau intel-media-driver et ancien intel-vaapi-driver)
+- Support Vulkan et OpenCL
+- Support 32-bit pour jeux
+- Options kernel pour GuC/HuC, PSR, FBC
+- Outils : intel-gpu-tools, intel_gpu_top
+
+### Exemple de configuration
+
+Pour une machine bare metal avec GPU Nvidia :
+
+```nix
+# Dans configuration.nix, section imports
+imports = [
+  # ...
+  # ./modules/hyperv.nix     # Commenter pour bare metal
+
+  # GPU (décommenter selon matériel)
+  ./services/nvidia.nix      # ACTIF pour Nvidia
+  # ./services/amd.nix
+  # ./services/intel.nix
+];
+```
 
 ## Architecture modulaire
 

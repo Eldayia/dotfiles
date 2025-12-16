@@ -42,6 +42,11 @@
       ./services/audio.nix
       ./services/display-manager.nix
       ./services/ssh.nix
+
+      # GPU (Bare Metal uniquement - décommenter selon votre matériel)
+      # ./services/nvidia.nix   # NVIDIA GPU - Bare Metal
+      # ./services/amd.nix      # AMD GPU - Bare Metal
+      # ./services/intel.nix    # Intel GPU - Bare Metal
     ];
 
   # Version de l'état (Ne pas toucher)

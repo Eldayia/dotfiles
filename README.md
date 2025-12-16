@@ -135,7 +135,10 @@ dotfiles/
 │   └── services/                 # Services système
 │       ├── audio.nix             # PipeWire et son
 │       ├── display-manager.nix   # Ly display manager
-│       └── ssh.nix                # OpenSSH serveur
+│       ├── ssh.nix               # OpenSSH serveur
+│       ├── nvidia.nix            # Configuration GPU Nvidia (bare metal)
+│       ├── amd.nix               # Configuration GPU AMD (bare metal)
+│       └── intel.nix             # Configuration GPU Intel (bare metal)
 ├── .config/                      # Configurations utilisateur
 │   ├── hypr/                     # Hyprland (window manager)
 │   │   ├── hyprland.conf         # Configuration principale
@@ -344,6 +347,11 @@ Le fichier `nixos/configuration.nix` est le **point d'entrée** qui importe tous
 - `audio.nix` : PipeWire (ALSA + PulseAudio + RTKit)
 - `display-manager.nix` : Ly (display manager minimaliste)
 - `ssh.nix` : OpenSSH (serveur SSH avec configuration sécurisée)
+
+#### **GPU (Bare Metal uniquement)**
+- `nvidia.nix` : Configuration GPU Nvidia (commenté par défaut)
+- `amd.nix` : Configuration GPU AMD (commenté par défaut)
+- `intel.nix` : Configuration GPU Intel (commenté par défaut)
 
 ### Avantages de cette architecture
 
@@ -603,6 +611,81 @@ Configuration simplifiée :
 - [STOW.md](STOW.md) : Guide complet sur GNU Stow
 - [NixOS Manual](https://nixos.org/manual/nixos/stable/)
 - [Hyprland Wiki](https://wiki.hyprland.org/)
+
+## 🎮 Configuration GPU pour Bare Metal
+
+Si vous installez sur une machine physique (bare metal) avec une carte graphique dédiée, des modules GPU spécifiques sont disponibles.
+
+### Modules GPU disponibles
+
+#### 🟢 nvidia.nix - Cartes graphiques Nvidia
+
+**Fonctionnalités :**
+- Pilotes propriétaires ou open-source (configurable)
+- Support versions : stable, beta, legacy (série 600/700)
+- Modesetting pour Wayland/Hyprland
+- Power Management pour laptops
+- Configuration PRIME pour GPU hybride Intel+Nvidia
+- Variables d'environnement optimisées
+- Outils : nvtop pour monitoring
+
+#### 🔴 amd.nix - Cartes graphiques AMD (Radeon)
+
+**Fonctionnalités :**
+- Pilotes AMDGPU open-source
+- Support OpenCL et Vulkan (RADV/AMDVLK)
+- Support VAAPI pour accélération vidéo
+- Support 32-bit pour jeux
+- Options kernel pour FreeSync
+- Outils : nvtop pour AMD, radeontop
+
+#### 🔵 intel.nix - Cartes graphiques Intel
+
+**Fonctionnalités :**
+- Pilote modesetting moderne (recommandé) ou legacy intel
+- Pilotes VAAPI (nouveau intel-media-driver + ancien intel-vaapi-driver)
+- Support Vulkan et OpenCL
+- Support 32-bit pour jeux
+- Options kernel pour GuC/HuC, PSR, FBC
+- Outils : intel-gpu-tools, intel_gpu_top
+
+### Activation d'un module GPU
+
+**1. Éditer `configuration.nix`** (ou via `/etc/nixos/configuration.nix`) :
+
+```nix
+imports = [
+  # ...
+
+  # Commenter le module VM (si utilisé)
+  # ./modules/hyperv.nix
+  # ./modules/vmware.nix
+
+  # Décommenter le module GPU correspondant
+  ./services/nvidia.nix    # Pour Nvidia
+  # ./services/amd.nix     # Pour AMD
+  # ./services/intel.nix   # Pour Intel
+];
+```
+
+**2. Reconstruire le système :**
+
+```bash
+sudo nixos-rebuild switch
+```
+
+**3. Redémarrer pour appliquer les pilotes GPU :**
+
+```bash
+sudo reboot
+```
+
+### Notes importantes
+
+- **Un seul module GPU** doit être actif à la fois
+- Les modules GPU sont **commentés par défaut** (config pour VM/Hyper-V)
+- Pour VM : utiliser les modules `hyperv.nix`, `vmware.nix`, ou `virtualbox.nix`
+- Pour bare metal : activer le module GPU correspondant à votre matériel
 
 ## 💬 Contribuer
 

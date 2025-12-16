@@ -13,7 +13,8 @@
       ./modules/users.nix
       ./modules/fonts.nix
       # ./modules/vmware.nix      # VMware Guest - OPTIONNEL
-      ./modules/virtualbox.nix    # VirtualBox Guest - ACTIF
+      # ./modules/virtualbox.nix  # VirtualBox Guest - OPTIONNEL
+      ./modules/hyperv.nix        # Hyper-V Guest avec GPU-PV - ACTIF
       # ./modules/wsl.nix         # WSL2 - OPTIONNEL (utiliser configuration-wsl.nix)
       ./modules/graphics.nix
       ./modules/session.nix

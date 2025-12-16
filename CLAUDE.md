@@ -4,7 +4,7 @@ Ce fichier fournit des directives à WARP (warp.dev) et Claude lors du travail a
 
 ## Vue d'ensemble du projet
 
-Dépôt de dotfiles pour une installation NixOS avec environnement Hyprland (Wayland). Configuration complète pour un poste de développement moderne avec shell Nushell et terminal Warp. Compatible WSL2 et VM (VMware). Support X11 + i3 disponible en option.
+Dépôt de dotfiles pour une installation NixOS avec environnement Hyprland (Wayland). Configuration complète pour un poste de développement moderne avec shell Nushell et terminal Warp. Compatible WSL2 et VM (Hyper-V avec GPU-PV). Support X11 + i3 disponible en option.
 
 ## Structure du dépôt
 
@@ -16,7 +16,7 @@ Le dépôt est organisé comme suit :
   - `hardware-configuration.nix` : Configuration matérielle générée automatiquement
   - `modules/` : Modules de configuration par thème
     - Système de base : boot, network, locale, users, fonts, graphics, session
-    - Plateforme : virtualbox.nix (ACTIF), vmware.nix (optionnel), wsl.nix (WSL2 uniquement)
+    - Plateforme : hyperv.nix (ACTIF), virtualbox.nix (optionnel), vmware.nix (optionnel), wsl.nix (WSL2 uniquement)
     - Environnement graphique : wayland.nix (ACTIF), hyprland.nix (ACTIF), x11.nix (optionnel), interface.nix, packages.nix
     - Applications : archives, communication, cybersecurity, development, multimedia, network-tools, terminal-utils, web, screenshot, lockscreen
   - `services/` : Services système (audio, display-manager, ssh)
@@ -66,7 +66,7 @@ Le dépôt est organisé comme suit :
 ## Stack technique
 
 - **OS** : NixOS 24.05
-- **Plateforme** : VirtualBox (principal), WSL2/VMware (supportés)
+- **Plateforme** : Hyper-V avec GPU-PV (principal), WSL2/VirtualBox/VMware (supportés)
 - **Display Manager** : Ly
 - **Window Manager** : Hyprland (Wayland) - **ACTIF** | i3 (X11) disponible en option
 - **Shell** : Nushell (par défaut système)
@@ -74,7 +74,7 @@ Le dépôt est organisé comme suit :
 - **Launcher** : wofi (Hyprland), rofi (compatible), dmenu (i3)
 - **Status Bar** : waybar (Hyprland), i3status/i3blocks (i3)
 - **Notifications** : Dunst
-- **Graphics** : Mesa avec driver modesetting (VirtualBox/VMware) ou WSLg (WSL2)
+- **Graphics** : Mesa avec driver i915/modesetting + GPU Intel (Hyper-V GPU-PV) ou WSLg (WSL2)
 - **Outils CLI** : btop, fastfetch, fd, git, stow, neovim, ripgrep, zellij, yazi, zoxide
 
 ## Commandes NixOS
@@ -236,11 +236,11 @@ Raccourcis clavier disponibles dans i3 :
 - Ce dépôt est personnel mais ouvert aux suggestions via issues/PRs
 - Configuration principale : Hyprland (Wayland) pour environnement moderne
 - Support i3 (X11) disponible en option (module x11.nix commenté)
-- Plateforme principale : VirtualBox avec Guest Additions
-- Plateformes supportées : WSL2 (configuration-wsl.nix), VMware (vmware.nix)
+- Plateforme principale : Hyper-V avec GPU-PV (accélération 3D matérielle Intel)
+- Plateformes supportées : WSL2 (configuration-wsl.nix), VirtualBox (virtualbox.nix), VMware (vmware.nix)
 - Toujours communiquer en français avec l'utilisateur
 - Le système utilise les polices Nerd Fonts pour l'affichage des icônes
-- Le développement se fait sous Windows, le déploiement sur VM NixOS (VirtualBox)
+- Le développement se fait sous Windows, le déploiement sur VM NixOS (Hyper-V)
 - Des outils complets de diagnostic et déploiement sont disponibles
 
 ## Architecture modulaire

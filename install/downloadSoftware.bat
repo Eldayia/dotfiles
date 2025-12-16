@@ -6,6 +6,35 @@ echo ===============================================
 echo Script de téléchargement des programmes (Modulaire)
 echo ===============================================
 echo.
+echo Quel type d'installation souhaitez-vous?
+echo   1. PC Fixe (installation complète)
+echo   2. PC Portable (installation sans gaming et périphériques desktop)
+echo.
+set /p INSTALL_TYPE="Votre choix (1 ou 2): "
+
+if "%INSTALL_TYPE%"=="1" (
+    set "IS_DESKTOP=1"
+    echo.
+    echo Installation complète (PC Fixe) sélectionnée.
+) else if "%INSTALL_TYPE%"=="2" (
+    set "IS_DESKTOP=0"
+    echo.
+    echo Installation PC Portable sélectionnée.
+    echo Les modules suivants seront exclus:
+    echo   - Gaming
+    echo   - Revo Uninstaller Pro
+    echo   - DisplayLink Graphics
+    echo   - Logitech G HUB
+    echo   - Logi Options+
+    echo   - Elgato Stream Deck
+    echo   - Samsung Magician
+) else (
+    echo Choix invalide. Installation complète par défaut.
+    set "IS_DESKTOP=1"
+)
+echo.
+pause
+echo.
 
 REM Définir le répertoire de téléchargement
 set "DOWNLOAD_DIR=%~dp0Downloads"
@@ -31,7 +60,12 @@ REM Appeler tous les modules
 call "%~dp0modules\archives.bat"
 call "%~dp0modules\communication.bat"
 call "%~dp0modules\development.bat"
-call "%~dp0modules\gaming.bat"
+
+REM Gaming uniquement pour PC Fixe
+if "%IS_DESKTOP%"=="1" (
+    call "%~dp0modules\gaming.bat"
+)
+
 call "%~dp0modules\multimedia.bat"
 call "%~dp0modules\productivity.bat"
 call "%~dp0modules\security.bat"

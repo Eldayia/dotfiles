@@ -36,8 +36,8 @@ call :DownloadSoftware "Docker Desktop" "Docker.DockerDesktop" "https://desktop.
 REM GitKraken
 call :DownloadSoftware "GitKraken" "Axosoft.GitKraken" "" ""
 
-REM Visual Studio Community 2022
-call :DownloadSoftware "Visual Studio Community 2022" "Microsoft.VisualStudio.2022.Community" "" ""
+REM Visual Studio Community 2026
+call :DownloadSoftware "Visual Studio Community 2026" "Microsoft.VisualStudio.2026.Community" "" ""
 
 REM Visual Studio Installer
 call :IncludedWith "Visual Studio Installer" "Visual Studio"

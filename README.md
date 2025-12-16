@@ -31,9 +31,8 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 
 ## 📦 Logiciels disponibles (67+)
 
-### Archives & Compression (2)
-- **7-Zip** - Gestionnaire d'archives
-- **NanaZip** - Alternative moderne à 7-Zip
+### Archives & Compression (1)
+- **NanaZip** - Gestionnaire d'archives moderne
 
 ### Communication (1)
 - **Discord** - Plateforme de communication
@@ -48,7 +47,7 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - **Rustup** - Toolchain Rust
 - **Docker Desktop** - Conteneurisation
 - **GitKraken** - Client Git graphique
-- **Visual Studio Community 2022** - IDE complet
+- **Visual Studio Community 2026** - IDE complet
 
 ### Gaming (13)
 - **Steam** - Plateforme Valve
@@ -106,7 +105,7 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - **QNAP Qsync Client** - Synchronisation QNAP
 - **Raspberry Pi Imager** - Flasher cartes SD
 - **OrcaSlicer** - Slicer impression 3D
-- **Comet** - Gestionnaire de fichiers
+- **Comet** - Navigateur
 - **LM Studio** - IA locale
 - **Shutter** - Capture d'écran
 
@@ -127,7 +126,7 @@ dotfiles/
     ├── common/
     │   └── functions.bat         # Fonctions réutilisables
     └── modules/                  # Modules par catégorie
-        ├── archives.bat          # 7-Zip, NanaZip
+        ├── archives.bat          # NanaZip
         ├── communication.bat     # Discord
         ├── development.bat       # Git, VSCode, Docker, Python, etc.
         ├── gaming.bat            # Steam, Epic, GOG, Battle.net, etc.

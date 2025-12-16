@@ -7,7 +7,7 @@ install/
 ├── downloadSoftware.bat          # Point d'entrée principal
 ├── downloadSoftware.bat.old      # Ancien fichier (backup)
 ├── modules/                      # Modules par catégorie
-│   ├── archives.bat              # 7-Zip, NanaZip
+│   ├── archives.bat              # NanaZip
 │   ├── communication.bat         # Discord
 │   ├── development.bat           # Git, VSCode, Docker, Python, etc.
 │   ├── gaming.bat                # Steam, Epic, GOG, Battle.net, etc.
@@ -132,8 +132,7 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 
 ## 📋 Liste des modules
 
-### archives.bat (2 logiciels)
-- 7-Zip
+### archives.bat (1 logiciel)
 - NanaZip (manuel)
 
 ### communication.bat (1 logiciel)

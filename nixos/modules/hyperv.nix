@@ -15,7 +15,7 @@
     enable32Bit = true;
     extraPackages = with pkgs; [
       intel-media-driver    # Pour Intel Arc/iGPU (driver moderne)
-      vaapiIntel            # Support VA-API legacy
+      intel-vaapi-driver    # Support VA-API legacy (anciennement vaapiIntel)
       vaapiVdpau            # Bridge VA-API vers VDPAU
       libvdpau-va-gl        # VDPAU via OpenGL
       intel-compute-runtime # Support OpenCL Intel

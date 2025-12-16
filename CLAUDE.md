@@ -16,7 +16,7 @@ Le dépôt est organisé comme suit :
   - `hardware-configuration.nix` : Configuration matérielle générée automatiquement
   - `modules/` : Modules de configuration par thème
     - Système de base : boot, network, locale, users, fonts, graphics, session
-    - Plateforme : vmware.nix (VM), wsl.nix (WSL2)
+    - Plateforme : virtualbox.nix (ACTIF), vmware.nix (optionnel), wsl.nix (WSL2 uniquement)
     - Environnement graphique : wayland.nix (ACTIF), hyprland.nix (ACTIF), x11.nix (optionnel), interface.nix, packages.nix
     - Applications : archives, communication, cybersecurity, development, multimedia, network-tools, terminal-utils, web, screenshot, lockscreen
   - `services/` : Services système (audio, display-manager, ssh)
@@ -66,15 +66,15 @@ Le dépôt est organisé comme suit :
 ## Stack technique
 
 - **OS** : NixOS 24.05
-- **Plateforme** : WSL2 (principal), VMware (supporté)
-- **Display Manager** : Ly (VM) | WSLg (WSL2)
+- **Plateforme** : VirtualBox (principal), WSL2/VMware (supportés)
+- **Display Manager** : Ly
 - **Window Manager** : Hyprland (Wayland) - **ACTIF** | i3 (X11) disponible en option
 - **Shell** : Nushell (par défaut système)
 - **Terminal** : Warp Terminal (principal), Kitty (secondaire), Ghostty (alternatif)
 - **Launcher** : wofi (Hyprland), rofi (compatible), dmenu (i3)
 - **Status Bar** : waybar (Hyprland), i3status/i3blocks (i3)
 - **Notifications** : Dunst
-- **Graphics** : Mesa avec WSLg (WSL2) ou vmwgfx/modesetting (VMware)
+- **Graphics** : Mesa avec driver modesetting (VirtualBox/VMware) ou WSLg (WSL2)
 - **Outils CLI** : btop, fastfetch, fd, git, stow, neovim, ripgrep, zellij, yazi, zoxide
 
 ## Commandes NixOS
@@ -234,12 +234,13 @@ Raccourcis clavier disponibles dans i3 :
 ## Notes de développement
 
 - Ce dépôt est personnel mais ouvert aux suggestions via issues/PRs
-- Configuration principale : i3 (X11) pour compatibilité VMware optimale
-- Support Hyprland (Wayland) disponible en option (modules wayland.nix et hyprland.nix commentés)
-- Configuration i3 basée sur les raccourcis Hyprland (Ctrl comme modificateur principal)
+- Configuration principale : Hyprland (Wayland) pour environnement moderne
+- Support i3 (X11) disponible en option (module x11.nix commenté)
+- Plateforme principale : VirtualBox avec Guest Additions
+- Plateformes supportées : WSL2 (configuration-wsl.nix), VMware (vmware.nix)
 - Toujours communiquer en français avec l'utilisateur
 - Le système utilise les polices Nerd Fonts pour l'affichage des icônes
-- Le développement se fait sous Windows, le déploiement sur VM NixOS
+- Le développement se fait sous Windows, le déploiement sur VM NixOS (VirtualBox)
 - Des outils complets de diagnostic et déploiement sont disponibles
 
 ## Architecture modulaire

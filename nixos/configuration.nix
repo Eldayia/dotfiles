@@ -12,7 +12,9 @@
       ./modules/locale.nix
       ./modules/users.nix
       ./modules/fonts.nix
-      ./modules/vmware.nix
+      # ./modules/vmware.nix      # VMware Guest - OPTIONNEL
+      ./modules/virtualbox.nix    # VirtualBox Guest - ACTIF
+      # ./modules/wsl.nix         # WSL2 - OPTIONNEL (utiliser configuration-wsl.nix)
       ./modules/graphics.nix
       ./modules/session.nix
 

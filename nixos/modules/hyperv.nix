@@ -45,8 +45,7 @@
     mesa
     libGL
 
-    # Outils de diagnostic GPU
-    glxinfo
+    # Outils de diagnostic GPU (glxinfo inclus dans mesa-demos)
     vulkan-tools
     mesa-demos
     intel-gpu-tools

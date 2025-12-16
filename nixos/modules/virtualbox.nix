@@ -7,8 +7,6 @@
   # Activer les Guest Additions VirtualBox
   virtualisation.virtualbox.guest = {
     enable = true;
-    # Support X11 (copier-coller, redimensionnement fenêtre)
-    x11 = true;
   };
 
   # Driver vidéo pour Wayland/X11

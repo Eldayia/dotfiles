@@ -16,7 +16,7 @@
     extraPackages = with pkgs; [
       intel-media-driver    # Pour Intel Arc/iGPU (driver moderne)
       intel-vaapi-driver    # Support VA-API legacy (anciennement vaapiIntel)
-      vaapiVdpau            # Bridge VA-API vers VDPAU
+      libva-vdpau-driver    # Bridge VA-API vers VDPAU (anciennement vaapiVdpau)
       libvdpau-va-gl        # VDPAU via OpenGL
       intel-compute-runtime # Support OpenCL Intel
     ];

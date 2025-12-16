@@ -12,6 +12,7 @@
     wayland-protocols  # Protocoles Wayland standards
     wayland-utils      # Utilitaires Wayland (wayland-info, etc.)
     wl-clipboard       # Clipboard Wayland (wl-copy, wl-paste)
+    swaybg             # Wallpaper pour Wayland
 
     # Support Qt pour Wayland
     libsForQt5.qt5.qtwayland

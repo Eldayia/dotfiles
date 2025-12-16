@@ -5,16 +5,14 @@
   # Configuration pour Hyper-V Guest avec accélération GPU Intel (GPU-PV)
 
   # Activer les services Hyper-V Guest
-  virtualisation.hypervGuest = {
-    enable = true;
-    videoMode = "1920x1080";  # Résolution par défaut
-  };
+  # Note: videoMode est déprécié, configurer via Hyper-V Settings
+  virtualisation.hypervGuest.enable = true;
 
   # Support GPU Intel pour GPU-PV
-  hardware.opengl = {
+  # Note: driSupport est déprécié dans NixOS 24.11+
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
     extraPackages = with pkgs; [
       intel-media-driver    # Pour Intel Arc/iGPU (driver moderne)
       vaapiIntel            # Support VA-API legacy

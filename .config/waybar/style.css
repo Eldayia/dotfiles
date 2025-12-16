@@ -11,13 +11,11 @@
   min-height: 0;
 }
 
-/* Barre principale - Effet Mica */
+/* Barre principale */
 window#waybar {
-  background: rgba(30, 30, 46, 0.75); /* Catppuccin Mocha base avec transparence */
+  background: rgba(30, 30, 46, 0.9); /* Catppuccin Mocha base */
   color: #cdd6f4; /* Catppuccin Mocha text */
   border-radius: 16px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 

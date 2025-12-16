@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Script pour mettre à jour la configuration NixOS depuis le dépôt dotfiles
-# Usage: sudo ./install-update.sh
+# Usage: cd ~/dotfiles && sudo ./scripts/install-update.sh
 
 set -e  # Arrêter en cas d'erreur
 
@@ -19,10 +19,12 @@ fi
 
 # --- VÉRIFICATION DU RÉPERTOIRE ---
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-NIXOS_SOURCE="$SCRIPT_DIR/nixos"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+NIXOS_SOURCE="$REPO_ROOT/nixos"
 
 if [ ! -d "$NIXOS_SOURCE" ]; then
-    echo "❌ Erreur: Le dossier nixos/ n'existe pas dans $SCRIPT_DIR"
+    echo "❌ Erreur: Le dossier nixos/ n'existe pas dans $REPO_ROOT"
+    echo "   Ce script doit être dans dotfiles/scripts/"
     exit 1
 fi
 

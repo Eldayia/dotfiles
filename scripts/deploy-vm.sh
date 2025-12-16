@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Script de déploiement pour la VM NixOS
+# Usage: cd ~/dotfiles && ./scripts/deploy-vm.sh
 
 set -e
 
@@ -11,9 +12,16 @@ if [ ! -f /etc/NIXOS ]; then
     exit 1
 fi
 
+# Déterminer la racine du dépôt
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+# Se déplacer à la racine du dépôt
+cd "$REPO_ROOT"
+
 # Vérifier qu'on est dans le bon répertoire
 if [ ! -f "CLAUDE.md" ]; then
-    echo "❌ Erreur: Exécutez ce script depuis la racine du dépôt dotfiles"
+    echo "❌ Erreur: CLAUDE.md non trouvé dans $REPO_ROOT"
     exit 1
 fi
 

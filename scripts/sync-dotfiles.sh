@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
+# Script de synchronisation des dotfiles vers Git
+# Usage: cd ~/dotfiles && ./scripts/sync-dotfiles.sh
+
 set -e
 
 BRANCH="nixos"
 
-cd "$(dirname "$0")"
+# Déterminer la racine du dépôt
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+cd "$REPO_ROOT"
 
 echo "🔍 Checking for changes in dotfiles..."
 

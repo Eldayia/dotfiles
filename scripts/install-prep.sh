@@ -74,73 +74,94 @@ echo "Création de la table de partition GPT..."
 parted -s "$TARGET_DISK" -- mklabel gpt
 
 echo "Création des partitions..."
-parted -s "$TARGET_DISK" -- mkpart ESP fat32 1MB 512MB
+# Partition 1 : ESP (boot) - 512 MB
+parted -s "$TARGET_DISK" -- mkpart ESP fat32 1MiB 513MiB
 parted -s "$TARGET_DISK" -- set 1 esp on
-parted -s "$TARGET_DISK" -- mkpart primary 512MB 100%
+
+# Partition 2 : Root - Tout le reste de l'espace disponible
+parted -s "$TARGET_DISK" -- mkpart primary ext4 513MiB 100%
+
+echo "Table de partition créée :"
+parted "$TARGET_DISK" print
 
 # On force le système à relire la table des partitions
 partprobe "$TARGET_DISK" 2>/dev/null || true
 sleep 2
 
+echo ""
 echo "Formatage des partitions..."
+echo "  - Formatage de /dev/${PART_PREFIX}1 en FAT32 (boot)..."
 mkfs.fat -F 32 -n boot "/dev/${PART_PREFIX}1"
-mkfs.ext4 -L nixos "/dev/${PART_PREFIX}2"
 
+echo "  - Formatage de /dev/${PART_PREFIX}2 en ext4 (nixos)..."
+mkfs.ext4 -F -L nixos "/dev/${PART_PREFIX}2"
+
+echo ""
 echo "Montage des partitions..."
-# CORRECTION ICI : On utilise le chemin direct au lieu du label pour éviter l'erreur
 mount "/dev/${PART_PREFIX}2" /mnt
 mkdir -p /mnt/boot
 mount "/dev/${PART_PREFIX}1" /mnt/boot
 
-#!/bin/sh
-set -e
+echo "✅ Partitions montées :"
+lsblk "$TARGET_DISK"
+df -h | grep -E "(Mounted|/mnt)"
+echo ""
 
 # --- 4. GÉNÉRATION CONFIGURATION MATÉRIELLE ---
 echo ""
-echo "[4/5] Génération de la configuration de base..."
+echo "[4/6] Génération de la configuration de base..."
 nixos-generate-config --root /mnt
+echo "✅ Configuration matérielle générée dans /mnt/etc/nixos/"
 
 # --- 5. COPIE DES DOTFILES ---
 echo ""
-echo "[5/5] Récupération de vos fichiers de configuration..."
+echo "[5/6] Récupération de vos fichiers de configuration..."
 
 # On demande le lien du repo (ou dossier local)
-read -p "Avez-vous un dépôt Git pour vos dotfiles ? (Laissez vide si non) : " GIT_REPO
+read -p "URL du dépôt Git (défaut: https://github.com/Eldayia/dotfiles.git) : " GIT_REPO
+GIT_REPO=${GIT_REPO:-"https://github.com/Eldayia/dotfiles.git"}
+
+read -p "Branche à cloner (défaut: nixos) : " GIT_BRANCH
+GIT_BRANCH=${GIT_BRANCH:-"nixos"}
 
 if [ -n "$GIT_REPO" ]; then
-    echo "Clonage du dépôt..."
+    echo "Clonage du dépôt (branche: $GIT_BRANCH)..."
     # On installe git temporairement s'il n'est pas là
-    nix-env -iA nixos.git
-    
-    # On clone dans un dossier temporaire
-    git clone "$GIT_REPO" /mnt/tmp/dotfiles
-    
+    nix-env -iA nixos.git 2>/dev/null || echo "Git déjà installé"
+
+    # On clone dans un dossier temporaire avec la branche choisie
+    git clone -b "$GIT_BRANCH" "$GIT_REPO" /mnt/tmp/dotfiles
+
+    # Sauvegarder hardware-configuration.nix
+    cp /mnt/etc/nixos/hardware-configuration.nix /mnt/tmp/hardware-backup.nix
+
     echo "Copie des fichiers vers /mnt/etc/nixos..."
-    # On copie tout le contenu du dossier 'nixos' du repo vers la destination
-    # ATTENTION : Adaptez le chemin '/mnt/tmp/dotfiles/nixos/*' si votre structure est différente
-    sudo cp -r /mnt/tmp/dotfiles/nixos/* /mnt/etc/nixos/
-    
+    cp -r /mnt/tmp/dotfiles/nixos/* /mnt/etc/nixos/
+
+    # Restaurer hardware-configuration.nix
+    cp /mnt/tmp/hardware-backup.nix /mnt/etc/nixos/hardware-configuration.nix
+
     # On supprime le dossier temporaire
     rm -rf /mnt/tmp/dotfiles
-    
-    echo "✅ Configuration importée !"
+    rm /mnt/tmp/hardware-backup.nix
+
+    echo "✅ Configuration importée depuis Git !"
 else
-    # Si vous avez copié le dossier "dotfiles" manuellement dans le dossier home de l'utilisateur
-    if [ -d "$HOME/dotfiles/nixos" ]; then
-        echo "Dossier local détecté. Copie en cours..."
-        sudo cp -r "$HOME/dotfiles/nixos/"* /mnt/etc/nixos/
-        echo "✅ Fichiers locaux copiés."
-    else
-        echo "⚠️  Aucun dotfile trouvé. Vous devrez éditer configuration.nix manuellement."
-    fi
+    echo "⚠️  Aucun dépôt fourni. Vous devrez éditer configuration.nix manuellement."
 fi
 
-# Petite sécurité : On s'assure que hardware-configuration.nix est bien présent
-# (Au cas où vos dotfiles l'auraient écrasé avec une version incompatible)
+# Vérification finale
 if [ ! -f /mnt/etc/nixos/hardware-configuration.nix ]; then
-    echo "⚠️  Attention : hardware-configuration.nix manquant ! Régénération..."
+    echo "❌ ERREUR : hardware-configuration.nix manquant !"
     nixos-generate-config --root /mnt
 fi
+
+# --- 6. AFFICHAGE INFORMATIONS ---
+echo ""
+echo "[6/6] Vérification finale..."
+echo ""
+echo "Contenu de /mnt/etc/nixos/ :"
+ls -lah /mnt/etc/nixos/
 
 echo ""
 echo "============================================"

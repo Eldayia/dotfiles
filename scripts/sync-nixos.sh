@@ -1,13 +1,20 @@
-#!/bin/sh
+#!/usr/bin/env bash
+# Script de synchronisation de /etc/nixos vers le dépôt
+# Usage: cd ~/dotfiles && ./scripts/sync-nixos.sh
 
 set -e
 
-echo "Copie de /etc/nixos dans ./nixos (avec sudo)..."
-sudo cp -r /etc/nixos/. ./nixos
+# Déterminer la racine du dépôt
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+cd "$REPO_ROOT"
 
-echo "Changement de propriétaire et permissions dans ./nixos..."
-sudo chown -R $(whoami):$(id -gn) ./nixos
-chmod -R u+rw ./nixos
+echo "Copie de /etc/nixos dans $REPO_ROOT/nixos (avec sudo)..."
+sudo cp -r /etc/nixos/. "$REPO_ROOT/nixos"
+
+echo "Changement de propriétaire et permissions dans $REPO_ROOT/nixos..."
+sudo chown -R $(whoami):$(id -gn) "$REPO_ROOT/nixos"
+chmod -R u+rw "$REPO_ROOT/nixos"
 
 echo "Affichage des différences avec diff-so-fancy :"
 git diff --color | diff-so-fancy

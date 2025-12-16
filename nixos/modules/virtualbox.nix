@@ -7,37 +7,24 @@
   # Activer les Guest Additions VirtualBox
   virtualisation.virtualbox.guest = {
     enable = true;
-    # Activer la mémoire vidéo étendue et l'accélération 2D/3D
     draganddrop = true;
   };
 
-  # Driver vidéo pour Wayland/X11
-  # VirtualBox avec accélération 3D utilise vmsvga + modesetting
-  services.xserver = {
-    videoDrivers = [ "vmsvga" "modesetting" ];
-    # Configuration pour VirtualBox
-    deviceSection = ''
-      Option "AccelMethod" "glamor"
-    '';
-  };
+  # Driver vidéo simple pour VirtualBox
+  # modesetting fonctionne mieux avec Wayland sur VirtualBox
+  services.xserver.videoDrivers = [ "modesetting" ];
 
-  # Variables d'environnement pour améliorer le rendu
+  # Variables d'environnement pour Wayland sur VirtualBox
   environment.variables = {
-    # Forcer l'utilisation de l'accélération matérielle si disponible
+    # Permet le rendu software comme fallback
     WLR_RENDERER_ALLOW_SOFTWARE = "1";
-    # Driver Mesa pour VirtualBox
-    MESA_LOADER_DRIVER_OVERRIDE = "vmwgfx";
+    # Disable hardware cursors (obligatoire pour VirtualBox)
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
 
-  # Paquets VirtualBox et drivers graphiques
+  # Paquets pour le rendu graphique
   environment.systemPackages = with pkgs; [
-    # Guest Additions déjà inclus via virtualisation.virtualbox.guest
-    # Drivers Mesa pour vmwgfx (VirtualBox/VMware)
     mesa
     libGL
-    libdrm
   ];
-
-  # Modules kernel pour VirtualBox graphics
-  boot.kernelModules = [ "vmwgfx" ];
 }

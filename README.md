@@ -15,6 +15,13 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 
 ## 🆕 Nouveautés récentes
 
+### Environnement de développement complet (Décembre 2024)
+- ✅ **Android Studio** - Développement mobile Android avec SDK complet
+- ✅ **Support multilangage complet** - C++, C#, Python, Rust, Java, JavaScript/TypeScript
+- ✅ **Outils modernes JavaScript** - TypeScript, Vite, Vue CLI, ESLint, Prettier (via npm)
+- ✅ **Compilation C++** - LLVM/Clang, MinGW-w64, CMake, MSVC Build Tools
+- ✅ **Revo Uninstaller Pro** - Disponible pour tous les PC (Desktop et Laptop)
+
 ### Architecture modulaire
 - ✅ **Structure inspirée de NixOS** - Organisation par modules thématiques
 - ✅ **8 modules spécialisés** - Archives, Communication, Développement, Gaming, Multimédia, Productivité, Sécurité, Outils système, Web
@@ -22,14 +29,15 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - ✅ **Maintenance simplifiée** - Ajout/suppression de logiciels en quelques lignes
 
 ### Fonctionnalités
-- ✅ **Téléchargement automatique** via Winget (67+ logiciels)
+- ✅ **Téléchargement automatique** via Winget (75+ logiciels)
+- ✅ **Installation adaptative** - Mode Desktop (complet) ou Laptop (sans gaming)
 - ✅ **Fallback intelligent** vers curl si winget échoue
 - ✅ **Téléchargement sélectif** - Exécuter uniquement certains modules
 - ✅ **Documentation complète** - README détaillé avec exemples
 
 ---
 
-## 📦 Logiciels disponibles (67+)
+## 📦 Logiciels disponibles (75+)
 
 ### Archives & Compression (1)
 - **NanaZip** - Gestionnaire d'archives moderne
@@ -37,17 +45,45 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 ### Communication (1)
 - **Discord** - Plateforme de communication
 
-### Développement (11)
-- **Git** - Gestion de versions
+### Développement (20)
+**Éditeurs de code et IDE**
 - **Visual Studio Code** - Éditeur de code
 - **Cursor** - IDE avec IA
-- **CMake** - Build system
-- **Node.js** - Runtime JavaScript
+- **Android Studio** - IDE pour développement Android
+- **Visual Studio Community 2026** - IDE complet
+
+**Contrôle de version**
+- **Git** - Gestion de versions
+- **GitKraken** - Client Git graphique
+
+**Langages de programmation et runtimes**
+- **OpenJDK 21** - Java Development Kit
+- **.NET SDK 8** - Framework C#
 - **Python 3.12** - Langage de programmation
 - **Rustup** - Toolchain Rust
+- **Node.js** - Runtime JavaScript (inclut npm)
+
+**Outils de build et compilation C++**
+- **CMake** - Build system multiplateforme
+- **LLVM** - Compilateur Clang
+- **MinGW-w64** - GCC pour Windows (téléchargement manuel)
+- **MSVC Build Tools** - Inclus avec Visual Studio
+
+**Outils JavaScript/TypeScript (via npm post-installation)**
+- **TypeScript** - Typage statique pour JavaScript
+- **Vite** - Build tool rapide
+- **Vue CLI** - Interface en ligne de commande Vue.js
+- **ESLint** - Linter JavaScript
+- **Prettier** - Formateur de code
+
+**Outils Android**
+- **Android SDK** - Inclus avec Android Studio
+- **Android Platform Tools** - Inclus avec Android Studio
+- **Android Emulator** - Inclus avec Android Studio
+- **Gradle** - Inclus avec Android Studio
+
+**Conteneurs et virtualisation**
 - **Docker Desktop** - Conteneurisation
-- **GitKraken** - Client Git graphique
-- **Visual Studio Community 2026** - IDE complet
 
 ### Gaming (13)
 - **Steam** - Plateforme Valve
@@ -92,19 +128,28 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - **Acronis True Image** - Sauvegarde
 
 ### Outils système (16)
+**Périphériques (Desktop uniquement)**
 - **Samsung Magician** - Gestion SSD Samsung
 - **Elgato Stream Deck** - Contrôleur de streaming
 - **Logi Options+** - Souris/claviers Logitech
 - **Logitech G HUB** - Périphériques gaming Logitech
 - **DisplayLink Graphics** - Adaptateurs DisplayLink
+
+**Personnalisation et utilitaires**
 - **Stardock Start11** - Personnalisation menu démarrer
 - **Stardock Multiplicity** - KVM logiciel
 - **TeamViewer** - Bureau à distance
-- **Revo Uninstaller Pro** - Désinstallation avancée
+- **Revo Uninstaller Pro** - Désinstallation avancée (tous les PC)
+
+**Virtualisation et réseau**
 - **VMware Workstation** - Virtualisation
 - **QNAP Qsync Client** - Synchronisation QNAP
+
+**Matériel et outils spécialisés**
 - **Raspberry Pi Imager** - Flasher cartes SD
 - **OrcaSlicer** - Slicer impression 3D
+
+**Divers**
 - **Comet** - Navigateur
 - **LM Studio** - IA locale
 - **Shutter** - Capture d'écran
@@ -147,10 +192,27 @@ downloadSoftware.bat
 ```
 
 Ce script va :
-1. Créer le dossier `Downloads\` s'il n'existe pas
-2. Appeler tous les modules dans l'ordre
-3. Télécharger via winget ou curl
-4. Afficher un récapitulatif des téléchargements manuels requis
+1. Vous demander si c'est un PC Desktop ou Laptop
+   - **Desktop** : Installation complète (gaming, périphériques, etc.)
+   - **Laptop** : Installation sans gaming ni périphériques Desktop
+2. Créer le dossier `Downloads\` s'il n'existe pas
+3. Appeler tous les modules dans l'ordre
+4. Télécharger via winget ou curl
+5. Afficher un récapitulatif des téléchargements manuels requis
+
+### Post-installation : Outils npm pour développement JavaScript/TypeScript
+
+Après l'installation de Node.js, installer les outils de développement globaux :
+
+```batch
+npm install -g typescript
+npm install -g vite
+npm install -g @vue/cli
+npm install -g eslint
+npm install -g prettier
+```
+
+Ces outils fournissent un environnement complet pour le développement moderne JavaScript/TypeScript, Vue.js et React.
 
 ### Télécharger une catégorie spécifique
 
@@ -327,6 +389,16 @@ call install\modules\development.bat
 call install\modules\productivity.bat
 call install\modules\web.bat
 ```
+
+Le module `development.bat` installe un environnement complet couvrant :
+- **C++** : LLVM/Clang, MinGW-w64, CMake, MSVC Build Tools
+- **C#** : .NET SDK 8
+- **Python** : Python 3.12
+- **Rust** : Rustup toolchain
+- **Java** : OpenJDK 21
+- **JavaScript/TypeScript** : Node.js, npm, TypeScript, Vite, Vue CLI, ESLint, Prettier
+- **Android** : Android Studio avec SDK, Platform Tools, Emulator et Gradle
+- **Conteneurs** : Docker Desktop
 
 ## 🔗 Liens utiles
 

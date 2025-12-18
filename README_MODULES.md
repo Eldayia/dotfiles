@@ -138,8 +138,27 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 ### communication.bat (1 logiciel)
 - Discord
 
-### development.bat (11 logiciels)
-- Git, VSCode, Cursor, CMake, Node.js, Python 3.12, Rustup, Docker Desktop, GitKraken, Visual Studio 2022
+### development.bat (20+ logiciels et outils)
+**Éditeurs de code et IDE**
+- Visual Studio Code, Cursor, Android Studio, Visual Studio Community 2026
+
+**Contrôle de version**
+- Git, GitKraken
+
+**Langages de programmation et runtimes**
+- OpenJDK 21 (Java), .NET SDK 8 (C#), Python 3.12, Rustup (Rust), Node.js/npm
+
+**Outils de build et compilation C++**
+- CMake, LLVM/Clang, MinGW-w64 (manuel), MSVC Build Tools (inclus avec VS)
+
+**Outils JavaScript/TypeScript (via npm post-installation)**
+- TypeScript, Vite, Vue CLI, ESLint, Prettier
+
+**Outils Android**
+- Android SDK, Platform Tools, Emulator, Gradle (tous inclus avec Android Studio)
+
+**Conteneurs et virtualisation**
+- Docker Desktop
 
 ### gaming.bat (13 logiciels)
 - Steam, Epic Games, GOG, Battle.net, EA app, Ubisoft Connect, Amazon Games, Riot Client, Wargaming, HoYoPlay, BlueStacks, CurseForge, Ankama Launcher
@@ -154,7 +173,20 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 - Bitdefender (manuel), NordVPN, Acronis (manuel)
 
 ### system-tools.bat (16 logiciels)
-- Samsung Magician, Elgato Stream Deck (manuel), Logi Options+, Logitech G HUB, DisplayLink (manuel), Stardock Start11, Stardock Multiplicity (manuel), TeamViewer, Revo Uninstaller Pro, VMware (manuel), QNAP Qsync (manuel), Raspberry Pi Imager, OrcaSlicer, Comet, LM Studio, Shutter (manuel)
+**Périphériques (Desktop uniquement)**
+- Samsung Magician, Elgato Stream Deck (manuel), Logi Options+, Logitech G HUB, DisplayLink (manuel)
+
+**Personnalisation et utilitaires**
+- Stardock Start11, Stardock Multiplicity (manuel), TeamViewer, Revo Uninstaller Pro (tous les PC)
+
+**Virtualisation et réseau**
+- VMware Workstation (manuel), QNAP Qsync (manuel)
+
+**Matériel et outils spécialisés**
+- Raspberry Pi Imager, OrcaSlicer
+
+**Divers**
+- Comet, LM Studio, Shutter (manuel)
 
 ### web.bat (2 logiciels)
 - Google Chrome, Google Chrome Canary
@@ -174,6 +206,27 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 - ✅ Fonctions réutilisables
 - ✅ Similaire à l'architecture NixOS
 
+## 🔧 Post-installation
+
+### Outils npm pour développement JavaScript/TypeScript
+
+Après l'installation de Node.js via le module `development.bat`, installer les outils de développement globaux :
+
+```batch
+npm install -g typescript
+npm install -g vite
+npm install -g @vue/cli
+npm install -g eslint
+npm install -g prettier
+```
+
+Ces outils fournissent :
+- **TypeScript** : Typage statique pour JavaScript
+- **Vite** : Build tool ultra-rapide pour applications modernes
+- **Vue CLI** : Scaffold et gestion de projets Vue.js
+- **ESLint** : Linter pour maintenir la qualité du code
+- **Prettier** : Formateur de code automatique
+
 ## 💡 Conseils
 
 1. **Garder l'ancien fichier** : `downloadSoftware.bat.old` est un backup
@@ -181,6 +234,8 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 3. **Utiliser les commentaires** : Commenter plutôt que supprimer pour garder l'historique
 4. **Variables d'environnement** : `%DOWNLOAD_DIR%` est accessible dans tous les modules
 5. **Ordre d'exécution** : Les modules sont appelés dans l'ordre défini dans `downloadSoftware.bat`
+6. **Post-installation npm** : Ne pas oublier d'installer les outils npm après Node.js
+7. **Desktop vs Laptop** : Le script principal demande le type de PC pour adapter l'installation
 
 ## 📝 Notes
 

@@ -2,6 +2,7 @@
 name: security-auditor
 description: Audit de sécurité. OWASP, secrets, dépendances, configuration. Use PROACTIVELY sur code sensible (auth, API).
 tools: Read, Grep, Glob, Bash
+color: red
 ---
 
 Tu es un expert en sécurité applicative.

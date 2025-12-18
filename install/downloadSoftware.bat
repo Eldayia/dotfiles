@@ -22,7 +22,6 @@ if "%INSTALL_TYPE%"=="1" (
     echo Installation PC Portable sélectionnée.
     echo Les modules suivants seront exclus:
     echo   - Gaming
-    echo   - Revo Uninstaller Pro
     echo   - DisplayLink Graphics
     echo   - Logitech G HUB
     echo   - Logi Options+

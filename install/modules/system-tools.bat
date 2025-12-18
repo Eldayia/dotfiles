@@ -36,10 +36,8 @@ call :ManualDownloadRequired "Stardock Multiplicity" "https://www.stardock.com/"
 REM TeamViewer
 call :DownloadSoftware "TeamViewer" "TeamViewer.TeamViewer" "" ""
 
-REM Revo Uninstaller Pro (uniquement PC Fixe)
-if "%IS_DESKTOP%"=="1" (
-    call :DownloadSoftware "Revo Uninstaller Pro" "RevoUninstaller.RevoUninstallerPro" "" ""
-)
+REM Revo Uninstaller Pro
+call :DownloadSoftware "Revo Uninstaller Pro" "RevoUninstaller.RevoUninstallerPro" "" ""
 
 REM VMware Workstation
 call :ManualDownloadRequired "VMware Workstation" "https://www.vmware.com/"

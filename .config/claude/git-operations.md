@@ -2,6 +2,7 @@
 name: git-operations
 description: Expert intégration Git native sur Android avec JGit. Utilise cet agent pour clone, fetch, pull, push, diff, merge, gestion des branches, et stockage sécurisé des credentials.
 model: sonnet
+color: cyan
 ---
 
 # Git Operations Expert Agent

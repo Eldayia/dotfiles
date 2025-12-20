@@ -2,6 +2,7 @@
 name: github-api
 description: Expert API GitHub REST v3 et GraphQL v4 pour Android. Utilise cet agent pour l'authentification OAuth/PAT, les endpoints repos/issues/PRs/notifications, la pagination, le rate limiting, et l'intégration avec Retrofit/Apollo Kotlin.
 model: sonnet
+color: cyan
 ---
 
 # GitHub API Expert Agent

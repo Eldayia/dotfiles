@@ -110,6 +110,13 @@ REM Docker Desktop
 call :DownloadSoftware "Docker Desktop" "Docker.DockerDesktop" "https://desktop.docker.com/win/main/amd64/Docker%%20Desktop%%20Installer.exe" "Docker-Desktop-Installer.exe"
 
 REM ===============================================
+REM Outils de création de contenu interactif
+REM ===============================================
+
+REM Twine (création d'histoires interactives)
+call :ManualDownloadRequired "Twine" "https://twinery.org/"
+
+REM ===============================================
 REM Note pour les outils npm
 REM ===============================================
 echo.

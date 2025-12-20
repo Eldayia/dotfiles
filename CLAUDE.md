@@ -74,6 +74,46 @@ npm install -g typescript vite @vue/cli eslint prettier
 - Supports: init, stow, unstow, pull, push, status, adopt
 - Requires Windows Developer Mode or Admin for symlinks
 
+## Claude Agents Available
+
+22 specialized agents are available in `.config/claude/` for different development tasks:
+
+### Development & Code Quality
+- **android-code** - Expert Android Kotlin developer (MVVM, Jetpack Compose, Material You)
+- **android-build** - Gradle build system expert (compilation, debugging, optimization)
+- **kotlin** - Elite Android/Kotlin developer (architecture, performance, security)
+- **code-reviewer** - Multi-language code review (quality, patterns, security)
+- **code-viewer** - Syntax highlighting and code visualization on Android
+- **windows-scripting** - Batch and PowerShell scripting expert
+
+### Android-Specific Specialists
+- **compose-navigation** - Jetpack Compose navigation (type-safe routes, deep links, animations)
+- **material-you-design** - Material Design 3 / Material You theming expert
+- **github-api** - GitHub REST v3 and GraphQL v4 API integration
+- **git-operations** - Native Git operations on Android with JGit
+- **notifications-handler** - GitHub notifications system (FCM, polling, deep linking)
+- **offline-sync** - Offline-first architecture (Room, WorkManager, sync strategies)
+
+### Architecture & Design
+- **agent-architect** - Design and create autonomous AI agent configurations
+- **project-todolist** - Project analysis and roadmap generation
+
+### Documentation & Web
+- **doc-writer** - Technical documentation (README, API docs, CHANGELOG)
+- **web-design** - Modern web design analysis (accessibility, UX/UI, performance)
+
+### Tools & Utilities
+- **docker-compose-helper** - Docker Compose optimization and debugging
+- **git-helper** - Git workflows and Conventional Commits
+- **nix-flake** - Nix/NixOS flakes and development environments
+- **security-auditor** - Security audit (OWASP, secrets, dependencies)
+
+### Creative & Assets
+- **eagle-maker** - RPG Maker MZ asset organization for Eagle
+- **image-logo-generator** - Visual asset creation (logos, icons, UI graphics)
+
+Use agents with the Task tool in Claude Code for specialized assistance on specific tasks.
+
 ## Commands
 
 ```powershell

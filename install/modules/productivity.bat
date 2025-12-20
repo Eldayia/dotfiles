@@ -51,4 +51,7 @@ call :ManualDownloadRequired "Wondershare Recoverit" "https://recoverit.wondersh
 REM ReNamer
 call :DownloadSoftware "ReNamer" "DenisKozlov.ReNamer" "" ""
 
+REM Eagle (gestionnaire d'assets pour designers)
+call :DownloadSoftware "Eagle" "ogdesign.Eagle" "https://eaglefile.oss-cn-shanghai.aliyuncs.com/releases/Eagle-4.0-build66.exe" "EagleSetup.exe"
+
 goto :eof

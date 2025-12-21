@@ -29,7 +29,7 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - ✅ **Maintenance simplifiée** - Ajout/suppression de logiciels en quelques lignes
 
 ### Fonctionnalités
-- ✅ **Téléchargement automatique** via Winget (75+ logiciels)
+- ✅ **Téléchargement automatique** via Winget (77+ logiciels)
 - ✅ **Installation adaptative** - Mode Desktop (complet) ou Laptop (sans gaming)
 - ✅ **Fallback intelligent** vers curl si winget échoue
 - ✅ **Téléchargement sélectif** - Exécuter uniquement certains modules
@@ -37,7 +37,7 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 
 ---
 
-## 📦 Logiciels disponibles (75+)
+## 📦 Logiciels disponibles (77+)
 
 ### Archives & Compression (1)
 - **NanaZip** - Gestionnaire d'archives moderne
@@ -107,7 +107,7 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - **Adobe Creative Cloud** - Suite créative
 - **qBittorrent** - Client BitTorrent
 
-### Productivité (13)
+### Productivité (15)
 - **1Password** - Gestionnaire de mots de passe
 - **1Password CLI** - Version ligne de commande
 - **PowerToys** - Utilitaires Microsoft
@@ -121,6 +121,8 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - **Warp** - Terminal moderne
 - **UPDF** - Éditeur PDF
 - **ReNamer** - Renommage en masse
+- **Eagle** - Gestionnaire d'assets pour designers
+- **Obsidian** - Prise de notes et gestion de connaissances
 
 ### Sécurité (3)
 - **Bitdefender Total Security** - Antivirus

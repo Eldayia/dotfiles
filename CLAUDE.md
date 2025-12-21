@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal dotfiles repository for Windows and Linux configurations. Currently focused on Windows with modular installation scripts for automated software setup via Winget. Supports 75+ software packages covering development tools, productivity, gaming, multimedia, and system utilities.
+Personal dotfiles repository for Windows and Linux configurations. Currently focused on Windows with modular installation scripts for automated software setup via Winget. Supports 77+ software packages covering development tools, productivity, gaming, multimedia, and system utilities.
 
 ## Architecture
 

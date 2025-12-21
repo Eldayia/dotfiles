@@ -166,8 +166,8 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 ### multimedia.bat (5 logiciels)
 - VLC, Mp3tag, Apple Music, Adobe Creative Cloud, qBittorrent
 
-### productivity.bat (13 logiciels)
-- 1Password, 1Password CLI, PowerToys, Rainmeter, FileZilla, WinSCP, eM Client, TreeSize, UltraSearch, UniGetUI, Warp, UPDF, ReNamer
+### productivity.bat (15 logiciels)
+- 1Password, 1Password CLI, PowerToys, Rainmeter, FileZilla, WinSCP, eM Client, TreeSize, UltraSearch, UniGetUI, Warp, UPDF, ReNamer, Eagle, Obsidian
 
 ### security.bat (3 logiciels)
 - Bitdefender (manuel), NordVPN, Acronis (manuel)

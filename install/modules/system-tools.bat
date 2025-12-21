@@ -60,4 +60,7 @@ call :DownloadSoftware "LM Studio" "LMStudio.LMStudio" "https://releases.lmstudi
 REM Shutter
 call :ManualDownloadRequired "Shutter" ""
 
+REM Drivers imprimante Epson ET-2710
+call :ManualDownloadRequired "Epson ET-2710 Drivers" "https://epson.com/Support/Printers/All-In-Ones/ET-Series/Epson-ET-2710/s/SPT_C11CG86201"
+
 goto :eof

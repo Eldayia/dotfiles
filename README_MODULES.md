@@ -138,9 +138,9 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 ### communication.bat (1 logiciel)
 - **Vesktop** (client Discord alternatif open-source)
 
-### development.bat (20 logiciels)
-**Éditeurs de code et IDE (4)**
-- Visual Studio Code, Cursor, Android Studio, Visual Studio Community 2026
+### development.bat (24 logiciels)
+**Éditeurs de code et IDE (6)**
+- Visual Studio Code, Cursor, Android Studio, Visual Studio Community 2026, nano, Neovim
 - Visual Studio Installer (inclus avec VS 2026)
 
 **Contrôle de version (2)**
@@ -153,13 +153,16 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 - CMake, LLVM/Clang, MinGW-w64 (manuel), MSVC Build Tools (inclus avec VS)
 
 **Outils JavaScript/TypeScript (via npm post-installation)**
-- TypeScript, Vite, Vue CLI, ESLint, Prettier
+- TypeScript, Vite, Vue CLI, ESLint, Prettier, Claude Code
 
 **Outils Android (inclus avec Android Studio)**
 - Android SDK, Platform Tools, Emulator, Gradle
 
 **Conteneurs et virtualisation (1)**
 - Docker Desktop
+
+**Outils IA et assistants (2)**
+- Claude Desktop, Claude Code (via npm)
 
 **Création de contenu interactif (1)**
 - Twine (téléchargement manuel)
@@ -176,9 +179,9 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 ### security.bat (4 logiciels)
 - Bitdefender Total Security (manuel), NordVPN, Acronis True Image (manuel), Tor Browser
 
-### system-tools.bat (16 logiciels)
-**Périphériques (5 - Desktop uniquement)**
-- Samsung Magician, Elgato Stream Deck (manuel), Logi Options+, Logitech G HUB, DisplayLink Graphics (manuel)
+### system-tools.bat (17 logiciels)
+**Périphériques et pilotes (6)**
+- Samsung Magician (Desktop uniquement), Elgato Stream Deck (manuel, Desktop uniquement), Logi Options+ (Desktop uniquement), Logitech G HUB (Desktop uniquement), DisplayLink Graphics (manuel, Desktop uniquement), Epson ET-2710 Drivers (manuel)
 
 **Personnalisation et utilitaires (4)**
 - Stardock Start11, Stardock Multiplicity (manuel), TeamViewer, Revo Uninstaller Pro (tous les PC)
@@ -197,7 +200,7 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 
 ---
 
-**TOTAL : 78 logiciels** (sans compter les outils npm et les logiciels inclus)
+**TOTAL : 83 logiciels** (sans compter les outils npm et les logiciels inclus)
 
 ## 🔄 Comparaison avec l'ancienne version
 
@@ -226,6 +229,7 @@ npm install -g vite
 npm install -g @vue/cli
 npm install -g eslint
 npm install -g prettier
+npm install -g @anthropic-ai/claude-code
 ```
 
 Ces outils fournissent :
@@ -234,6 +238,7 @@ Ces outils fournissent :
 - **Vue CLI** : Scaffold et gestion de projets Vue.js
 - **ESLint** : Linter pour maintenir la qualité du code
 - **Prettier** : Formateur de code automatique
+- **Claude Code** : CLI de Claude pour assistance IA au développement
 
 ## 💡 Conseils
 

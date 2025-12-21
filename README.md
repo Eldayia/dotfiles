@@ -29,15 +29,16 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - ✅ **Maintenance simplifiée** - Ajout/suppression de logiciels en quelques lignes
 
 ### Fonctionnalités
-- ✅ **Téléchargement automatique** via Winget (78 logiciels)
+- ✅ **Téléchargement automatique** via Winget (83 logiciels)
 - ✅ **Installation adaptative** - Mode Desktop (complet) ou Laptop (sans gaming)
 - ✅ **Fallback intelligent** vers curl si winget échoue
 - ✅ **Téléchargement sélectif** - Exécuter uniquement certains modules
 - ✅ **Documentation complète** - README détaillé avec exemples
+- ✅ **Rappel des installations manuelles** - Adobe Creative Suite, Tile Map Alchimist, Wonderdraft
 
 ---
 
-## 📦 Logiciels disponibles (78)
+## 📦 Logiciels disponibles (83)
 
 ### Archives & Compression (1)
 - **NanaZip** - Gestionnaire d'archives moderne (téléchargement manuel)
@@ -45,12 +46,14 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 ### Communication (1)
 - **Vesktop** - Client Discord alternatif open-source (Vencord)
 
-### Développement (20)
-**Éditeurs de code et IDE (4)**
+### Développement (24)
+**Éditeurs de code et IDE (6)**
 - **Visual Studio Code** - Éditeur de code
 - **Cursor** - IDE avec IA
 - **Android Studio** - IDE pour développement Android
 - **Visual Studio Community 2026** - IDE complet avec Visual Studio Installer
+- **nano** - Éditeur texte en ligne de commande
+- **Neovim** - Éditeur texte modal avancé
 
 **Contrôle de version (2)**
 - **Git** - Gestion de versions
@@ -75,6 +78,7 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - **Vue CLI** - Interface en ligne de commande Vue.js
 - **ESLint** - Linter JavaScript
 - **Prettier** - Formateur de code
+- **Claude Code** - CLI de Claude pour développement
 
 **Outils Android (inclus avec Android Studio)**
 - **Android SDK** - Kit de développement Android
@@ -84,6 +88,10 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 
 **Conteneurs et virtualisation (1)**
 - **Docker Desktop** - Conteneurisation
+
+**Outils IA et assistants (2)**
+- **Claude Desktop** - Interface desktop de Claude IA
+- **Claude Code** - CLI de Claude pour développement (via npm)
 
 **Création de contenu interactif (1)**
 - **Twine** - Création d'histoires interactives (téléchargement manuel)
@@ -134,13 +142,14 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - **Acronis True Image** - Sauvegarde (téléchargement manuel)
 - **Tor Browser** - Navigateur anonyme
 
-### Outils système (16)
-**Périphériques (5 - Desktop uniquement)**
-- **Samsung Magician** - Gestion SSD Samsung
-- **Elgato Stream Deck** - Contrôleur de streaming (téléchargement manuel)
-- **Logi Options+** - Configuration souris/claviers Logitech
-- **Logitech G HUB** - Périphériques gaming Logitech
-- **DisplayLink Graphics** - Pilotes adaptateurs DisplayLink (téléchargement manuel)
+### Outils système (17)
+**Périphériques et pilotes (6)**
+- **Samsung Magician** - Gestion SSD Samsung (Desktop uniquement)
+- **Elgato Stream Deck** - Contrôleur de streaming (téléchargement manuel, Desktop uniquement)
+- **Logi Options+** - Configuration souris/claviers Logitech (Desktop uniquement)
+- **Logitech G HUB** - Périphériques gaming Logitech (Desktop uniquement)
+- **DisplayLink Graphics** - Pilotes adaptateurs DisplayLink (téléchargement manuel, Desktop uniquement)
+- **Epson ET-2710 Drivers** - Pilotes imprimante Epson (téléchargement manuel)
 
 **Personnalisation et utilitaires (4)**
 - **Stardock Start11** - Personnalisation menu démarrer Windows 11
@@ -217,9 +226,10 @@ npm install -g vite
 npm install -g @vue/cli
 npm install -g eslint
 npm install -g prettier
+npm install -g @anthropic-ai/claude-code
 ```
 
-Ces outils fournissent un environnement complet pour le développement moderne JavaScript/TypeScript, Vue.js et React.
+Ces outils fournissent un environnement complet pour le développement moderne JavaScript/TypeScript, Vue.js, React et l'assistance IA avec Claude Code.
 
 ### Télécharger une catégorie spécifique
 
@@ -403,15 +413,27 @@ Le module `development.bat` installe un environnement complet couvrant :
 - **Python** : Python 3.12
 - **Rust** : Rustup toolchain
 - **Java** : OpenJDK 21
-- **JavaScript/TypeScript** : Node.js, npm, TypeScript, Vite, Vue CLI, ESLint, Prettier
+- **JavaScript/TypeScript** : Node.js, npm, TypeScript, Vite, Vue CLI, ESLint, Prettier, Claude Code
 - **Android** : Android Studio avec SDK, Platform Tools, Emulator et Gradle
 - **Conteneurs** : Docker Desktop
+- **Éditeurs** : Visual Studio Code, Cursor, nano, Neovim
+- **IA** : Claude Desktop
 
 ## 🔗 Liens utiles
 
 - [Winget Documentation](https://docs.microsoft.com/windows/package-manager/)
 - [Winget Package Search](https://winget.run/)
 - [PowerShell Documentation](https://docs.microsoft.com/powershell/)
+
+## ⚠️ Logiciels à installation manuelle
+
+Certains logiciels ne peuvent pas être automatisés et nécessitent une installation manuelle. Le script affiche un rappel à la fin de l'exécution pour :
+
+- **Adobe Creative Suite** (version complète, pas Creative Cloud)
+- **Tile Map Alchimist** - Outil de cartographie pour RPG Maker
+- **Wonderdraft** - Créateur de cartes fantaisie
+
+Ces logiciels doivent être téléchargés et installés séparément depuis leurs sites officiels respectifs.
 
 ## 💡 Conseils
 
@@ -420,6 +442,7 @@ Le module `development.bat` installe un environnement complet couvrant :
 3. **Commentaires** : Utiliser `REM` pour désactiver temporairement des logiciels
 4. **Variables** : `%DOWNLOAD_DIR%` est accessible dans tous les modules
 5. **Ordre** : L'ordre d'exécution des modules peut être modifié dans `install/downloadSoftware.bat`
+6. **Installation manuelle** : Consulter la liste ci-dessus pour les logiciels nécessitant une installation manuelle
 
 ## 🤝 Contribuer
 

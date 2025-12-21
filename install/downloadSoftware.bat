@@ -100,6 +100,23 @@ echo.
 echo Archives:
 echo   - NanaZip
 echo.
+echo Développement:
+echo   - Twine
+echo   - MinGW-w64
+echo.
+echo ===============================================
+echo RAPPEL: LOGICIELS À INSTALLATION MANUELLE
+echo ===============================================
+echo.
+echo Les logiciels suivants nécessitent une installation
+echo manuelle et ne peuvent PAS être automatisés:
+echo.
+echo   1. Adobe Creative Suite (version complète, pas CC)
+echo   2. Tile Map Alchimist
+echo   3. Wonderdraft
+echo.
+echo Veuillez les installer manuellement après ce script.
+echo.
 echo ===============================================
 echo COMMENT AJOUTER/SUPPRIMER DES LOGICIELS
 echo ===============================================

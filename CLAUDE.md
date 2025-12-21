@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal dotfiles repository for Windows and Linux configurations. Currently focused on Windows with modular installation scripts for automated software setup via Winget. Supports 78 software packages covering development tools, productivity, gaming, multimedia, and system utilities.
+Personal dotfiles repository for Windows and Linux configurations. Currently focused on Windows with modular installation scripts for automated software setup via Winget. Supports 83 software packages covering development tools, productivity, gaming, multimedia, and system utilities.
 
 ## Architecture
 
@@ -53,19 +53,29 @@ The `development.bat` module provides comprehensive tooling for:
 - **Python**: Python 3.12
 - **Rust**: Rustup toolchain
 - **Java**: OpenJDK 21
-- **JavaScript/TypeScript**: Node.js, npm + post-install tools (TypeScript, Vite, Vue CLI, ESLint, Prettier)
+- **JavaScript/TypeScript**: Node.js, npm + post-install tools (TypeScript, Vite, Vue CLI, ESLint, Prettier, Claude Code)
 - **Android**: Android Studio with SDK, Platform Tools, Emulator, Gradle
 - **Containers**: Docker Desktop
+- **AI Tools**: Claude Desktop
+- **Text Editors**: Visual Studio Code, Cursor, nano, Neovim
 
 Post-installation npm packages (run after Node.js install):
 ```batch
-npm install -g typescript vite @vue/cli eslint prettier
+npm install -g typescript vite @vue/cli eslint prettier @anthropic-ai/claude-code
 ```
 
 ### System-tools Changes
 
 - **Revo Uninstaller Pro** is now installed on ALL PCs (previously Desktop-only)
 - Peripheral-specific software (Samsung Magician, Logitech G HUB, Elgato Stream Deck, DisplayLink) remain Desktop-only
+- **Epson ET-2710 Drivers** added as manual download
+
+### Manual Installation Reminder
+
+At the end of execution, `downloadSoftware.bat` displays a reminder for software that requires manual installation and cannot be automated:
+- **Adobe Creative Suite** (full version, not CC)
+- **Tile Map Alchimist**
+- **Wonderdraft**
 
 ### Claude Agents Stow System
 

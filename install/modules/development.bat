@@ -19,6 +19,12 @@ call :DownloadSoftware "Visual Studio Code" "Microsoft.VisualStudioCode" "" ""
 REM Cursor
 call :DownloadSoftware "Cursor" "Cursor.Cursor" "https://downloader.cursor.sh/windows/nsis/x64" "CursorSetup.exe"
 
+REM nano (éditeur texte en ligne de commande)
+call :DownloadSoftware "nano" "GNU.Nano" "" ""
+
+REM Neovim (éditeur texte modal)
+call :DownloadSoftware "Neovim" "Neovim.Neovim" "" ""
+
 REM Visual Studio Community 2026
 call :DownloadSoftware "Visual Studio Community 2026" "Microsoft.VisualStudio.2026.Community" "" ""
 
@@ -110,6 +116,16 @@ REM Docker Desktop
 call :DownloadSoftware "Docker Desktop" "Docker.DockerDesktop" "https://desktop.docker.com/win/main/amd64/Docker%%20Desktop%%20Installer.exe" "Docker-Desktop-Installer.exe"
 
 REM ===============================================
+REM Outils IA et assistants
+REM ===============================================
+
+REM Claude Desktop
+call :DownloadSoftware "Claude Desktop" "Anthropic.Claude" "" ""
+
+REM Claude Code (installé via npm après Node.js)
+REM npm install -g @anthropic-ai/claude-code
+
+REM ===============================================
 REM Outils de création de contenu interactif
 REM ===============================================
 
@@ -126,6 +142,7 @@ echo   - Vite: npm install -g vite
 echo   - Vue CLI: npm install -g @vue/cli
 echo   - ESLint: npm install -g eslint
 echo   - Prettier: npm install -g prettier
+echo   - Claude Code: npm install -g @anthropic-ai/claude-code
 echo.
 
 goto :eof

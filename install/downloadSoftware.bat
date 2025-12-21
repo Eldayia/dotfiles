@@ -113,6 +113,6 @@ echo   1. Ouvrir le module correspondant dans modules\
 echo   2. Commenter ou supprimer la ligne
 echo.
 echo Exemple:
-echo   REM call :DownloadSoftware "Discord" "Discord.Discord" "" ""
+echo   REM call :DownloadSoftware "Vesktop" "Vencord.Vesktop" "" ""
 echo.
 pause

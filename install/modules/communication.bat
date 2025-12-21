@@ -9,7 +9,7 @@ echo.
 echo === COMMUNICATION ===
 echo.
 
-REM Discord
-call :DownloadSoftware "Discord" "Discord.Discord" "https://discord.com/api/download?platform=win" "DiscordSetup.exe"
+REM Vesktop (Discord client alternatif open-source)
+call :DownloadSoftware "Vesktop" "Vencord.Vesktop" "" ""
 
 goto :eof

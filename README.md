@@ -29,7 +29,7 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - ✅ **Maintenance simplifiée** - Ajout/suppression de logiciels en quelques lignes
 
 ### Fonctionnalités
-- ✅ **Téléchargement automatique** via Winget (77+ logiciels)
+- ✅ **Téléchargement automatique** via Winget (78 logiciels)
 - ✅ **Installation adaptative** - Mode Desktop (complet) ou Laptop (sans gaming)
 - ✅ **Fallback intelligent** vers curl si winget échoue
 - ✅ **Téléchargement sélectif** - Exécuter uniquement certains modules
@@ -37,33 +37,33 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 
 ---
 
-## 📦 Logiciels disponibles (77+)
+## 📦 Logiciels disponibles (78)
 
 ### Archives & Compression (1)
-- **NanaZip** - Gestionnaire d'archives moderne
+- **NanaZip** - Gestionnaire d'archives moderne (téléchargement manuel)
 
 ### Communication (1)
-- **Discord** - Plateforme de communication
+- **Vesktop** - Client Discord alternatif open-source (Vencord)
 
 ### Développement (20)
-**Éditeurs de code et IDE**
+**Éditeurs de code et IDE (4)**
 - **Visual Studio Code** - Éditeur de code
 - **Cursor** - IDE avec IA
 - **Android Studio** - IDE pour développement Android
-- **Visual Studio Community 2026** - IDE complet
+- **Visual Studio Community 2026** - IDE complet avec Visual Studio Installer
 
-**Contrôle de version**
+**Contrôle de version (2)**
 - **Git** - Gestion de versions
 - **GitKraken** - Client Git graphique
 
-**Langages de programmation et runtimes**
+**Langages de programmation et runtimes (5)**
 - **OpenJDK 21** - Java Development Kit
 - **.NET SDK 8** - Framework C#
 - **Python 3.12** - Langage de programmation
 - **Rustup** - Toolchain Rust
 - **Node.js** - Runtime JavaScript (inclut npm)
 
-**Outils de build et compilation C++**
+**Outils de build et compilation C++ (4)**
 - **CMake** - Build system multiplateforme
 - **LLVM** - Compilateur Clang
 - **MinGW-w64** - GCC pour Windows (téléchargement manuel)
@@ -76,28 +76,31 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - **ESLint** - Linter JavaScript
 - **Prettier** - Formateur de code
 
-**Outils Android**
-- **Android SDK** - Inclus avec Android Studio
-- **Android Platform Tools** - Inclus avec Android Studio
-- **Android Emulator** - Inclus avec Android Studio
-- **Gradle** - Inclus avec Android Studio
+**Outils Android (inclus avec Android Studio)**
+- **Android SDK** - Kit de développement Android
+- **Android Platform Tools** - Outils en ligne de commande (adb, fastboot)
+- **Android Emulator** - Émulateur de périphériques
+- **Gradle** - Système de build
 
-**Conteneurs et virtualisation**
+**Conteneurs et virtualisation (1)**
 - **Docker Desktop** - Conteneurisation
 
-### Gaming (13)
+**Création de contenu interactif (1)**
+- **Twine** - Création d'histoires interactives (téléchargement manuel)
+
+### Gaming (13 + 1 inclus - Desktop uniquement)
 - **Steam** - Plateforme Valve
-- **Epic Games Launcher** - Store Epic
+- **Epic Games Launcher** - Store Epic (inclut Epic Online Services)
 - **GOG GALAXY** - Client GOG
 - **Battle.net** - Plateforme Blizzard
 - **EA app** - Electronic Arts
 - **Ubisoft Connect** - Plateforme Ubisoft
 - **Amazon Games** - Client Amazon
 - **Riot Client** - League of Legends, Valorant
-- **Wargaming.net** - World of Tanks, etc.
-- **HoYoPlay** - Genshin Impact, etc.
-- **BlueStacks** - Émulateur Android
-- **CurseForge** - Mods Minecraft
+- **Wargaming.net Game Center** - World of Tanks, etc.
+- **HoYoPlay** - Genshin Impact, Honkai Star Rail
+- **BlueStacks** - Émulateur Android pour gaming
+- **CurseForge** - Mods Minecraft et autres jeux
 - **Ankama Launcher** - Dofus, Wakfu
 
 ### Multimédia (5)
@@ -107,7 +110,7 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - **Adobe Creative Cloud** - Suite créative
 - **qBittorrent** - Client BitTorrent
 
-### Productivité (15)
+### Productivité (16)
 - **1Password** - Gestionnaire de mots de passe
 - **1Password CLI** - Version ligne de commande
 - **PowerToys** - Utilitaires Microsoft
@@ -120,41 +123,43 @@ Scripts modulaires pour le téléchargement et l'installation automatique de log
 - **UniGetUI** - Interface pour gestionnaires de paquets
 - **Warp** - Terminal moderne
 - **UPDF** - Éditeur PDF
+- **Wondershare Recoverit** - Récupération de données (téléchargement manuel)
 - **ReNamer** - Renommage en masse
 - **Eagle** - Gestionnaire d'assets pour designers
 - **Obsidian** - Prise de notes et gestion de connaissances
 
-### Sécurité (3)
-- **Bitdefender Total Security** - Antivirus
+### Sécurité (4)
+- **Bitdefender Total Security** - Antivirus (téléchargement manuel)
 - **NordVPN** - VPN
-- **Acronis True Image** - Sauvegarde
+- **Acronis True Image** - Sauvegarde (téléchargement manuel)
+- **Tor Browser** - Navigateur anonyme
 
 ### Outils système (16)
-**Périphériques (Desktop uniquement)**
+**Périphériques (5 - Desktop uniquement)**
 - **Samsung Magician** - Gestion SSD Samsung
-- **Elgato Stream Deck** - Contrôleur de streaming
-- **Logi Options+** - Souris/claviers Logitech
+- **Elgato Stream Deck** - Contrôleur de streaming (téléchargement manuel)
+- **Logi Options+** - Configuration souris/claviers Logitech
 - **Logitech G HUB** - Périphériques gaming Logitech
-- **DisplayLink Graphics** - Adaptateurs DisplayLink
+- **DisplayLink Graphics** - Pilotes adaptateurs DisplayLink (téléchargement manuel)
 
-**Personnalisation et utilitaires**
-- **Stardock Start11** - Personnalisation menu démarrer
-- **Stardock Multiplicity** - KVM logiciel
+**Personnalisation et utilitaires (4)**
+- **Stardock Start11** - Personnalisation menu démarrer Windows 11
+- **Stardock Multiplicity** - KVM logiciel multi-PC (téléchargement manuel)
 - **TeamViewer** - Bureau à distance
 - **Revo Uninstaller Pro** - Désinstallation avancée (tous les PC)
 
-**Virtualisation et réseau**
-- **VMware Workstation** - Virtualisation
-- **QNAP Qsync Client** - Synchronisation QNAP
+**Virtualisation et réseau (2)**
+- **VMware Workstation** - Virtualisation (téléchargement manuel)
+- **QNAP Qsync Client** - Synchronisation NAS QNAP (téléchargement manuel)
 
-**Matériel et outils spécialisés**
-- **Raspberry Pi Imager** - Flasher cartes SD
-- **OrcaSlicer** - Slicer impression 3D
+**Matériel et outils spécialisés (2)**
+- **Raspberry Pi Imager** - Flasher cartes SD pour Raspberry Pi
+- **OrcaSlicer** - Slicer pour imprimantes 3D
 
-**Divers**
-- **Comet** - Navigateur
-- **LM Studio** - IA locale
-- **Shutter** - Capture d'écran
+**Divers (3)**
+- **Comet** - Navigateur de fichiers cloud 115
+- **LM Studio** - Exécution de modèles IA en local
+- **Shutter** - Outil de capture d'écran (téléchargement manuel)
 
 ### Navigateurs Web (2)
 - **Google Chrome** - Navigateur Google
@@ -174,7 +179,7 @@ dotfiles/
     │   └── functions.bat         # Fonctions réutilisables
     └── modules/                  # Modules par catégorie
         ├── archives.bat          # NanaZip
-        ├── communication.bat     # Discord
+        ├── communication.bat     # Vesktop
         ├── development.bat       # Git, VSCode, Docker, Python, etc.
         ├── gaming.bat            # Steam, Epic, GOG, Battle.net, etc.
         ├── multimedia.bat        # VLC, Mp3tag, Adobe CC, etc.
@@ -272,7 +277,7 @@ call :DownloadSoftware "OBS Studio" "OBSProject.OBSStudio" "https://cdn-fastly.o
 2. Commenter la ligne avec `REM` :
 
 ```batch
-REM call :DownloadSoftware "Discord" "Discord.Discord" "" ""
+REM call :DownloadSoftware "Vesktop" "Vencord.Vesktop" "" ""
 ```
 
 Ou supprimer complètement la ligne.

@@ -8,7 +8,7 @@ install/
 ├── downloadSoftware.bat.old      # Ancien fichier (backup)
 ├── modules/                      # Modules par catégorie
 │   ├── archives.bat              # NanaZip
-│   ├── communication.bat         # Discord
+│   ├── communication.bat         # Vesktop
 │   ├── development.bat           # Git, VSCode, Docker, Python, etc.
 │   ├── gaming.bat                # Steam, Epic, GOG, Battle.net, etc.
 │   ├── multimedia.bat            # VLC, Mp3tag, Adobe CC, etc.
@@ -67,7 +67,7 @@ call :DownloadSoftware "Minecraft" "Mojang.Minecraft" "https://launcher.mojang.c
 2. Commenter ou supprimer la ligne :
 
 ```batch
-REM call :DownloadSoftware "Discord" "Discord.Discord" "" ""
+REM call :DownloadSoftware "Vesktop" "Vencord.Vesktop" "" ""
 ```
 
 ### Modifier un logiciel
@@ -77,10 +77,10 @@ REM call :DownloadSoftware "Discord" "Discord.Discord" "" ""
 
 ```batch
 REM Avant
-call :DownloadSoftware "Discord" "Discord.Discord" "" ""
+call :DownloadSoftware "Vesktop" "Vencord.Vesktop" "" ""
 
 REM Après (avec URL de fallback)
-call :DownloadSoftware "Discord" "Discord.Discord" "https://discord.com/api/download?platform=win" "DiscordSetup.exe"
+call :DownloadSoftware "Vesktop" "Vencord.Vesktop" "https://github.com/Vencord/Vesktop/releases/latest" "VesktopSetup.exe"
 ```
 
 ## 🛠️ Fonctions disponibles
@@ -133,63 +133,71 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 ## 📋 Liste des modules
 
 ### archives.bat (1 logiciel)
-- NanaZip (manuel)
+- **NanaZip** (téléchargement manuel)
 
 ### communication.bat (1 logiciel)
-- Discord
+- **Vesktop** (client Discord alternatif open-source)
 
-### development.bat (20+ logiciels et outils)
-**Éditeurs de code et IDE**
+### development.bat (20 logiciels)
+**Éditeurs de code et IDE (4)**
 - Visual Studio Code, Cursor, Android Studio, Visual Studio Community 2026
+- Visual Studio Installer (inclus avec VS 2026)
 
-**Contrôle de version**
+**Contrôle de version (2)**
 - Git, GitKraken
 
-**Langages de programmation et runtimes**
+**Langages de programmation et runtimes (5)**
 - OpenJDK 21 (Java), .NET SDK 8 (C#), Python 3.12, Rustup (Rust), Node.js/npm
 
-**Outils de build et compilation C++**
+**Outils de build et compilation C++ (4)**
 - CMake, LLVM/Clang, MinGW-w64 (manuel), MSVC Build Tools (inclus avec VS)
 
 **Outils JavaScript/TypeScript (via npm post-installation)**
 - TypeScript, Vite, Vue CLI, ESLint, Prettier
 
-**Outils Android**
-- Android SDK, Platform Tools, Emulator, Gradle (tous inclus avec Android Studio)
+**Outils Android (inclus avec Android Studio)**
+- Android SDK, Platform Tools, Emulator, Gradle
 
-**Conteneurs et virtualisation**
+**Conteneurs et virtualisation (1)**
 - Docker Desktop
 
-### gaming.bat (13 logiciels)
-- Steam, Epic Games, GOG, Battle.net, EA app, Ubisoft Connect, Amazon Games, Riot Client, Wargaming, HoYoPlay, BlueStacks, CurseForge, Ankama Launcher
+**Création de contenu interactif (1)**
+- Twine (téléchargement manuel)
+
+### gaming.bat (13 logiciels - Desktop uniquement)
+- Steam, Epic Games Launcher (+ Epic Online Services inclus), GOG GALAXY, Battle.net, EA app, Ubisoft Connect, Amazon Games, Riot Client, Wargaming.net Game Center, HoYoPlay, BlueStacks, CurseForge, Ankama Launcher
 
 ### multimedia.bat (5 logiciels)
-- VLC, Mp3tag, Apple Music, Adobe Creative Cloud, qBittorrent
+- VLC media player, Mp3tag, Apple Music, Adobe Creative Cloud, qBittorrent
 
-### productivity.bat (15 logiciels)
-- 1Password, 1Password CLI, PowerToys, Rainmeter, FileZilla, WinSCP, eM Client, TreeSize, UltraSearch, UniGetUI, Warp, UPDF, ReNamer, Eagle, Obsidian
+### productivity.bat (16 logiciels)
+- 1Password, 1Password CLI, PowerToys, Rainmeter, FileZilla, WinSCP, eM Client, TreeSize, UltraSearch, UniGetUI, Warp, UPDF, Wondershare Recoverit (manuel), ReNamer, Eagle, Obsidian
 
-### security.bat (3 logiciels)
-- Bitdefender (manuel), NordVPN, Acronis (manuel)
+### security.bat (4 logiciels)
+- Bitdefender Total Security (manuel), NordVPN, Acronis True Image (manuel), Tor Browser
 
 ### system-tools.bat (16 logiciels)
-**Périphériques (Desktop uniquement)**
-- Samsung Magician, Elgato Stream Deck (manuel), Logi Options+, Logitech G HUB, DisplayLink (manuel)
+**Périphériques (5 - Desktop uniquement)**
+- Samsung Magician, Elgato Stream Deck (manuel), Logi Options+, Logitech G HUB, DisplayLink Graphics (manuel)
 
-**Personnalisation et utilitaires**
+**Personnalisation et utilitaires (4)**
 - Stardock Start11, Stardock Multiplicity (manuel), TeamViewer, Revo Uninstaller Pro (tous les PC)
 
-**Virtualisation et réseau**
-- VMware Workstation (manuel), QNAP Qsync (manuel)
+**Virtualisation et réseau (2)**
+- VMware Workstation (manuel), QNAP Qsync Client (manuel)
 
-**Matériel et outils spécialisés**
+**Matériel et outils spécialisés (2)**
 - Raspberry Pi Imager, OrcaSlicer
 
-**Divers**
+**Divers (3)**
 - Comet, LM Studio, Shutter (manuel)
 
 ### web.bat (2 logiciels)
 - Google Chrome, Google Chrome Canary
+
+---
+
+**TOTAL : 78 logiciels** (sans compter les outils npm et les logiciels inclus)
 
 ## 🔄 Comparaison avec l'ancienne version
 

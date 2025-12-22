@@ -35,6 +35,7 @@
       ./modules/network-tools.nix
       ./modules/terminal-utils.nix
       ./modules/web.nix
+      # ./modules/languages.nix    # Langages de dev (Node, Rust, Python, C++, Java, etc.) - OPTIONNEL
       ./modules/screenshot.nix
       ./modules/lockscreen.nix
 

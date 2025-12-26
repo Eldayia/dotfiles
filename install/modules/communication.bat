@@ -9,7 +9,7 @@ echo.
 echo === COMMUNICATION ===
 echo.
 
-REM Vesktop (Discord client alternatif open-source)
-call :DownloadSoftware "Vesktop" "Vencord.Vesktop" "" ""
+REM Discord
+call :DownloadSoftware "Discord" "Discord.Discord" "" ""
 
 goto :eof

@@ -132,6 +132,9 @@ REM ===============================================
 REM Twine (création d'histoires interactives)
 call :ManualDownloadRequired "Twine" "https://twinery.org/"
 
+REM Ren'Py (moteur de visual novels)
+call :DownloadSoftware "Ren'Py" "RenpyOrg.Renpy" "https://www.renpy.org/dl/8.3.4/renpy-8.3.4-sdk.zip" "renpy-sdk.zip"
+
 REM ===============================================
 REM Note pour les outils npm
 REM ===============================================

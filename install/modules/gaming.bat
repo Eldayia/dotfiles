@@ -45,6 +45,9 @@ call :DownloadSoftware "HoYoPlay" "Cognosphere.HoYoPlay" "" ""
 REM BlueStacks
 call :DownloadSoftware "BlueStacks" "BlueStack.BlueStacks" "https://cdn3.bluestacks.com/downloads/windows/nxt/latest/BlueStacksInstaller.exe" "BlueStacksInstaller.exe"
 
+REM Google Play Games (jeux Android sur PC)
+call :DownloadSoftware "Google Play Games" "Google.PlayGames" "" ""
+
 REM CurseForge
 call :DownloadSoftware "CurseForge" "Overwolf.CurseForge" "https://curseforge.overwolf.com/downloads/curseforge-latest-x64.exe" "CurseForge-Setup.exe"
 

@@ -9,7 +9,7 @@ echo.
 echo === ARCHIVES ^& COMPRESSION ===
 echo.
 
-REM NanaZip
-call :ManualDownloadRequired "NanaZip" "https://github.com/M2Team/NanaZip/releases"
+REM NanaZip (7-Zip moderne avec interface Windows 11)
+call :DownloadSoftware "NanaZip" "M2Team.NanaZip" "" ""
 
 goto :eof

@@ -50,6 +50,8 @@ echo   modules\multimedia.bat
 echo   modules\productivity.bat
 echo   modules\security.bat
 echo   modules\system-tools.bat
+echo   modules\gamesdev.bat
+echo   modules\audioproduction.bat
 echo   modules\web.bat
 echo.
 echo Démarrage des téléchargements...
@@ -65,6 +67,8 @@ if "%IS_DESKTOP%"=="1" (
     call "%~dp0modules\gaming.bat"
 )
 
+call "%~dp0modules\gamesdev.bat"
+call "%~dp0modules\audioproduction.bat"
 call "%~dp0modules\multimedia.bat"
 call "%~dp0modules\productivity.bat"
 call "%~dp0modules\security.bat"
@@ -87,22 +91,33 @@ echo   - Bitdefender Total Security
 echo   - Acronis True Image
 echo.
 echo Outils système:
-echo   - DisplayLink Graphics
-echo   - Elgato Stream Deck
+echo   - DisplayLink Graphics (Desktop uniquement)
+echo   - Elgato Stream Deck (Desktop uniquement)
 echo   - VMware Workstation
-echo   - QNAP Qsync Client
 echo   - Stardock Multiplicity
-echo   - Shutter
+echo   - RaiDrive
 echo.
 echo Multimédia:
 echo   - Wondershare Recoverit
 echo.
-echo Archives:
-echo   - NanaZip
-echo.
 echo Développement:
-echo   - Twine
 echo   - MinGW-w64
+echo   - Bun (via PowerShell)
+echo.
+echo Game Dev:
+echo   - Ren'Py
+echo   - Aseprite, Game Character Hub, PyxelEdit
+echo   - Live2D Cubism, Tilesetter
+echo.
+echo Audio Production:
+echo   - FL Studio (Image-Line)
+echo   - MIDI Control Center (Arturia)
+echo   - Plugins VST (Vital, Dexed, OTT, Valhalla, etc.)
+echo   - iZotope (Ozone, Trash, Vinyl)
+echo   - Voxengo (SPAN, MSED)
+echo   - Softube (Saturation Knob, Central)
+echo   - Spitfire Audio App
+echo   - Voir module audioproduction.bat pour la liste complete
 echo.
 echo ===============================================
 echo RAPPEL: LOGICIELS À INSTALLATION MANUELLE

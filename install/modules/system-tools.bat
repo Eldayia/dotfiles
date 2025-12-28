@@ -42,9 +42,6 @@ call :DownloadSoftware "Revo Uninstaller Pro" "RevoUninstaller.RevoUninstallerPr
 REM VMware Workstation
 call :ManualDownloadRequired "VMware Workstation" "https://www.vmware.com/"
 
-REM QNAP Qsync Client
-call :ManualDownloadRequired "QNAP Qsync Client" "https://www.qnap.com/"
-
 REM Raspberry Pi Imager
 call :DownloadSoftware "Raspberry Pi Imager" "RaspberryPiFoundation.RaspberryPiImager" "" ""
 
@@ -57,10 +54,23 @@ call :DownloadSoftware "Comet" "115.Comet" "" ""
 REM LM Studio
 call :DownloadSoftware "LM Studio" "LMStudio.LMStudio" "https://releases.lmstudio.ai/windows/latest/LM-Studio-Setup.exe" "LM-Studio-Setup.exe"
 
-REM Shutter
-call :ManualDownloadRequired "Shutter" ""
+REM Shutter (planification arrêt/redémarrage)
+call :DownloadSoftware "Shutter" "den4b.Shutter" "" ""
 
 REM Drivers imprimante Epson ET-2710
 call :ManualDownloadRequired "Epson ET-2710 Drivers" "https://epson.com/Support/Printers/All-In-Ones/ET-Series/Epson-ET-2710/s/SPT_C11CG86201"
+
+REM ===============================================
+REM Partage et synchronisation
+REM ===============================================
+
+REM LocalSend (transfert fichiers local, AirDrop-like)
+call :DownloadSoftware "LocalSend" "LocalSend.LocalSend" "" ""
+
+REM RaiDrive (monter cloud comme disque)
+call :ManualDownloadRequired "RaiDrive" "https://www.raidrive.com/"
+
+REM QNAP Qsync Client
+call :DownloadSoftware "QNAP Qsync" "QNAP.Qsync" "" ""
 
 goto :eof

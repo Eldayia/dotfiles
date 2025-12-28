@@ -12,4 +12,10 @@ echo.
 REM Discord
 call :DownloadSoftware "Discord" "Discord.Discord" "" ""
 
+REM Microsoft Teams
+call :DownloadSoftware "Microsoft Teams" "Microsoft.Teams" "" ""
+
+REM YouTube Music Desktop App
+call :DownloadSoftware "YouTube Music Desktop" "Ytmdesktop.Ytmdesktop" "" ""
+
 goto :eof

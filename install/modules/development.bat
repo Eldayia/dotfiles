@@ -17,7 +17,10 @@ REM Visual Studio Code
 call :DownloadSoftware "Visual Studio Code" "Microsoft.VisualStudioCode" "" ""
 
 REM Cursor
-call :DownloadSoftware "Cursor" "Cursor.Cursor" "https://downloader.cursor.sh/windows/nsis/x64" "CursorSetup.exe"
+call :DownloadSoftware "Cursor" "Anysphere.Cursor" "" ""
+
+REM Trae (IDE IA ByteDance)
+call :DownloadSoftware "Trae" "ByteDance.Trae" "" ""
 
 REM nano (éditeur texte en ligne de commande)
 call :DownloadSoftware "nano" "GNU.Nano" "" ""
@@ -41,6 +44,9 @@ REM ===============================================
 REM Git
 call :DownloadSoftware "Git" "Git.Git" "" ""
 
+REM GitHub CLI
+call :DownloadSoftware "GitHub CLI" "GitHub.cli" "" ""
+
 REM GitKraken
 call :DownloadSoftware "GitKraken" "Axosoft.GitKraken" "" ""
 
@@ -62,6 +68,9 @@ call :DownloadSoftware "Rustup" "Rustlang.Rustup" "" ""
 
 REM Node.js (inclut npm)
 call :DownloadSoftware "Node.js" "OpenJS.NodeJS" "" ""
+
+REM Bun (runtime JS rapide)
+call :ManualDownloadRequired "Bun" "https://bun.sh/ (powershell -c 'irm bun.sh/install.ps1 | iex')"
 
 REM ===============================================
 REM Outils de build et compilation C++
@@ -124,16 +133,6 @@ call :DownloadSoftware "Claude Desktop" "Anthropic.Claude" "" ""
 
 REM Claude Code (installé via npm après Node.js)
 REM npm install -g @anthropic-ai/claude-code
-
-REM ===============================================
-REM Outils de création de contenu interactif
-REM ===============================================
-
-REM Twine (création d'histoires interactives)
-call :ManualDownloadRequired "Twine" "https://twinery.org/"
-
-REM Ren'Py (moteur de visual novels)
-call :DownloadSoftware "Ren'Py" "RenpyOrg.Renpy" "https://www.renpy.org/dl/8.3.4/renpy-8.3.4-sdk.zip" "renpy-sdk.zip"
 
 REM ===============================================
 REM Note pour les outils npm

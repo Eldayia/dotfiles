@@ -57,4 +57,24 @@ call :DownloadSoftware "Eagle" "ogdesign.Eagle" "https://eaglefile.oss-cn-shangh
 REM Obsidian
 call :DownloadSoftware "Obsidian" "Obsidian.Obsidian" "" ""
 
+REM ===============================================
+REM Capture d'écran et productivité
+REM ===============================================
+
+REM ShareX (capture d'écran avancée)
+call :DownloadSoftware "ShareX" "ShareX.ShareX" "" ""
+
+REM Monica (assistant IA personnel)
+call :DownloadSoftware "Monica" "ButterflyEffect.Monica" "" ""
+
+REM ===============================================
+REM Gestion de fichiers
+REM ===============================================
+
+REM LockHunter (débloquer fichiers verrouillés)
+call :DownloadSoftware "LockHunter" "CrystalRich.LockHunter" "" ""
+
+REM TeraCopy (copie de fichiers améliorée)
+call :DownloadSoftware "TeraCopy" "CodeSector.TeraCopy" "" ""
+
 goto :eof

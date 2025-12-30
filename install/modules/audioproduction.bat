@@ -82,6 +82,9 @@ echo.
 REM MIDI Control Center (obligatoire pour MiniLab 3)
 call :ManualDownloadRequired "MIDI Control Center" "https://www.arturia.com/support/downloads&manuals"
 
+REM Melodics (apprentissage piano/clavier)
+call :ManualDownloadRequired "Melodics" "https://melodics.com/download"
+
 REM Analog Lab Intro (inclus avec MiniLab 3)
 call :IncludedWith "Analog Lab Intro" "MiniLab 3 (enregistrer sur arturia.com)"
 

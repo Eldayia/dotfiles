@@ -72,11 +72,27 @@ REM Game Character Hub (payant, Steam)
 call :ManualDownloadRequired "Game Character Hub" "https://store.steampowered.com/app/292230/"
 
 REM ===============================================
+REM Outils de sprite et textures
+REM ===============================================
+
+REM Spriteilluminator (lighting effects - payant)
+call :ManualDownloadRequired "Spriteilluminator" "https://www.codeandweb.com/spriteilluminator"
+
+REM PhysicsEditor (collision shapes - payant)
+call :ManualDownloadRequired "PhysicsEditor" "https://www.codeandweb.com/physicseditor"
+
+REM TexturepackGUI (texture packing - payant)
+call :ManualDownloadRequired "TexturepackGUI" "https://www.codeandweb.com/texturepacker"
+
+REM ===============================================
 REM Animation 2D
 REM ===============================================
 
 REM Live2D Cubism (animation 2D pour personnages)
 call :ManualDownloadRequired "Live2D Cubism" "https://www.live2d.com/en/download/cubism/"
+
+REM Inochi Creator (animation 2D VTuber - open source)
+call :ManualDownloadRequired "Inochi Creator" "https://github.com/Inochi2D/inochi-creator/releases/latest"
 
 REM ===============================================
 REM Map / Level Design
@@ -87,6 +103,9 @@ call :DownloadSoftware "Tiled" "mapeditor.Tiled" "" ""
 
 REM Tilesetter (tileset creation - Steam)
 call :ManualDownloadRequired "Tilesetter" "https://store.steampowered.com/app/1105890/Tilesetter/"
+
+REM Dungeondraft (map creation - payant)
+call :ManualDownloadRequired "Dungeondraft" "https://dungeondraft.net/"
 
 REM Note: Pour les plugins VST et DAW complets, voir le module audioproduction.bat
 

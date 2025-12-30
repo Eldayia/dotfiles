@@ -53,6 +53,9 @@ call :DownloadSoftware "Native Access" "NativeInstruments.NativeAccess" "https:/
 REM Waves Central (gestionnaire Waves)
 call :DownloadSoftware "Waves Central" "WavesAudio.WavesCentral" "" ""
 
+REM Cosmos (gestionnaire Waves)
+call :ManualDownloadRequired "Cosmos" "https://www.waves.com/cosmos"
+
 REM Softube Central
 call :ManualDownloadRequired "Softube Central" "https://www.softube.com/central"
 

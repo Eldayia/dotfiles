@@ -9,6 +9,17 @@ echo.
 echo === PRODUCTIVITÉ ===
 echo.
 
+REM ===============================================
+REM Suite bureautique
+REM ===============================================
+
+REM Microsoft 365 Famille
+call :DownloadSoftware "Microsoft 365" "Microsoft.Office" "" ""
+
+REM ===============================================
+REM Gestionnaires de mots de passe
+REM ===============================================
+
 REM 1Password
 call :DownloadSoftware "1Password" "AgileBits.1Password" "https://downloads.1password.com/win/1PasswordSetup-latest.exe" "1PasswordSetup.exe"
 

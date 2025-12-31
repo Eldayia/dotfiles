@@ -101,11 +101,17 @@ REM ===============================================
 REM Tiled Map Editor
 call :DownloadSoftware "Tiled" "mapeditor.Tiled" "" ""
 
+REM LDtk (Level Designer Toolkit - gratuit, open source)
+call :DownloadSoftware "LDtk" "deepnight.ldtk" "" ""
+
 REM Tilesetter (tileset creation - Steam)
 call :ManualDownloadRequired "Tilesetter" "https://store.steampowered.com/app/1105890/Tilesetter/"
 
 REM Dungeondraft (map creation - payant)
 call :ManualDownloadRequired "Dungeondraft" "https://dungeondraft.net/"
+
+REM Wonderdraft (world map creation - payant)
+call :ManualDownloadRequired "Wonderdraft" "https://www.wonderdraft.net/"
 
 REM Note: Pour les plugins VST et DAW complets, voir le module audioproduction.bat
 

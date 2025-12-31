@@ -54,8 +54,8 @@ REM ===============================================
 REM Langages de programmation et runtimes
 REM ===============================================
 
-REM Java Development Kit (JDK)
-call :DownloadSoftware "OpenJDK 21" "Microsoft.OpenJDK.21" "" ""
+REM Eclipse Temurin JDK 21 (référence open source, anciennement AdoptOpenJDK)
+call :DownloadSoftware "Eclipse Temurin JDK 21" "EclipseAdoptium.Temurin.21.JDK" "" ""
 
 REM .NET SDK (pour C#)
 call :DownloadSoftware ".NET SDK" "Microsoft.DotNet.SDK.8" "" ""
@@ -87,6 +87,12 @@ call :ManualDownloadRequired "MinGW-w64" "https://www.mingw-w64.org/"
 
 REM Visual C++ Build Tools
 call :IncludedWith "MSVC Build Tools" "Visual Studio Community 2026"
+
+REM OpenSSL (cryptographie)
+call :DownloadSoftware "OpenSSL" "ShiningLight.OpenSSL" "" ""
+
+REM NASM (assembleur)
+call :DownloadSoftware "NASM" "NASM.NASM" "" ""
 
 REM ===============================================
 REM Outils JavaScript/TypeScript

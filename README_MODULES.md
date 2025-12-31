@@ -11,6 +11,7 @@ install/
 │   ├── communication.bat         # Vesktop
 │   ├── development.bat           # Git, VSCode, Docker, Python, etc.
 │   ├── gaming.bat                # Steam, Epic, GOG, Battle.net, etc.
+│   ├── gamesdev.bat              # Reaper, Kontakt, Splice, Godot, Unity
 │   ├── multimedia.bat            # VLC, Mp3tag, Adobe CC, etc.
 │   ├── productivity.bat          # 1Password, PowerToys, FileZilla, etc.
 │   ├── security.bat              # Bitdefender, NordVPN, Acronis
@@ -195,12 +196,28 @@ call :IncludedWith "Epic Online Services" "Epic Games Launcher"
 **Divers (3)**
 - Comet, LM Studio, Shutter (manuel)
 
+### gamesdev.bat (12 logiciels)
+**Moteurs de jeu (4)**
+- RPG Maker MZ (manuel/Steam), Godot Engine, Unity Hub, Ren'Py (manuel)
+
+**DAW - Digital Audio Workstation (1)**
+- Reaper
+
+**Lecteurs de samples obligatoires (5)**
+- Native Access, Kontakt 8 (via Native Access), Splice, Splice Bridge (via Splice), Splice INSTRUMENT (via Splice)
+
+**Création graphique (3)**
+- Aseprite (manuel), Game Character Hub (manuel/Steam), Tiled Map Editor
+
+**Plugins VST essentiels (1 + manuels)**
+- Vital (+ Surge XT, Dexed, OTT, Valhalla Supermassive, TDR Nova/Kotelnikov, Spitfire LABS, MeldaProduction en manuel)
+
 ### web.bat (2 logiciels)
 - Google Chrome, Google Chrome Canary
 
 ---
 
-**TOTAL : 83 logiciels** (sans compter les outils npm et les logiciels inclus)
+**TOTAL : 95 logiciels** (sans compter les outils npm et les logiciels inclus)
 
 ## 🔄 Comparaison avec l'ancienne version
 

@@ -40,18 +40,33 @@ REM ASIO4ALL (driver ASIO universel)
 call :DownloadSoftware "ASIO4ALL" "MichaelTippach.ASIO4ALL" "" ""
 
 REM ===============================================
-REM Gestionnaires de plugins
+REM Gestionnaires de plugins (INSTALLER SUR CHAQUE PC)
 REM ===============================================
 
 echo.
 echo --- GESTIONNAIRES DE PLUGINS ---
 echo.
+echo [!] Ces logiciels doivent etre installes sur CHAQUE PC
+echo     (les plugins qu'ils gerent ne sont pas synchronisables)
+echo.
+
+REM Arturia Software Center (obligatoire pour Analog Lab, Pigments, etc.)
+call :ManualDownloadRequired "Arturia Software Center" "https://www.arturia.com/support/downloads&manuals"
 
 REM Native Access (gestionnaire Native Instruments)
 call :DownloadSoftware "Native Access" "NativeInstruments.NativeAccess" "https://www.native-instruments.com/fileadmin/ni_media/downloads/Native-Access_2.exe" "Native-Access.exe"
 
+REM Spitfire Audio App
+call :ManualDownloadRequired "Spitfire Audio App" "https://www.spitfireaudio.com/info/library-manager"
+
+REM UVI Portal (gestionnaire UVI - pour Model D, etc.)
+call :ManualDownloadRequired "UVI Portal" "https://www.uvi.net/uvi-portal"
+
 REM Waves Central (gestionnaire Waves)
 call :DownloadSoftware "Waves Central" "WavesAudio.WavesCentral" "" ""
+
+REM iLok License Manager (gestionnaire de licences tierces)
+call :ManualDownloadRequired "iLok License Manager" "https://www.ilok.com/#!license-manager"
 
 REM Cosmos (gestionnaire Waves)
 call :ManualDownloadRequired "Cosmos" "https://www.waves.com/cosmos"
@@ -68,9 +83,6 @@ call :IncludedWith "Splice Bridge" "Splice (activer dans l'app)"
 REM Splice INSTRUMENT (via Splice)
 call :IncludedWith "Splice INSTRUMENT" "Splice (activer dans l'app)"
 
-REM Spitfire Audio App
-call :ManualDownloadRequired "Spitfire Audio App" "https://www.spitfireaudio.com/info/library-manager"
-
 REM ===============================================
 REM Configuration MiniLab 3 (Arturia)
 REM ===============================================
@@ -85,14 +97,20 @@ call :ManualDownloadRequired "MIDI Control Center" "https://www.arturia.com/supp
 REM Melodics (apprentissage piano/clavier)
 call :ManualDownloadRequired "Melodics" "https://melodics.com/download"
 
-REM Analog Lab Intro (inclus avec MiniLab 3)
-call :IncludedWith "Analog Lab Intro" "MiniLab 3 (enregistrer sur arturia.com)"
+REM Analog Lab Intro (inclus avec MiniLab 3 - via Arturia Software Center)
+call :IncludedWith "Analog Lab Intro" "Arturia Software Center (enregistrer MiniLab 3 sur arturia.com)"
 
-REM UVI Model D (inclus avec MiniLab 3)
-call :IncludedWith "UVI Model D" "MiniLab 3 (code fourni)"
+REM Analog Lab V (version complete si achetee)
+call :IncludedWith "Analog Lab V" "Arturia Software Center"
+
+REM Pigments (synthetiseur wavetable Arturia)
+call :IncludedWith "Pigments" "Arturia Software Center"
+
+REM UVI Model D (inclus avec MiniLab 3 - via UVI Portal)
+call :IncludedWith "UVI Model D" "UVI Portal (code fourni avec MiniLab 3)"
 
 REM Native Instruments The Gentleman (inclus avec MiniLab 3)
-call :IncludedWith "NI The Gentleman" "MiniLab 3 (code fourni, via Native Access)"
+call :IncludedWith "NI The Gentleman" "Native Access (code fourni avec MiniLab 3)"
 
 REM ===============================================
 REM Plugin Reaper - ReaLearn (obligatoire pour MiniLab 3)
@@ -284,38 +302,68 @@ echo ===============================================
 echo CONFIGURATION POST-INSTALLATION AUDIO
 echo ===============================================
 echo.
-echo 1. MINILAB 3:
-echo    - Enregistrer le clavier sur arturia.com
-echo    - Installer MIDI Control Center
-echo    - Installer Analog Lab Intro
-echo    - Récupérer les codes UVI Model D et NI The Gentleman
+echo ===== GESTIONNAIRES A INSTALLER SUR CHAQUE PC =====
+echo.
+echo 1. ARTURIA SOFTWARE CENTER:
+echo    - Telecharger: https://www.arturia.com/support/downloads^&manuals
+echo    - Se connecter avec ton compte Arturia
+echo    - Installer: Analog Lab Intro/V, Pigments (si achete)
 echo.
 echo 2. NATIVE ACCESS:
-echo    - Se connecter ou créer compte
+echo    - Se connecter ou creer compte
 echo    - Entrer le code NI The Gentleman (MiniLab 3)
-echo    - Télécharger Komplete Start (gratuit)
+echo    - Telecharger Komplete Start (gratuit)
+echo    - Installer Kontakt 8 si necessaire
 echo.
-echo 3. SPITFIRE AUDIO:
-echo    - Installer Spitfire Audio App
-echo    - Créer compte gratuit
-echo    - Télécharger les packs LABS souhaités
+echo 3. SPITFIRE AUDIO APP:
+echo    - Telecharger: https://www.spitfireaudio.com/info/library-manager
+echo    - Creer compte gratuit
+echo    - Telecharger les packs LABS souhaites
 echo.
-echo 4. REAPER - Configuration MiniLab 3:
+echo 4. UVI PORTAL:
+echo    - Telecharger: https://www.uvi.net/uvi-portal
+echo    - Se connecter ou creer compte
+echo    - Entrer le code Model D (MiniLab 3)
+echo.
+echo 5. WAVES CENTRAL:
+echo    - Se connecter avec ton compte Waves
+echo    - Installer les plugins Waves achetes
+echo.
+echo 6. iLOK LICENSE MANAGER:
+echo    - Telecharger: https://www.ilok.com/#!license-manager
+echo    - Se connecter pour synchroniser les licences cloud
+echo.
+echo ===== CONFIGURATION MINILAB 3 =====
+echo.
+echo 7. MIDI CONTROL CENTER:
+echo    - Telecharger: https://www.arturia.com/support/downloads^&manuals
+echo    - Configurer le MiniLab 3, templates, firmware
+echo.
+echo ===== CONFIGURATION DAW =====
+echo.
+echo 8. REAPER - Configuration MiniLab 3:
 echo    a. Installer ReaLearn (helgobox-windows-x64.msi)
 echo    b. Dans Reaper: Options ^> Preferences ^> MIDI Devices
 echo       - Activer tous les ports MiniLab 3
 echo    c. Dans MIDI Control Center (Arturia):
 echo       - Device Settings ^> Global Parameters
 echo       - Transport Mode: Mackie (pas "Both")
-echo    d. Ajouter ReaLearn en FX pour mapper les contrôles
+echo    d. Ajouter ReaLearn en FX pour mapper les controles
 echo.
-echo 5. CHEMINS VST REAPER:
-echo    Options ^> Preferences ^> Plug-ins ^> VST
-echo    Ajouter:
+echo 9. CHEMINS VST (REAPER et FL STUDIO):
+echo    Ajouter ces chemins dans les preferences VST:
 echo      %%USERPROFILE%%\Qsync\GamesDev\_Library\DAW\Plugins\VST
 echo      %%USERPROFILE%%\Qsync\GamesDev\_Library\DAW\Plugins\VST3
 echo      %%USERPROFILE%%\Qsync\GamesDev\_Library\DAW\Plugins\CLAP
-echo    Puis: Re-scan
+echo    Puis: Re-scan les plugins
+echo.
+echo ===== RAPPEL SYNCHRONISATION =====
+echo.
+echo Les plugins AUTONOMES (Vital, Dexed, Valhalla, OTT, etc.)
+echo sont synchronises via Qsync et n'ont pas besoin d'installation.
+echo.
+echo Les plugins GERES (Arturia, NI, Spitfire, UVI, Waves)
+echo doivent etre installes via leur gestionnaire sur chaque PC.
 echo.
 
 goto :eof

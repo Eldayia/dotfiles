@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat(claude): ajout de 12 agents spécialisés pour développement Android GitHub\n\nNouveaux agents Claude pour projet GitHub Android avec Material You :\n- android-build.md : build, déploiement et CI/CD Android\n- android-code.md : développement Android avec Kotlin et Compose\n- code-viewer.md : analyse et compréhension de code\n- compose-navigation.md : navigation Jetpack Compose\n- git-operations.md : opérations Git et conventional commits\n- github-api.md : intégration API GitHub REST/GraphQL\n- kotlin.md : développement Kotlin moderne\n- material-you-design.md : système de design Material You\n- notifications-handler.md : gestion notifications Android\n- offline-sync.md : synchronisation offline-first\n- project-todolist.md : gestion projet et todolist\n- windows-scripting.md : scripts PowerShell et Batch\n\nAméliorations agent-architect.md :\n- Ajout section Agent Discovery & Import\n- Scan automatique des agents existants\n- Recommandations d''intégration et composition\n\nMise à jour documentation et scripts :\n- CLAUDE.md : architecture complète et commandes\n- README.md : environnement dev complet (75+ logiciels)\n- Ajout CHANGELOG.md pour suivi des versions\n- Ajout scripts/stow-claude-agents.ps1 pour gestion symlinks\n- development.bat : support C++/C#/Python/Rust/Java/JS/Android\n- system-tools.bat : Revo Uninstaller Pro pour tous les PC\nEOF\n)\")",
+      "Bash(git config:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}

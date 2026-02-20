@@ -1,0 +1,127 @@
+// --- NIRI CONFIG (Hyper-V / GPU-PV) ---
+// Référence : https://github.com/YaLTeR/niri/wiki/Configuration
+
+// Désactiver le direct-scanout (incompatible avec GPU-PV Hyper-V)
+prefer-no-csd
+
+// --- INPUT ---
+input {
+    keyboard {
+        xkb {
+            layout "fr"
+        }
+    }
+    touchpad {
+        tap
+        natural-scroll
+    }
+}
+
+// --- OUTPUTS ---
+// L'output sera détecté automatiquement sur Hyper-V
+// output "Virtual-1" {
+//     mode "1280x720@60"
+//     scale 1.0
+// }
+
+// --- LAYOUT ---
+layout {
+    gaps 8
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        width 2
+        active-color "#cba6f7"
+        inactive-color "#45475a"
+    }
+
+    border {
+        off
+    }
+}
+
+// --- APPARENCE ---
+prefer-no-csd
+
+// Animations
+animations {
+    slowdown 1.0
+}
+
+// --- RACCOURCIS CLAVIER ---
+// Mod = Super (touche Windows)
+binds {
+    // Lancer un terminal
+    Mod+Return { spawn "kitty"; }
+
+    // Lanceur d'applications
+    Mod+D { spawn "wofi" "--show" "run"; }
+
+    // Fermer la fenêtre active
+    Mod+Q { close-window; }
+
+    // Navigation entre fenêtres
+    Mod+H { focus-column-left; }
+    Mod+L { focus-column-right; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+
+    // Déplacer les fenêtres
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+
+    // Workspaces
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+Shift+1 { move-window-to-workspace 1; }
+    Mod+Shift+2 { move-window-to-workspace 2; }
+    Mod+Shift+3 { move-window-to-workspace 3; }
+    Mod+Shift+4 { move-window-to-workspace 4; }
+    Mod+Shift+5 { move-window-to-workspace 5; }
+
+    // Plein écran
+    Mod+F { fullscreen-window; }
+
+    // Redimensionner
+    Mod+R { switch-preset-column-width; }
+
+    // Quitter niri
+    Mod+Shift+E { quit; }
+
+    // Verrouiller l'écran
+    Mod+Shift+L { spawn "swaylock"; }
+
+    // Volume
+    XF86AudioRaiseVolume  { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    XF86AudioLowerVolume  { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioMute         { spawn "wpctl" "set-mute"   "@DEFAULT_AUDIO_SINK@" "toggle"; }
+
+    // Capture d'écran
+    Print { screenshot; }
+    Mod+Print { screenshot-screen; }
+    Mod+Shift+Print { screenshot-window; }
+}
+
+// --- RÈGLES FENÊTRES ---
+window-rule {
+    match app-id="firefox"
+    default-column-width { proportion 0.75; }
+}
+
+window-rule {
+    match app-id="kitty"
+    default-column-width { proportion 0.5; }
+}

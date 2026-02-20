@@ -34,6 +34,9 @@
   environment.variables = {
     # Pas de curseur hardware (plus stable sur VM)
     WLR_NO_HARDWARE_CURSORS = "1";
+
+    # Niri sur Hyper-V : désactiver le direct scanout (incompatible GPU-PV)
+    NIRI_DISABLE_DIRECT_SCANOUT = "1";
   };
 
   # Driver vidéo modesetting (fonctionne avec i915)

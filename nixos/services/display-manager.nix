@@ -4,6 +4,6 @@
   # --- LOGIN MANAGER : LY ---
   services.displayManager.ly.enable = true;
 
-  # --- SESSION PAR DÉFAUT : HYPRLAND ---
-  services.displayManager.defaultSession = "hyprland";
+  # --- SESSION PAR DÉFAUT : NIRI ---
+  services.displayManager.defaultSession = "niri";
 }

@@ -1,133 +1,329 @@
-// --- NIRI CONFIG (Hyper-V / GPU-PV) ---
-// Référence : https://github.com/YaLTeR/niri/wiki/Configuration
+﻿// ================================================================
+// NIRI CONFIG — Hyper-V GPU-PV  |  Catppuccin Mocha
+// https://github.com/YaLTeR/niri/wiki/Configuration
+// Version Niri : 25.11
+// ================================================================
+//
+// Palette Catppuccin Mocha :
+//   Base    #1e1e2e   Surface0 #313244   Overlay0 #6c7086
+//   Text    #cdd6f4   Subtext0 #a6adc8
+//   Mauve   #cba6f7   Blue     #89b4fa   Teal     #94e2d5
+//   Green   #a6e3a1   Yellow   #f9e2af   Red      #f38ba8
+// ================================================================
 
-// Désactiver le direct-scanout (incompatible avec GPU-PV Hyper-V)
+// ---- GLOBAL ----------------------------------------------------
+
 prefer-no-csd
 
-// --- STARTUP ---
-// Propager les variables Wayland aux services systemd (portail XDG, etc.)
+// ---- DEMARRAGE -------------------------------------------------
+
+// Propager WAYLAND_DISPLAY et XDG_CURRENT_DESKTOP aux services systemd
 spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
-// XWayland via xwayland-satellite (support apps X11 sans session X complète)
+
+// XWayland rootless : support apps X11 sans serveur X complet
 spawn-at-startup "xwayland-satellite"
 
-// --- INPUT ---
+// Barre de statut
+spawn-at-startup "waybar"
+
+// Notifications
+spawn-at-startup "mako"
+
+// Fond d ecran (couleur de base Catppuccin)
+spawn-at-startup "swaybg" "--mode" "fill" "--color" "#1e1e2e"
+
+// ---- INPUT -----------------------------------------------------
+
 input {
     keyboard {
         xkb {
-            layout "fr"
+            layout  "fr"
+            options "caps:escape"
         }
+        repeat-delay 250
+        repeat-rate  50
     }
+
+    mouse {
+        accel-speed   0.0
+        accel-profile "flat"
+    }
+
     touchpad {
         tap
+        dwt
         natural-scroll
+        accel-speed 0.2
     }
+
+    focus-follows-mouse max-scroll-amount="0%"
+    warp-mouse-to-focus
 }
 
-// --- OUTPUTS ---
-// L'output sera détecté automatiquement sur Hyper-V
+// ---- OUTPUT ----------------------------------------------------
+// Hyper-V : detection automatique via KMS
+// Decommentez pour forcer une resolution :
 // output "Virtual-1" {
-//     mode "1280x720@60"
+//     mode "1920x1080@60.000"
 //     scale 1.0
+//     position x=0 y=0
 // }
 
-// --- LAYOUT ---
+// ---- LAYOUT ----------------------------------------------------
+
 layout {
-    gaps 8
+    gaps 10
+
     center-focused-column "never"
 
     preset-column-widths {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
+        proportion 1.0
+    }
+
+    preset-window-heights {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        proportion 1.0
     }
 
     default-column-width { proportion 0.5; }
 
     focus-ring {
-        width 2
-        active-color "#cba6f7"
-        inactive-color "#45475a"
+        width          2
+        active-color   "#cba6f7"
+        inactive-color "#313244"
     }
 
     border {
         off
     }
+
+    shadow {
+        on
+        softness 20
+        spread   3
+        offset x=0 y=4
+        draw-behind-window true
+        color          "#000000bf"
+        inactive-color "#00000066"
+    }
+
+    struts {
+        top    0
+        bottom 0
+        left   0
+        right  0
+    }
 }
 
-// --- APPARENCE ---
-prefer-no-csd
+// ---- CURSEUR ---------------------------------------------------
 
-// Animations
+cursor {
+    xcursor-theme "Adwaita"
+    xcursor-size  24
+}
+
+// ---- ANIMATIONS ------------------------------------------------
+
 animations {
     slowdown 1.0
+
+    window-open {
+        duration-ms 200
+        curve       "ease-out-expo"
+    }
+    window-close {
+        duration-ms 150
+        curve       "ease-out-expo"
+    }
+    window-movement {
+        duration-ms 200
+        curve       "ease-out-expo"
+    }
+    window-resize {
+        duration-ms 200
+        curve       "ease-out-expo"
+    }
+    horizontal-view-movement {
+        duration-ms 250
+        curve       "ease-out-expo"
+    }
+    workspace-switch {
+        duration-ms 300
+        curve       "ease-out-expo"
+    }
+    config-notification-open-close {
+        duration-ms 400
+        curve       "ease-out-expo"
+    }
 }
 
-// --- RACCOURCIS CLAVIER ---
+// ---- RACCOURCIS ------------------------------------------------
 // Mod = Super (touche Windows)
+
 binds {
-    // Lancer un terminal
+
+    // Aide raccourcis
+    Mod+Slash { show-hotkey-overlay; }
+
+    // --- Applications ---
     Mod+Return { spawn "kitty"; }
+    Mod+D      { spawn "wofi" "--show" "drun"; }
+    Mod+E      { spawn "nautilus"; }
+    Mod+B      { spawn "chromium"; }
+    Mod+V      { spawn "sh" "-c" "cliphist list | wofi --dmenu --prompt Clipboard | cliphist decode | wl-copy"; }
 
-    // Lanceur d'applications
-    Mod+D { spawn "wofi" "--show" "run"; }
+    // --- Fenetres ---
+    Mod+Q       { close-window; }
+    Mod+F       { fullscreen-window; }
+    Mod+C       { center-column; }
+    Mod+Shift+P { power-off-monitors; }
 
-    // Fermer la fenêtre active
-    Mod+Q { close-window; }
+    // --- Navigation Vi + fleches ---
+    Mod+H     { focus-column-left; }
+    Mod+L     { focus-column-right; }
+    Mod+J     { focus-window-down; }
+    Mod+K     { focus-window-up; }
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Up    { focus-window-up; }
+    Mod+Down  { focus-window-down; }
+    Mod+Home  { focus-column-first; }
+    Mod+End   { focus-column-last; }
 
-    // Navigation entre fenêtres
-    Mod+H { focus-column-left; }
-    Mod+L { focus-column-right; }
-    Mod+J { focus-window-down; }
-    Mod+K { focus-window-up; }
+    // --- Deplacer ---
+    Mod+Shift+H     { move-column-left; }
+    Mod+Shift+L     { move-column-right; }
+    Mod+Shift+J     { move-window-down; }
+    Mod+Shift+K     { move-window-up; }
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+Up    { move-window-up; }
+    Mod+Shift+Down  { move-window-down; }
+    Mod+Shift+Home  { move-column-to-first; }
+    Mod+Shift+End   { move-column-to-last; }
 
-    // Déplacer les fenêtres
-    Mod+Shift+H { move-column-left; }
-    Mod+Shift+L { move-column-right; }
-    Mod+Shift+J { move-window-down; }
-    Mod+Shift+K { move-window-up; }
+    // --- Redimensionnement ---
+    Mod+R           { switch-preset-column-width; }
+    Mod+Shift+R     { switch-preset-window-height; }
+    Mod+Minus       { set-column-width  "-10%"; }
+    Mod+Equal       { set-column-width  "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
 
-    // Workspaces
+    // --- Workspaces ---
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
     Mod+3 { focus-workspace 3; }
     Mod+4 { focus-workspace 4; }
     Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
     Mod+Shift+1 { move-window-to-workspace 1; }
     Mod+Shift+2 { move-window-to-workspace 2; }
     Mod+Shift+3 { move-window-to-workspace 3; }
     Mod+Shift+4 { move-window-to-workspace 4; }
     Mod+Shift+5 { move-window-to-workspace 5; }
+    Mod+Shift+6 { move-window-to-workspace 6; }
+    Mod+Shift+7 { move-window-to-workspace 7; }
+    Mod+Shift+8 { move-window-to-workspace 8; }
+    Mod+Shift+9 { move-window-to-workspace 9; }
 
-    // Plein écran
-    Mod+F { fullscreen-window; }
+    Mod+Tab       { focus-workspace-down; }
+    Mod+Shift+Tab { focus-workspace-up; }
+    Mod+Page_Down { focus-workspace-down; }
+    Mod+Page_Up   { focus-workspace-up; }
 
-    // Redimensionner
-    Mod+R { switch-preset-column-width; }
+    Mod+WheelScrollDown       cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp         cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollRight cooldown-ms=150 { focus-column-right; }
+    Mod+Ctrl+WheelScrollLeft  cooldown-ms=150 { focus-column-left; }
 
-    // Quitter niri
-    Mod+Shift+E { quit; }
+    // --- Multi-moniteur ---
+    Mod+Shift+Ctrl+H { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+L { move-column-to-monitor-right; }
 
-    // Verrouiller l'écran
-    Mod+Shift+L { spawn "swaylock"; }
+    // --- Volume ---
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute"   "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute"   "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-    // Volume
-    XF86AudioRaiseVolume  { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-    XF86AudioLowerVolume  { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-    XF86AudioMute         { spawn "wpctl" "set-mute"   "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    // --- Luminosite ---
+    XF86MonBrightnessUp   { spawn "brightnessctl" "set" "10%+"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "set" "10%-"; }
 
-    // Capture d'écran
-    Print { screenshot; }
-    Mod+Print { screenshot-screen; }
+    // --- Captures ecran ---
+    Print           { screenshot; }
+    Mod+Print       { screenshot-screen; }
     Mod+Shift+Print { screenshot-window; }
+    Ctrl+Print      { spawn "sh" "-c" "grim -g \"$(slurp -d)\" - | swappy -f -"; }
+
+    // --- Systeme ---
+    Mod+Shift+E { quit; }
+    Mod+Shift+L { spawn "swaylock"; }
 }
 
-// --- RÈGLES FENÊTRES ---
+// ---- REGLES FENETRES -------------------------------------------
+
+// Coins arrondis globaux (style moderne)
 window-rule {
-    match app-id="firefox"
+    geometry-corner-radius 8
+    clip-to-geometry true
+}
+
+// Dialogues flottants
+window-rule {
+    match is-dialog true
+    open-floating true
+}
+
+// Utilitaires systeme flottants
+window-rule {
+    match app-id=r#"^(pavucontrol|nm-connection-editor|blueman-manager)$"#
+    open-floating true
+    default-column-width { fixed 800; }
+}
+
+// Gestionnaire de fichiers flottant
+window-rule {
+    match app-id="org.gnome.Nautilus"
+    open-floating true
+    default-column-width { fixed 960; }
+}
+
+// Picture-in-Picture
+window-rule {
+    match title="Picture-in-Picture"
+    open-floating true
+    default-column-width { fixed 640; }
+}
+
+// Tailles par application
+window-rule {
+    match app-id=r#"^(firefox|chromium|chromium-browser)$"#
     default-column-width { proportion 0.75; }
 }
 
 window-rule {
-    match app-id="kitty"
+    match app-id=r#"^(kitty|alacritty|warp-terminal)$"#
     default-column-width { proportion 0.5; }
+}
+
+window-rule {
+    match app-id="code"
+    default-column-width { proportion 0.66667; }
+}
+
+// Transparence terminaux
+window-rule {
+    match app-id=r#"^(kitty|alacritty)$"#
+    opacity 0.95
 }

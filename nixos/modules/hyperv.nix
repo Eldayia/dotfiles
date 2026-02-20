@@ -2,59 +2,76 @@
 
 {
   # --- SUPPORT HYPER-V AVEC GPU-PV ---
-  # Configuration pour Hyper-V Guest avec accélération GPU Intel (GPU-PV)
+  # Hyper-V Guest avec accélération GPU Intel (GPU Paravirtualization)
+  # Le GPU hôte Intel est exposé à la VM via le protocole Hyper-V GPU-PV
 
-  # Activer les services Hyper-V Guest
-  # Note: videoMode est déprécié, configurer via Hyper-V Settings
+  # Services et modules kernel Hyper-V Guest
   virtualisation.hypervGuest.enable = true;
 
-  # Support GPU Intel pour GPU-PV
-  # Note: driSupport est déprécié dans NixOS 24.11+
+  # --- DRIVERS GPU INTEL (GPU-PV) ---
   hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
+    enable      = true;
+    enable32Bit = true;  # Wine, Steam, applications 32-bit
+
     extraPackages = with pkgs; [
-      intel-media-driver    # Pour Intel Arc/iGPU (driver moderne)
-      intel-vaapi-driver    # Support VA-API legacy (anciennement vaapiIntel)
-      libva-vdpau-driver    # Bridge VA-API vers VDPAU (anciennement vaapiVdpau)
-      libvdpau-va-gl        # VDPAU via OpenGL
-      intel-compute-runtime # Support OpenCL Intel
+      # VA-API (accélération vidéo matérielle)
+      intel-media-driver    # Driver iHD - Gen8+ (recommandé, UHD/Iris/Arc)
+      intel-vaapi-driver    # Driver i965 - Gen2-Gen9 (legacy, fallback)
+
+      # VDPAU (API NVIDIA implémentée par-dessus VA-API/OpenGL)
+      libva-vdpau-driver    # Bridge VA-API → VDPAU
+      libvdpau-va-gl        # Implémente VDPAU via OpenGL
+
+      # OpenCL Intel (calcul GPU général)
+      intel-compute-runtime
     ];
   };
 
-  # Modules kernel pour le GPU Intel
-  boot.kernelModules = [ "i915" "hv_vmbus" "hv_storvsc" "hv_netvsc" "hv_utils" ];
+  # --- MODULES KERNEL ---
+  # i915  : driver DRM/KMS Intel iGPU (Gen2→Gen12, GPU-PV)
+  # hv_*  : modules Hyper-V Guest (vmbus, stockage, réseau, utilitaires)
+  boot.kernelModules = [
+    "i915"
+    "hv_vmbus"
+    "hv_storvsc"
+    "hv_netvsc"
+    "hv_utils"
+  ];
 
-  # Variables d'environnement pour l'accélération matérielle
+  # --- VARIABLES DE SESSION ---
+  # Visibles uniquement dans les sessions graphiques (display manager)
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";       # Driver Intel moderne (pour Arc/Gen12+)
-    XDG_CURRENT_DESKTOP = "niri";    # Nécessaire pour la sélection du portail XDG
+    LIBVA_DRIVER_NAME   = "iHD";   # Force le driver Intel moderne pour VA-API
+    XDG_CURRENT_DESKTOP = "niri";  # Requis pour la sélection du portail XDG GTK
   };
 
-  # Variables d'environnement pour Wayland sur Hyper-V
+  # --- VARIABLES D'ENVIRONNEMENT GLOBALES ---
   environment.variables = {
-    # Pas de curseur hardware (plus stable sur VM)
-    WLR_NO_HARDWARE_CURSORS = "1";
-
-    # Niri sur Hyper-V : désactiver le direct scanout (incompatible GPU-PV)
+    # Curseur hardware désactivé (instable sur Hyper-V GPU-PV)
+    WLR_NO_HARDWARE_CURSORS     = "1";
+    # Direct scanout désactivé (le GPU-PV Hyper-V ne supporte pas le scanout DRM)
     NIRI_DISABLE_DIRECT_SCANOUT = "1";
+    # Vulkan ICD Intel (ANV via Mesa)
+    VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/intel_icd.x86_64.json";
   };
 
-  # Driver vidéo modesetting (fonctionne avec i915)
+  # Driver Xorg/KMS (utilisé par Ly pour initialiser le KMS avant Wayland)
   services.xserver.videoDrivers = [ "modesetting" ];
 
-  # Paquets pour le rendu graphique et diagnostic GPU
+  # --- PAQUETS DE RENDU ET DIAGNOSTIC GPU ---
   environment.systemPackages = with pkgs; [
-    # Rendu OpenGL
-    mesa
-    libGL
+    # OpenGL / EGL
+    mesa     # Mesa OpenGL + DRI drivers (iris/i965) + Vulkan ANV Intel
+    libGL    # Wrapper libGL → Mesa
 
-    # Outils de diagnostic GPU (glxinfo inclus dans mesa-demos)
-    vulkan-tools
-    mesa-demos
-    intel-gpu-tools
+    # Diagnostic
+    mesa-demos        # glxgears, glxinfo, eglinfo
+    vulkan-tools      # vulkaninfo, vkcube
+    intel-gpu-tools   # intel_gpu_top, igt-gpu-tools
+    libva-utils       # vainfo (vérification VA-API)
 
-    # Vulkan Intel
-    vulkan-loader
+    # Loaders / layers
+    vulkan-loader             # Chargeur Vulkan ICD
+    vulkan-validation-layers  # Couches de validation Vulkan (debug)
   ];
 }

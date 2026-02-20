@@ -42,13 +42,21 @@
   };
 
   # --- XDG DESKTOP PORTAL ---
+  # Note: xdg-desktop-portal-wlr est pour wlroots (Sway) uniquement, PAS pour Niri (Smithay)
+  # Niri gère Screenshot/Screencast via son propre IPC — pas besoin de portal wlr
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
-      xdg-desktop-portal-wlr        # Portal pour compositeurs wlroots (Niri, Sway, etc.)
-      # xdg-desktop-portal-hyprland # Portal pour Hyprland - OPTIONNEL
-      xdg-desktop-portal-gtk
+      xdg-desktop-portal-gtk        # Portail générique GTK (file picker, etc.)
+      # xdg-desktop-portal-hyprland # OPTIONNEL si retour sur Hyprland
     ];
-    config.common.default = "*";
+    config = {
+      niri = {
+        default = [ "gtk" ];
+      };
+      common = {
+        default = [ "gtk" ];
+      };
+    };
   };
 }

@@ -4,6 +4,12 @@
 // Désactiver le direct-scanout (incompatible avec GPU-PV Hyper-V)
 prefer-no-csd
 
+// --- STARTUP ---
+// Propager les variables Wayland aux services systemd (portail XDG, etc.)
+spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+// XWayland via xwayland-satellite (support apps X11 sans session X complète)
+spawn-at-startup "xwayland-satellite"
+
 // --- INPUT ---
 input {
     keyboard {

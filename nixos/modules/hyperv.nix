@@ -27,7 +27,8 @@
 
   # Variables d'environnement pour l'accélération matérielle
   environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";  # Driver Intel moderne (pour Arc/Gen12+)
+    LIBVA_DRIVER_NAME = "iHD";       # Driver Intel moderne (pour Arc/Gen12+)
+    XDG_CURRENT_DESKTOP = "niri";    # Nécessaire pour la sélection du portail XDG
   };
 
   # Variables d'environnement pour Wayland sur Hyper-V

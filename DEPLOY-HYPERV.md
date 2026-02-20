@@ -7,7 +7,7 @@ Votre VM NixOS est configurée avec :
 - **4 CPU** virtuels
 - **80 GB** de disque (VHDX dynamique)
 - **Accélération GPU-PV** activée
-- Boot depuis l'ISO NixOS 24.05
+- Boot depuis l'ISO NixOS 24.11
 
 ## 🚀 Démarrage de la VM
 
@@ -141,7 +141,7 @@ Set-VM -Name NixOS -ProcessorCount 8
 ## 📁 Fichiers
 
 - `nixos-disk.vhdx` : Disque virtuel (80 GB)
-- `nixos-24.05.iso` : ISO d'installation
+- `nixos-24.11.iso` : ISO d'installation
 - `start-hyperv.bat` : Script de démarrage rapide
 - `start-hyperv.ps1` : Script PowerShell détaillé
 - `setup-hyperv-gpu.ps1` : Script de configuration initiale

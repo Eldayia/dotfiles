@@ -46,7 +46,7 @@ Configuration complète pour NixOS avec environnement X11 + i3. Support optionne
 ## 📦 Stack technique
 
 ### Système de base
-- **OS** : NixOS 24.05
+- **OS** : NixOS 24.11
 - **Display Manager** : Ly
 - **Window Manager** : i3 (X11) - **ACTIF** | Hyprland (Wayland) optionnel
 - **Shell** : Nushell (défaut système)

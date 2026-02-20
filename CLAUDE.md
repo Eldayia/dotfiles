@@ -71,7 +71,7 @@ Le dépôt est organisé comme suit :
 
 ## Stack technique
 
-- **OS** : NixOS 24.05
+- **OS** : NixOS 24.11
 - **Plateforme** : Hyper-V avec GPU-PV (principal), WSL2/VirtualBox/VMware/Bare Metal (supportés)
 - **Display Manager** : Ly
 - **Window Manager** : Hyprland (Wayland) - **ACTIF** | i3 (X11) disponible en option

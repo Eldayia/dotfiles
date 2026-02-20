@@ -45,5 +45,5 @@
     ];
 
   # Version de l'état (Ne pas toucher)
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }

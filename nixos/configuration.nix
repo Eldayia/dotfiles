@@ -22,7 +22,8 @@
       # Environnement graphique
       # ./modules/x11.nix       # Configuration X11 + i3 - OPTIONNEL
       ./modules/wayland.nix     # Configuration Wayland pure (protocoles, libs) - ACTIF
-      ./modules/hyprland.nix    # Hyprland window manager - ACTIF
+      ./modules/niri.nix        # Niri window manager - ACTIF
+      # ./modules/hyprland.nix  # Hyprland window manager - OPTIONNEL
       ./modules/interface.nix   # Applications d'interface (wofi, waybar, etc.)
       ./modules/packages.nix
 

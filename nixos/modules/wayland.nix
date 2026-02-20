@@ -45,7 +45,8 @@
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-wlr        # Portal pour compositeurs wlroots (Niri, Sway, etc.)
+      # xdg-desktop-portal-hyprland # Portal pour Hyprland - OPTIONNEL
       xdg-desktop-portal-gtk
     ];
     config.common.default = "*";

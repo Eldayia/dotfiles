@@ -1,0 +1,148 @@
+# ============================================================
+# BASE
+# ============================================================
+
+base-devel
+git
+stow
+curl
+wget
+rsync
+unzip
+zip
+7zip
+jq
+less
+man-db
+man-pages
+pciutils
+usbutils
+nano
+neovim
+
+
+# ============================================================
+# KERNEL / ACER / INTEL
+# ============================================================
+
+linux-headers
+linux-lts
+linux-lts-headers
+linux-firmware
+intel-ucode
+sof-firmware
+
+mesa
+vulkan-intel
+intel-media-driver
+vpl-gpu-rt
+libva-utils
+vulkan-tools
+mesa-utils
+
+intel-npu-driver
+
+
+# ============================================================
+# NETWORK
+# ============================================================
+
+networkmanager
+bluez
+bluez-utils
+
+
+# ============================================================
+# AUDIO
+# ============================================================
+
+pipewire
+pipewire-alsa
+pipewire-pulse
+wireplumber
+alsa-utils
+
+
+# ============================================================
+# POWER
+# ============================================================
+
+power-profiles-daemon
+upower
+fwupd
+brightnessctl
+
+
+# ============================================================
+# WAYLAND / NIRI
+# ============================================================
+
+xwayland-satellite
+
+xdg-desktop-portal
+xdg-desktop-portal-gtk
+xdg-desktop-portal-gnome
+
+gnome-keyring
+polkit
+
+wl-clipboard
+cliphist
+wtype
+
+grim
+slurp
+satty
+
+playerctl
+
+
+# ============================================================
+# DMS
+# ============================================================
+
+matugen
+cava
+qt6-multimedia-ffmpeg
+
+
+# ============================================================
+# DESKTOP APPS
+# ============================================================
+
+ghostty
+nautilus
+gvfs
+gvfs-mtp
+udiskie
+
+xdg-user-dirs
+
+
+# ============================================================
+# FONTS
+# ============================================================
+
+ttf-jetbrains-mono-nerd
+noto-fonts
+noto-fonts-emoji
+
+
+# ============================================================
+# SHELL
+# ============================================================
+
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
+zsh-completions
+
+
+# ============================================================
+# GREETER / BIOMETRY / DIAGNOSTICS
+# ============================================================
+
+greetd
+fprintd
+v4l-utils
+edid-decode

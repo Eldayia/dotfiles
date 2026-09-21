@@ -1,0 +1,15 @@
+gui:
+  border: rounded
+  theme:
+    activeBorderColor: ["#cba6f7", bold]
+    inactiveBorderColor: ["#6c7086"]
+    selectedLineBgColor: ["#45475a"]
+    optionsTextColor: ["#89dceb"]
+  wrapMainPanel: true
+  showBottomLine: true
+logs:
+  timestamps: true
+  since: "30m"
+  tail: "300"
+commandTemplates:
+  dockerCompose: docker compose

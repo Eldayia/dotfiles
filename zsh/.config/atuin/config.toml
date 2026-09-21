@@ -1,0 +1,19 @@
+search_mode = "fuzzy"
+
+filter_mode = "global"
+
+style = "compact"
+
+inline_height = 25
+
+show_preview = true
+
+enter_accept = true
+
+keymap_mode = "emacs"
+
+history_filter = [
+    "^clear$",
+    "^c$",
+    "^exit$",
+]

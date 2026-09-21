@@ -1,0 +1,24 @@
+# Secrets
+*.pem
+*.key
+*credentials*
+*secret*
+*token*
+
+# Temporary
+*.swp
+*.swo
+*.tmp
+*~
+.DS_Store
+
+# Logs
+*.log
+
+# Machine generated / cache
+.cache/
+.local/state/
+
+# Backup files
+*.bak
+*.backup

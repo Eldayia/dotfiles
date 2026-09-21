@@ -1,0 +1,7 @@
+binds {
+    Mod+Shift+B hotkey-overlay-title="Btop" { spawn "ghostty" "-e" "btop"; }
+    Mod+Shift+Y hotkey-overlay-title="Yazi" { spawn "ghostty" "-e" "yazi"; }
+    Mod+Shift+Z hotkey-overlay-title="Zellij" { spawn "ghostty" "-e" "zellij" "attach" "--create" "principal"; }
+    Mod+Shift+D hotkey-overlay-title="Lazydocker" { spawn "ghostty" "-e" "lazydocker"; }
+    Mod+Shift+S hotkey-overlay-title="TermSCP" { spawn "ghostty" "-e" "termscp"; }
+}

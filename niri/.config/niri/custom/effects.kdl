@@ -1,0 +1,28 @@
+// ============================================================
+// NIRI VISUAL EFFECTS
+// ============================================================
+
+blur {
+    passes 3
+    offset 4
+    noise 0.015
+    saturation 1.15
+}
+
+window-rule {
+    geometry-corner-radius 14
+    clip-to-geometry true
+
+    background-effect {
+        blur true
+        xray true
+    }
+}
+
+window-rule {
+    match is-floating=true
+
+    background-effect {
+        xray false
+    }
+}

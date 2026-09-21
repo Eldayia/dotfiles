@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -euo pipefail
+exec python "${XDG_CONFIG_HOME:-$HOME/.config}/nautilus/actions.py" meld "$@"

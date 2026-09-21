@@ -1,0 +1,105 @@
+// ============================================================
+// CUSTOM NIRI / DMS GLASS EFFECTS
+// Keep this file OUTSIDE DMS-generated files.
+// Include it AFTER the dms/*.kdl includes in config.kdl.
+// ============================================================
+
+// Global blur quality.
+// 3 passes keeps GPU cost reasonable on a laptop; offset 4 gives
+// a noticeably softer glass effect without pushing pass count higher.
+blur {
+    passes 3
+    offset 4.0
+    noise 0.015
+    saturation 1.15
+}
+
+// Slightly airier layout and soft shadows.
+layout {
+    gaps 8
+
+    shadow {
+        on
+        softness 28
+        spread 3
+        offset x=0 y=5
+        draw-behind-window true
+        color "#00000066"
+    }
+}
+
+// Rounded glass for normal windows.
+// Opaque applications remain visually opaque; apps such as Ghostty need
+// their own background opacity configured separately.
+window-rule {
+    geometry-corner-radius 14
+    clip-to-geometry true
+
+    background-effect {
+        blur true
+        // X-ray blur is much cheaper and works very well for tiled windows.
+        xray true
+    }
+}
+
+// Floating windows get true blur of the actual content underneath them.
+window-rule {
+    match is-floating=true
+
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
+// DMS windows (settings, special windows) should look like real glass.
+window-rule {
+    match app-id="^com\\.danklinux\\.dms$"
+
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
+// DMS layer-shell surfaces: dashboard, launcher, control center,
+// notifications, etc. Use true blur so windows below remain visible as blur.
+layer-rule {
+    match namespace="^dms:"
+
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
+// Keep the bar on efficient x-ray blur. It is almost always visible, so this
+// saves GPU/battery while retaining the glass appearance.
+layer-rule {
+    match namespace="^dms:bar$"
+
+    background-effect {
+        blur true
+        xray true
+    }
+}
+
+// DMS already owns a dedicated blurred-wallpaper/background layer.
+// Avoid applying a second blur pass to these full-screen surfaces.
+layer-rule {
+    match namespace="^dms:blurwallpaper$"
+
+    background-effect {
+        blur false
+        xray true
+    }
+}
+
+layer-rule {
+    match namespace="^dms:.*:background$"
+
+    background-effect {
+        blur false
+        xray true
+    }
+}

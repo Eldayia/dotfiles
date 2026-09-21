@@ -1,0 +1,83 @@
+@import url("https://catppuccin.github.io/discord/dist/catppuccin-mocha-rosewater.theme.css");
+
+* {
+  font-family: system-ui !important;
+}
+
+html,
+body,
+#app-mount {
+  background: transparent !important;
+}
+
+html {
+  background-color: rgba(30, 30, 46, 0.35) !important;
+}
+
+.visual-refresh.theme-dark,
+.visual-refresh .theme-dark {
+  --font-primary: system-ui !important;
+
+  --background-base-lowest: rgba(30, 30, 46, 0.30) !important;
+  --background-base-lower: rgba(30, 30, 46, 0.28) !important;
+
+  --__header-bar-background: rgba(30, 30, 46, 0.25) !important;
+
+  --home-background: rgba(30, 30, 46, 0.30) !important;
+}
+
+[class*="chat_"],
+[class*="chatContent_"] {
+  background: rgba(30, 30, 46, 0.28) !important;
+
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+}
+
+[class*="sidebar_"],
+[class*="sidebarList_"] {
+  background: rgba(24, 24, 37, 0.34) !important;
+
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+}
+
+[class*="guilds_"] {
+  background: rgba(17, 17, 27, 0.38) !important;
+
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+}
+
+[class*="members_"],
+[class*="membersWrap_"] {
+  background: rgba(24, 24, 37, 0.32) !important;
+
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+}
+
+[class*="panels_"] {
+  background: rgba(17, 17, 27, 0.40) !important;
+
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+}
+
+[class*="title_"],
+[class*="container_"][class*="themed_"] {
+  background: rgba(30, 30, 46, 0.22) !important;
+
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+}
+
+.user-profile-sidebar {
+  background-color: rgba(30, 30, 46, 0.32) !important;
+  background-image: none !important;
+
+  --profile-gradient-overlay-color: transparent !important;
+
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+}

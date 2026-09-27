@@ -29,8 +29,8 @@ binds {
     XF86AudioPrev allow-when-locked=true { spawn "dms" "ipc" "call" "mpris" "previous"; }
     XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "3"; }
     XF86Launch1 hotkey-overlay-title="Screenshot: Region" { spawn "dms" "screenshot"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
-    XF86MonBrightnessUp allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "/home/eldayia/.local/bin/hdr-brightness" "down"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "/home/eldayia/.local/bin/hdr-brightness" "up"; }
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
     Mod+3 { focus-workspace 3; }
@@ -133,4 +133,5 @@ binds {
     Mod+O repeat=false { toggle-overview; }
     Mod+Tab repeat=false { toggle-overview; }
     Mod+colon { show-hotkey-overlay; }
+    Mod+Ctrl+P hotkey-overlay-title="Display Mode Menu" { spawn "dms" "ipc" "call" "niriDSA" "toggle"; }
 }

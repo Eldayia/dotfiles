@@ -1,0 +1,16 @@
+layout {
+    tab name="code" focus=true {
+        pane command="nvim"
+    }
+
+    tab name="run" {
+        pane split_direction="horizontal" {
+            pane
+            pane
+        }
+    }
+
+    tab name="git" {
+        pane
+    }
+}

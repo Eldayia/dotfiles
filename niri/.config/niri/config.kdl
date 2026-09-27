@@ -136,6 +136,7 @@ overview {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 // spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
 environment {
+  DMS_SHELL_DIR "/home/eldayia/.local/share/dms-command-center/quickshell"
   XDG_CURRENT_DESKTOP "niri"
   QT_QPA_PLATFORMTHEME "qt6ct"
   QT_STYLE_OVERRIDE "kvantum"
@@ -198,6 +199,10 @@ window-rule {
         blur true
         xray true
     }
+}
+window-rule {
+    match app-id=r#"^tauonmb$"#
+    opacity 0.94
 }
 window-rule {
     match app-id="^org.gitfourchette.gitfourchette$"
@@ -289,5 +294,7 @@ include optional=true "dms/outputs.kdl"
 include optional=true "dms/cursor.kdl"
 include optional=true "dms/input.kdl"
 include "custom/effects.kdl"
-
+include "custom/hdr-brightness.kdl"
 include "custom/tui.kdl"
+
+include "custom/command-center.kdl"

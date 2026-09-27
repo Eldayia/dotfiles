@@ -336,6 +336,10 @@ fi
 # Déployer tous les paquets de configuration présents dans le dépôt.
 bash "$ROOT/scripts/stow-configs.sh"
 bash "$ROOT/scripts/setup-nautilus.sh"
+bash "$ROOT/scripts/setup-dms-plugins.sh"
+bash "$ROOT/scripts/setup-command-center.sh"
+bash "$ROOT/scripts/setup-dev-tools.sh"
+bash "$ROOT/scripts/setup-ides.sh"
 
 
 # ============================================================

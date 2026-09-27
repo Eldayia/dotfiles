@@ -3,7 +3,7 @@ set -Eeuo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 packages=()
 for directory in "$ROOT"/*/; do
-    [[ -d "$directory/.config" || -f "$directory/.bashrc" || -f "$directory/.zshrc" ]] || continue
+    [[ -d "$directory/.config" || -d "$directory/.local" || -f "$directory/.bashrc" || -f "$directory/.zshrc" ]] || continue
     packages+=("$(basename "$directory")")
 done
 if ((${#packages[@]})); then

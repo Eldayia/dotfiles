@@ -1,0 +1,70 @@
+--- a/Modals/DankLauncherV2/Controller.qml
++++ b/Modals/DankLauncherV2/Controller.qml
+@@ -29,7 +29,7 @@
+     property bool active: false
+     property var _modeSectionsCache: ({})
+     property bool _queryDrivenSearch: false
+-    property bool _diskCacheConsumed: false
++    property bool _diskCacheConsumed: true
+     property var sectionViewModes: ({})
+     property var pluginViewPreferences: ({})
+     property int gridColumns: SettingsData.appLauncherGridColumns
+@@ -70,6 +70,15 @@
+         } else {
+             appCategory = "";
+             appCategories = [];
++        }
++    }
++
++    Connections {
++        target: SessionData
++        function onPinnedAppsChanged() {
++            AppSearchService.invalidateLauncherCache();
++            root._clearModeCache();
++            if (root.active) root.performSearch();
+         }
+     }
+
+@@ -191,7 +200,7 @@
+     readonly property var sectionDefinitions: [
+         {
+             id: "favorites",
+-            title: I18n.tr("Pinned"),
++            title: "Favoris",
+             icon: "push_pin",
+             priority: 1,
+             defaultViewMode: "list"
+@@ -1244,7 +1253,10 @@
+     function transformApp(app) {
+         var appId = app.id || app.execString || app.exec || "";
+         var override = SessionData.getAppOverride(appId);
+-        return Transform.transformApp(app, override, [], I18n.tr("Launch"));
++        var item = Transform.transformApp(app, override, [], I18n.tr("Launch"));
++        // Command Center: native app items retain all DMS actions and search.
++        item.section = SessionData.isPinnedApp(appId) ? "favorites" : "apps";
++        return item;
+     }
+
+     function transformCoreApp(app) {
+--- a/Modals/DankLauncherV2/LauncherContent.qml
++++ b/Modals/DankLauncherV2/LauncherContent.qml
+@@ -285,8 +285,8 @@
+         anchors.fill: parent
+         visible: !editMode
+
+-        readonly property bool inverted: (root.parentModal?.frameOwnsConnectedChrome ?? false) && (root.parentModal?.resolvedConnectedBarSide === "top")
+-        readonly property bool _connectedArcAtHeader: inverted && !(root.parentModal?.launcherArcExtenderActive ?? false)
++        readonly property bool inverted: !(root.parentModal?.frameOwnsConnectedChrome ?? false) || (root.parentModal?.resolvedConnectedBarSide === "top")
++        readonly property bool _connectedArcAtHeader: (root.parentModal?.frameOwnsConnectedChrome ?? false) && inverted && !(root.parentModal?.launcherArcExtenderActive ?? false)
+
+         Item {
+             id: footerBar
+@@ -739,7 +739,7 @@
+                     id: resultsList
+                     anchors.fill: parent
+                     controller: root.controller
+-                    leadingSectionHeaderAtBottom: contentHolder.inverted
++                    leadingSectionHeaderAtBottom: contentHolder.inverted && (root.parentModal?.frameOwnsConnectedChrome ?? false)
+                     transientSurfaceTracker: root.transientSurfaceTracker
+
+                     onItemRightClicked: (index, item, sceneX, sceneY) => {

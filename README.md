@@ -38,7 +38,7 @@ Modifier le fichier depuis `~/.config` ou depuis le dépôt revient donc à modi
 | **Bureau** | Niri-Spicy, effets de flou, DankMaterialShell, écran de connexion greetd/DMS |
 | **Terminal** | Ghostty, Zsh, Oh My Zsh, Powerlevel10k, complétions et raccourcis |
 | **Apparence** | Catppuccin, GTK, Qt, Kvantum, Cava et Fastfetch |
-| **Développement** | Git, Neovim, Lazygit, GitFourchette et Lazydocker |
+| **Développement** | Git, Neovim, VS Code, CLion, Lazygit, GitFourchette et Lazydocker |
 | **Fichiers** | Nautilus et ses scripts, Yazi, TermSCP, aperçus et archives |
 | **Système** | Listes Pacman/AUR et scripts d’installation |
 
@@ -106,7 +106,7 @@ Le script :
 3. compile et installe `paru` s’il est absent ;
 4. installe `niri-spicy-git` et vérifie qu’il fournit la dépendance `niri` ;
 5. installe `dms-shell-niri`, puis le reste de `aur.txt` ;
-6. active et démarre NetworkManager, Bluetooth et `power-profiles-daemon` ;
+6. active et démarre NetworkManager, Bluetooth, `power-profiles-daemon` et smartd ;
 7. active `fstrim.timer` pour les démarrages suivants et crée les dossiers XDG.
 
 DMS est volontairement installé après Niri-Spicy. Si la vérification du fournisseur `niri` échoue, le script s’arrête avant d’installer DMS.
@@ -139,6 +139,8 @@ Il traite aussi :
 
 - Rust stable, uniquement si `rustup` est déjà installé et sans toolchain active ;
 - la base `pkgfile`, si l’outil est disponible ;
+- les plugins Neovim/DMS verrouillés, les widgets et les hooks pre-commit du dépôt ;
+- les extensions VS Code et le plugin Catppuccin de CLion ;
 - l’initialisation DMS/Niri, en conservant la configuration Niri déjà présente ;
 - les scripts et préférences Nautilus via `setup-nautilus.sh` ;
 - l’association du service utilisateur DMS à Niri ;
@@ -169,6 +171,17 @@ Si un autre gestionnaire de connexion est déjà activé, désactive-le avant de
 
 ### 7 · Terminer les intégrations personnelles
 
+Pour préparer les instantanés de la racine Btrfs :
+
+```bash
+sudo bash "$HOME/dotfiles/scripts/setup-snapper.sh"
+```
+
+La politique est versionnée sous `system/snapper/`. Le script conserve `/etc`
+indépendant du dossier personnel ; les configurations utilisateur utilisent Stow.
+Consulte [les limites et la rétention](packages/EXTENSIONS.md) avant une restauration.
+
+
 | Fonction | Étape restante sur une nouvelle machine |
 | :--- | :--- |
 | **Docker / Lazydocker** | Si souhaité : `sudo systemctl enable --now docker.service`, puis vérifier `docker info` après reconnexion. Le script utilisateur configure le groupe, mais ne démarre pas Docker. Le groupe Docker donne un accès équivalent à root. |
@@ -189,6 +202,10 @@ Tous les exemples se lancent avec **Bash**, même lorsque ton shell habituel est
 | [setup-greeter.sh](scripts/setup-greeter.sh) | Une fois Niri testé | Écran de connexion greetd/DMS |
 | [setup-nautilus.sh](scripts/setup-nautilus.sh) | Installation ou modification des actions Nautilus | Stow du paquet Nautilus, puis application des préférences |
 | [import-dms.sh](scripts/import-dms.sh) | Import ponctuel d’une configuration DMS locale | Déplacement dans le dépôt, puis lien Stow |
+| [setup-snapper.sh](scripts/setup-snapper.sh) | Après installation de Snapper, avec sudo | Instantanés racine Btrfs et rétention |
+| [setup-dms-plugins.sh](scripts/setup-dms-plugins.sh) | Restaurer Phone Connect, Intel GPU Monitor et Command Runner | Versions verrouillées, préférences et widgets DMS |
+| [setup-dev-tools.sh](scripts/setup-dev-tools.sh) | Initialiser le dépôt et Neovim | Hooks pre-commit et plugins Neovim manquants |
+| [setup-ides.sh](scripts/setup-ides.sh) | Restaurer VS Code et CLion | Extensions, plugin Catppuccin et configurations Stow |
 
 ### Importer une configuration DMS existante
 
@@ -350,6 +367,8 @@ Ne versionne pas les clés SSH/WireGuard, profils VPN privés, mots de passe, se
 - [Nautilus, extensions et scripts de fichiers](packages/NAUTILUS.md)
 - [Inventaire des paquets](packages/README.md)
 - [Configuration Neovim](nvim/.config/nvim/README.md)
+- [Système, développement, audio et jeux](packages/EXTENSIONS.md)
+- [Inventaire des plugins Neovim et DMS](packages/plugins.md)
 
 ---
 
@@ -358,3 +377,7 @@ Ne versionne pas les clés SSH/WireGuard, profils VPN privés, mots de passe, se
 **Installer les paquets → déployer les liens → initialiser la session → personnaliser.**
 
 </div>
+
+## Command Center
+
+[Command Center : installation, raccourcis et configuration](packages/COMMAND-CENTER.md)

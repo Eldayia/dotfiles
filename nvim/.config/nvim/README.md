@@ -134,3 +134,10 @@ Vérifications utiles :
 :checkhealth
 :checkhealth vim.lsp
 ```
+
+
+## Débogage, formatage, tâches et tests
+
+La configuration `lua/plugins/workflow.lua` ajoute DAP/LLDB, Conform, Overseer et
+Neotest/pytest. Voir [les raccourcis et prérequis](../../../packages/EXTENSIONS.md).
+F2 et Norminette restent les références pour le formatage C/42.

@@ -54,6 +54,19 @@ Dans clic droit → Scripts :
 - **Ouvrir dans Lazygit** : sélectionner un dossier appartenant à un dépôt Git ;
   sans sélection, le dossier courant est utilisé.
 - **Calculer SHA-256** : calculer les empreintes des fichiers sélectionnés.
+- **Ouvrir dans Neovim** : fichiers sélectionnés, ou dossier courant, dans Ghostty.
+- **Informations du fichier** : type, taille, droits, dates et métadonnées MediaInfo ;
+  taille occupée pour un dossier.
+- **Créer une archive datée** : une archive `.tar.gz` des éléments sélectionnés,
+  dans leur dossier parent commun. Les liens symboliques sont conservés comme liens.
+- **Convertir en WebP** : nouvelles images datées, qualité 85 ; première page/image
+  uniquement pour les images animées ou multipages. Originaux conservés.
+- **Vérifier SHA-256** : sélectionner un fichier et coller l’empreinte attendue
+  dans la boîte de dialogue. Le résultat de comparaison est affiché.
+
+Les opérations longues affichent leur progression ou leur résultat dans Ghostty.
+Archives et conversions refusent d’écraser un fichier existant. Appuyer sur Entrée
+pour fermer le terminal une fois l’opération terminée.
 
 Ces scripts opèrent sur des fichiers locaux. Leurs arguments ne sont pas évalués
 par un shell. Ils sont déployés avec Stow ; leur code commun est dans

@@ -22,3 +22,8 @@
 # Backup files
 *.bak
 *.backup
+
+# DMS plugin sources and runtime history (restored from lockfile/defaults)
+/dms/.config/DankMaterialShell/plugins/
+/dms/.config/DankMaterialShell/plugin_settings.json
+__pycache__/

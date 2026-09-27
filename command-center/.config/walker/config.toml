@@ -1,0 +1,87 @@
+force_keyboard_focus = true
+close_when_open = true
+click_to_close = true
+selection_wrap = true
+disable_mouse = false
+hide_action_hints = true
+hide_quick_activation = true
+
+theme = "copilot-mocha"
+ext_background_effect_blur = true
+blur_corner_radius = 24
+
+[placeholders]
+"menus:command-center" = { input = "Rechercher une application ou une action…", list = "Aucun résultat" }
+"default" = { input = "Rechercher…", list = "Aucun résultat" }
+"desktopapplications" = { input = "Applications", list = "Aucune application" }
+"files" = { input = "Fichiers", list = "Aucun fichier" }
+"calc" = { input = "Calculer", list = "Entre un calcul" }
+"runner" = { input = "Exécuter", list = "Aucune commande" }
+"clipboard" = { input = "Presse-papiers", list = "Presse-papiers vide" }
+
+[keybinds]
+close = ["Escape"]
+next = ["Tab"]
+previous = ["shift Tab"]
+left = ["Left"]
+right = ["Right"]
+up = ["Up"]
+down = ["Down"]
+toggle_exact = ["ctrl e"]
+resume_last_query = ["ctrl r"]
+
+quick_activate = [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7",
+    "F8"
+]
+
+[providers]
+default = [
+    "desktopapplications",
+    "calc",
+    "runner",
+    "files",
+    "websearch"
+]
+
+empty = [
+    "desktopapplications"
+]
+
+max_results = 30
+
+[[providers.prefixes]]
+prefix = ";"
+provider = "providerlist"
+
+[[providers.prefixes]]
+prefix = ">"
+provider = "runner"
+
+[[providers.prefixes]]
+prefix = "/"
+provider = "files"
+
+[[providers.prefixes]]
+prefix = "="
+provider = "calc"
+
+[[providers.prefixes]]
+prefix = ":"
+provider = "clipboard"
+
+[[providers.prefixes]]
+prefix = "@"
+provider = "websearch"
+
+[columns]
+"menus:command-center" = 4
+
+[providers.actions]
+"menus:command-center" = [{ action = "launch", label = "Ouvrir", default = true, bind = "Return", after = "Close" }]

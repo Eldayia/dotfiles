@@ -1,0 +1,84 @@
+name = "command-center"
+fixed_order = true
+name_pretty = "Command Center"
+icon = "view-app-grid-symbolic"
+
+[[entries]]
+text = "Zen"
+icon = "zen-browser"
+actions = { launch = "~/.local/bin/copilot-menu --action 'Zen Browser'" }
+
+[[entries]]
+text = "Ghostty"
+icon = "com.mitchellh.ghostty"
+actions = { launch = "~/.local/bin/copilot-menu --action Ghostty" }
+
+[[entries]]
+text = "Obsidian"
+icon = "obsidian"
+actions = { launch = "~/.local/bin/copilot-menu --action Obsidian" }
+
+[[entries]]
+text = "Neovim"
+icon = "nvim"
+actions = { launch = "~/.local/bin/copilot-menu --action Neovim" }
+
+[[entries]]
+text = "Vesktop"
+icon = "vesktop"
+actions = { launch = "~/.local/bin/copilot-menu --action Vesktop" }
+
+[[entries]]
+text = "LiMusic"
+icon = "limusic-app"
+actions = { launch = "~/.local/bin/copilot-menu --action LiMusic" }
+
+[[entries]]
+text = "Yazi"
+icon = "system-file-manager"
+actions = { launch = "~/.local/bin/copilot-menu --action Yazi" }
+
+[[entries]]
+text = "Applications"
+icon = "view-app-grid-symbolic"
+actions = { launch = "~/.local/bin/copilot-menu --action 'Toutes les applications'" }
+
+[[entries]]
+text = "Presse-papiers"
+icon = "edit-paste-symbolic"
+actions = { launch = "~/.local/bin/copilot-menu --action Presse-papiers" }
+
+[[entries]]
+text = "Captures"
+icon = "camera-photo-symbolic"
+actions = { launch = "~/.local/bin/copilot-menu --action 'Capture d'\"'\"'écran'" }
+
+[[entries]]
+text = "Bluetooth"
+icon = "bluetooth-symbolic"
+actions = { launch = "~/.local/bin/copilot-menu --action Bluetooth" }
+
+[[entries]]
+text = "Audio & média"
+icon = "audio-volume-high-symbolic"
+actions = { launch = "~/.local/bin/copilot-menu --action 'Audio & média'" }
+
+[[entries]]
+text = "Écrans"
+icon = "video-display-symbolic"
+actions = { launch = "~/.local/bin/copilot-menu --action 'Écrans'" }
+
+[[entries]]
+text = "Réglages"
+icon = "preferences-system-symbolic"
+actions = { launch = "~/.local/bin/copilot-menu --action 'Réglages DMS'" }
+
+[[entries]]
+text = "Verrouiller"
+icon = "system-lock-screen-symbolic"
+actions = { launch = "~/.local/bin/copilot-menu --action Verrouiller" }
+
+[[entries]]
+text = "Session"
+icon = "system-shutdown-symbolic"
+actions = { launch = "~/.local/bin/copilot-menu --action 'Session / alimentation'" }

@@ -125,9 +125,9 @@ return {
     build = ":TSUpdate",
     config = function()
       local ts = require("nvim-treesitter")
-      ts.install({ "c", "lua", "vim", "vimdoc", "bash", "json", "markdown", "markdown_inline" })
+      ts.install({ "c", "lua", "vim", "vimdoc", "bash", "json", "markdown", "markdown_inline", "python" })
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "c", "lua", "vim", "bash", "json", "markdown" },
+        pattern = { "c", "lua", "vim", "bash", "json", "markdown", "python" },
         callback = function() pcall(vim.treesitter.start) end,
       })
     end,

@@ -1,6 +1,379 @@
+// ============================================================
+// ZELLIJ CONFIG
+// Arch Linux + Niri + Ghostty + Zsh + Neovim
+// ============================================================
+
+
+// ------------------------------------------------------------
+// THEME
+// ------------------------------------------------------------
+
 theme "catppuccin-mocha"
-default_layout "compact"
-pane_frames false
+
+
+// ------------------------------------------------------------
+// SHELL / EDITOR
+// ------------------------------------------------------------
+
+default_shell "/usr/bin/zsh"
+scrollback_editor "/usr/bin/nvim"
+
+
+// ------------------------------------------------------------
+// GENERAL
+// ------------------------------------------------------------
+
 mouse_mode true
-scroll_buffer_size 10000
+pane_frames true
+auto_layout true
+stacked_resize true
+
+simplified_ui false
+
+show_startup_tips false
+show_release_notes true
+
 copy_on_select false
+
+copy_command "wl-copy"
+
+scroll_buffer_size 10000
+
+session_serialization true
+pane_viewport_serialization true
+scrollback_lines_to_serialize 1000
+
+serialization_interval 1
+
+disable_session_metadata false
+
+
+// ------------------------------------------------------------
+// DEFAULT LAYOUT
+// ------------------------------------------------------------
+//
+// ~/.config/zellij/layouts/default.kdl
+//
+// Ce layout pourra contenir zjstatus automatiquement.
+//
+
+default_layout "default"
+
+
+// ------------------------------------------------------------
+// PLUGIN ALIASES
+// ------------------------------------------------------------
+
+plugins {
+
+    // ----- Plugins externes -----
+
+    zjstatus location="file:/home/eldayia/.config/zellij/plugins/zjstatus.wasm"
+
+    zjframes location="file:/home/eldayia/.config/zellij/plugins/zjframes.wasm"
+
+    room location="file:/home/eldayia/.config/zellij/plugins/room.wasm"
+
+
+    // ----- Plugins intégrés Zellij -----
+
+    tab-bar location="zellij:tab-bar"
+
+    status-bar location="zellij:status-bar"
+
+    compact-bar location="zellij:compact-bar"
+
+    session-manager location="zellij:session-manager"
+
+    strider location="zellij:strider"
+
+    configuration location="zellij:configuration"
+
+    plugin-manager location="zellij:plugin-manager"
+
+    about location="zellij:about"
+
+
+    // File picker basé sur Strider
+    filepicker location="zellij:strider" {
+        cwd "/"
+    }
+}
+
+
+// ------------------------------------------------------------
+// PLUGINS CHARGÉS AUTOMATIQUEMENT
+// ------------------------------------------------------------
+
+load_plugins {
+
+    zjframes {
+        hide_frame_for_single_pane "true"
+        hide_frame_except_for_search "false"
+        hide_frame_except_for_fullscreen "false"
+    }
+}
+
+
+// ------------------------------------------------------------
+// KEYBINDS
+// ------------------------------------------------------------
+
+keybinds {
+
+    // ========================================================
+    // GLOBAL
+    // ========================================================
+
+    shared_except "locked" {
+
+        // ----------------------------------------------------
+        // Navigation Vim-like entre panes
+        // ----------------------------------------------------
+
+        bind "Alt h" {
+            MoveFocus "Left"
+        }
+
+        bind "Alt j" {
+            MoveFocus "Down"
+        }
+
+        bind "Alt k" {
+            MoveFocus "Up"
+        }
+
+        bind "Alt l" {
+            MoveFocus "Right"
+        }
+
+
+        // ----------------------------------------------------
+        // Nouveau pane
+        // ----------------------------------------------------
+
+        bind "Alt n" {
+            NewPane
+        }
+
+
+        // ----------------------------------------------------
+        // Floating pane
+        // ----------------------------------------------------
+
+        bind "Alt f" {
+            TogglePaneEmbedOrFloating
+        }
+
+
+        // ----------------------------------------------------
+        // Fullscreen pane
+        // ----------------------------------------------------
+
+        bind "Alt Enter" {
+            ToggleFocusFullscreen
+        }
+
+
+        // ----------------------------------------------------
+        // Resize intelligent / stacked resize
+        // ----------------------------------------------------
+
+        bind "Alt +" {
+            Resize "Increase"
+        }
+
+        bind "Alt -" {
+            Resize "Decrease"
+        }
+
+
+        // ----------------------------------------------------
+        // Room
+        //
+        // Ctrl+y → fuzzy finder de tabs
+        // ----------------------------------------------------
+
+        bind "Ctrl y" {
+            LaunchOrFocusPlugin "room" {
+                floating true
+                move_to_focused_tab true
+                ignore_case true
+                quick_jump true
+            }
+        }
+
+
+        // ----------------------------------------------------
+        // Session Manager
+        //
+        // Alt+s
+        // ----------------------------------------------------
+
+        bind "Alt s" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+        }
+
+
+        // ----------------------------------------------------
+        // Plugin Manager
+        //
+        // Alt+p
+        // ----------------------------------------------------
+
+        bind "Alt p" {
+            LaunchOrFocusPlugin "plugin-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+        }
+
+
+        // ----------------------------------------------------
+        // File Picker
+        //
+        // Alt+e
+        // ----------------------------------------------------
+
+        bind "Alt e" {
+            LaunchOrFocusPlugin "filepicker" {
+                floating true
+                move_to_focused_tab true
+            }
+        }
+    }
+
+
+    // ========================================================
+    // PANE MODE
+    // ========================================================
+
+    pane {
+
+        bind "h" {
+            MoveFocus "Left"
+        }
+
+        bind "j" {
+            MoveFocus "Down"
+        }
+
+        bind "k" {
+            MoveFocus "Up"
+        }
+
+        bind "l" {
+            MoveFocus "Right"
+        }
+
+        bind "r" {
+            NewPane "Right"
+            SwitchToMode "Normal"
+        }
+
+        bind "d" {
+            NewPane "Down"
+            SwitchToMode "Normal"
+        }
+
+        bind "x" {
+            CloseFocus
+            SwitchToMode "Normal"
+        }
+
+        bind "f" {
+            ToggleFocusFullscreen
+            SwitchToMode "Normal"
+        }
+
+        bind "z" {
+            TogglePaneFrames
+            SwitchToMode "Normal"
+        }
+    }
+
+
+    // ========================================================
+    // TAB MODE
+    // ========================================================
+
+    tab {
+
+        bind "h" {
+            GoToPreviousTab
+        }
+
+        bind "l" {
+            GoToNextTab
+        }
+
+        bind "n" {
+            NewTab
+            SwitchToMode "Normal"
+        }
+
+        bind "x" {
+            CloseFocus
+            SwitchToMode "Normal"
+        }
+
+        bind "r" {
+            SwitchToMode "RenameTab"
+            TabNameInput 0
+        }
+    }
+
+
+    // ========================================================
+    // SCROLL MODE
+    // ========================================================
+
+    scroll {
+
+        bind "j" {
+            ScrollDown
+        }
+
+        bind "k" {
+            ScrollUp
+        }
+
+        bind "Ctrl d" {
+            HalfPageScrollDown
+        }
+
+        bind "Ctrl u" {
+            HalfPageScrollUp
+        }
+
+        bind "g" {
+            ScrollToTop
+        }
+
+        bind "G" {
+            ScrollToBottom
+        }
+
+        bind "e" {
+            EditScrollback
+            SwitchToMode "Normal"
+        }
+    }
+}
+
+
+// ------------------------------------------------------------
+// UI
+// ------------------------------------------------------------
+
+ui {
+
+    pane_frames {
+        rounded_corners true
+
+        hide_session_name false
+    }
+}

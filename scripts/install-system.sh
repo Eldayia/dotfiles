@@ -115,6 +115,7 @@ echo "======================================"
 sudo systemctl enable --now NetworkManager
 sudo systemctl enable --now bluetooth
 sudo systemctl enable --now power-profiles-daemon
+sudo systemctl enable --now smartd.service
 
 sudo systemctl enable fstrim.timer
 

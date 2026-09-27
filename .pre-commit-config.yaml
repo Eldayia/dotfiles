@@ -1,0 +1,13 @@
+repos:
+  - repo: local
+    hooks:
+      - id: gitleaks
+        name: Détecter les secrets dans les changements indexés
+        entry: gitleaks git --pre-commit --staged --redact --no-banner
+        language: system
+        pass_filenames: false
+      - id: ruff
+        name: Vérifier les scripts Python
+        entry: ruff check
+        language: system
+        types: [python]

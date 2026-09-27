@@ -11,7 +11,8 @@ export LANG="fr_FR.UTF-8"
 
 # Ne mets LC_ALL que si tu veux réellement tout forcer en français.
 # export LC_ALL="fr_FR.UTF-8"
-
+export USER42="camjouan"
+export MAIL42="camjouan@learner.42.tech"
 
 # ------------------------------------------------------------
 # Editors

@@ -12,6 +12,7 @@ application/x-extension-xht=zen.desktop
 x-scheme-handler/discord=vesktop.desktop
 x-scheme-handler/codex=chatgpt.desktop
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
+x-scheme-handler/jetbrains=jetbrainsd.desktop
 
 [Added Associations]
 x-scheme-handler/http=zen.desktop;

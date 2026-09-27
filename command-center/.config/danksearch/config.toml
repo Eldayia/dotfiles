@@ -1,0 +1,12 @@
+# Local filename/content search for the DMS launcher.
+worker_count = 2
+index_all_files = true
+max_file_bytes = 2097152
+
+[[index_paths]]
+path = "~"
+max_depth = 0
+exclude_hidden = true
+extract_exif = false
+merge_default_exclude_dirs = true
+exclude_dirs = ["go/pkg", "node_modules", "vendor", "target", "build", "dist"]

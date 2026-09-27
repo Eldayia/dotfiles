@@ -226,3 +226,37 @@ function y() {
     fi
     return "$result"
 }
+
+# Obsidian to Site
+qsync() {
+    rsync -av --delete \
+        --exclude='.obsidian/' \
+        --exclude='.trash/' \
+        "$HOME/Documents/42-Piscine/Public/" \
+        "$HOME/Sites/42-notes/content/"
+}
+
+qserve() {
+    qsync || return 1
+    cd "$HOME/Sites/42-notes" || return 1
+    npx quartz build --serve
+}
+
+qdeploy() {
+    qsync || return 1
+    cd "$HOME/Sites/42-notes" || return 1
+    npx quartz sync
+}
+
+function zj() {
+    local session="${1:-${PWD:t}}"
+    local layout="${2:-}"
+
+    if zellij list-sessions --short 2>/dev/null | grep -Fxq "$session"; then
+        zellij attach "$session"
+    elif [[ -n "$layout" ]]; then
+        zellij --session "$session" --new-session-with-layout "$layout"
+    else
+        zellij attach -c "$session"
+    fi
+}

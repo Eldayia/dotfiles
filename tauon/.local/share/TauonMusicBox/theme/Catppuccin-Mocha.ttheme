@@ -1,0 +1,75 @@
+# Catppuccin Mocha — thème personnel pour Tauon
+
+30,30,46       player background (top panel)
+30,30,46       playlist panel
+24,24,37       side panel
+24,24,37       bottom panel
+30,30,46       gallery background
+17,17,27       queue panel
+
+205,214,244    track line
+166,173,200    track time
+127,132,156    track index
+186,194,222    track artist
+205,214,244    album line
+
+203,166,247    track playing
+203,166,247    index playing
+180,190,254    artist playing
+180,190,254    album playing
+203,166,247    time playing
+
+108,112,134    track missing
+243,139,168    fav line
+49,50,68      folder line
+186,194,222    folder title
+
+203,166,247,25 playing highlight
+137,180,250,30 select highlight
+203,166,247    gallery highlight
+
+108,112,134    buttons off
+180,190,254    buttons over
+203,166,247    buttons active
+205,214,244    playing time
+
+203,166,247    seek bar
+49,50,68      seek bg
+137,180,250    volume bar
+49,50,68      volume bg
+88,91,112     scroll bar
+
+108,112,134    mode off
+180,190,254    mode over
+203,166,247    mode on
+205,214,244    bottom title
+
+24,24,37      menu background
+49,50,68      menu highlight
+69,71,90      menu border
+205,214,244    menu text
+108,112,134    menu disable text
+186,194,222    menu icons
+
+203,166,247    tab active line
+186,194,222    tab line
+24,24,37      tab background
+49,50,68      tab over
+49,50,68      tab active background
+
+205,214,244    title info
+166,173,200    extra info
+17,17,27      art border
+
+24,24,37      box background
+69,71,90      box border
+205,214,244    box title text
+186,194,222    box text label
+205,214,244    box text normal
+166,173,200    box sub text
+205,214,244    box input text
+
+24,24,37      mini bg
+69,71,90      mini border
+205,214,244    mini text 1
+203,166,247    mini text 2

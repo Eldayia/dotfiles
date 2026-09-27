@@ -1,3 +1,5 @@
 [user]
 	name = Eldayia
 	email = eldayia@gmail.com
+[alias]
+	dft = !git -c diff.external=difft diff

@@ -1,6 +1,13 @@
 1password
+cliamp
+clion
+clion-cmake
+clion-gdb
+clion-jre
+clion-lldb
 greetd-dms-greeter-bin
 heroic-games-launcher-bin
+libfprint-git
 limusic-bin
 losslesscut-bin
 millennium
@@ -8,6 +15,7 @@ nautilus-admin-gtk4
 niri-spicy-git
 paru
 paru-debug
+plexamp-beta-appimage
 protonplus
 python-pycxx
 python-pysvn
@@ -15,6 +23,7 @@ rabbitvcs
 rabbitvcs-nautilus
 vesktop-bin
 vlc-git
+walker-bin
 xwayland-satellite-git
 yay
 yay-debug

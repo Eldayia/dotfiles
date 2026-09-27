@@ -1,0 +1,7 @@
+// Managed in dotfiles; separate from DMS-generated bindings.
+binds {
+    Super+Shift+F23 repeat=false hotkey-overlay-title="Copilot (F23)" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Super+Shift+XF86Assistant repeat=false hotkey-overlay-title="Copilot Command Center" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    F24 repeat=false hotkey-overlay-title="Command Center" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod+Shift+Space repeat=false hotkey-overlay-title="Command Center" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+}

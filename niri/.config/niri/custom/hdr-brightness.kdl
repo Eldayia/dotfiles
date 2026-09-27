@@ -1,0 +1,6 @@
+output "eDP-1" {
+    hdr mode="on" {
+        reference-luminance 600
+        peak-luminance 600
+    }
+}

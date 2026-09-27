@@ -1,0 +1,36 @@
+{
+  "settings": {
+    "launcherStyle": "full",
+    "rememberLastMode": false,
+    "rememberLastQuery": false,
+    "spotlightSectionViewModes": {
+      "favorites": "grid",
+      "apps": "list",
+      "files": "list",
+      "fallback": "list"
+    },
+    "appDrawerSectionViewModes": {
+      "favorites": "grid",
+      "apps": "list"
+    },
+    "appLauncherGridColumns": 4,
+    "dankLauncherV2Size": "wide",
+    "dankLauncherV2IncludeFilesInAll": true,
+    "dankLauncherV2IncludeFoldersInAll": true,
+    "popupTransparency": 0.82,
+    "blurEnabled": true,
+    "currentThemeName": "custom",
+    "currentThemeCategory": "custom",
+    "customThemeFile": "~/.config/DankMaterialShell/themes/catppuccin-mocha.json"
+  },
+  "pinnedApps": [
+    "zen",
+    "org.gnome.Nautilus",
+    "com.mitchellh.ghostty",
+    "obsidian",
+    "nvim",
+    "vesktop",
+    "limusic",
+    "yazi"
+  ]
+}

@@ -1,0 +1,302 @@
+#!/usr/bin/env bash
+
+set -u
+export GDK_BACKEND=wayland
+
+if [[ ${1:-} == --action ]] && ! command -v walker >/dev/null 2>&1; then
+    notify-send "Command Center" "Installe Walker : ~/dotfiles/scripts/setup-command-center.sh"
+    exit 1
+fi
+
+pick() {
+    local prompt="$1"
+    shift
+
+    printf '%s\n' "$@" |
+        walker --dmenu --placeholder "$prompt — Rechercher…"
+}
+
+run_bg() {
+    setsid -f "$@" >/dev/null 2>&1
+}
+
+launch_gui() {
+    local pattern="$1"
+    shift
+
+    local cmd
+    local desktop
+
+    for cmd in "$@"; do
+        if command -v "$cmd" >/dev/null 2>&1; then
+            run_bg "$cmd"
+            return
+        fi
+    done
+
+    desktop="$(
+        grep -rilm1 -E "^Name=.*${pattern}.*$" \
+            "$HOME/.local/share/applications" \
+            /usr/share/applications \
+            2>/dev/null |
+        head -n 1
+    )"
+
+    if [ -n "${desktop:-}" ]; then
+        run_bg gio launch "$desktop"
+    else
+        notify-send \
+            "Command Center" \
+            "Application introuvable : ${pattern}"
+    fi
+}
+
+screenshot_menu() {
+    local choice
+
+    choice="$(
+        pick "󰹑  Capture d'écran" \
+            "󰹑  Sélection interactive" \
+            "󰍹  Écran → presse-papiers" \
+            "󰖯  Fenêtre → presse-papiers" \
+            "󰋩  Retour"
+    )"
+
+    [[ -n "$choice" ]] || return 0
+
+    case "$choice" in
+        *"Sélection interactive")
+            niri msg action screenshot
+            ;;
+
+        *"Écran → presse-papiers")
+            niri msg action screenshot-screen \
+                --write-to-disk=false
+            ;;
+
+        *"Fenêtre → presse-papiers")
+            niri msg action screenshot-window \
+                --write-to-disk=false
+            ;;
+
+        *"Retour")
+            main_menu
+            ;;
+    esac
+}
+
+audio_menu() {
+    local choice
+
+    choice="$(
+        pick "  Audio & média" \
+            "  Volume +5 %" \
+            "  Volume -5 %" \
+            "󰖁  Muet" \
+            "󰍬  Muet microphone" \
+            "󰓃  Changer de sortie audio" \
+            "  Lecture / Pause" \
+            "󰒮  Morceau précédent" \
+            "󰒭  Morceau suivant" \
+            "󰋩  Retour"
+    )"
+
+    [[ -n "$choice" ]] || return 0
+
+    case "$choice" in
+        *"Volume +5 %")
+            dms ipc call audio increment 5
+            ;;
+
+        *"Volume -5 %")
+            dms ipc call audio decrement 5
+            ;;
+
+        *"Muet microphone")
+            dms ipc call audio micmute
+            ;;
+
+        *"Muet")
+            dms ipc call audio mute
+            ;;
+
+        *"Changer de sortie audio")
+            dms ipc call audio cycleoutput
+            ;;
+
+        *"Lecture / Pause")
+            dms ipc call mpris playPause
+            ;;
+
+        *"Morceau précédent")
+            dms ipc call mpris previous
+            ;;
+
+        *"Morceau suivant")
+            dms ipc call mpris next
+            ;;
+
+        *"Retour")
+            main_menu
+            ;;
+    esac
+}
+
+display_menu() {
+    local choice
+
+    choice="$(
+        pick "󰍹  Écrans" \
+            "󰍹  Profil écran suivant" \
+            "󰑐  Rafraîchir les écrans" \
+            "󰒓  Ouvrir les réglages DMS" \
+            "󰋩  Retour"
+    )"
+
+    [[ -n "$choice" ]] || return 0
+
+    case "$choice" in
+        *"Profil écran suivant")
+            dms ipc call outputs cycleProfile
+            ;;
+
+        *"Rafraîchir les écrans")
+            dms ipc call outputs refresh
+            ;;
+
+        *"réglages DMS")
+            dms ipc call settings toggle
+            ;;
+
+        *"Retour")
+            main_menu
+            ;;
+    esac
+}
+
+session_menu() {
+    local choice
+
+    choice="$(
+        pick "  Session" \
+            "  Verrouiller" \
+            "󰒲  Mettre en veille" \
+            "  Power Menu DMS" \
+            "󰗼  Quitter Niri" \
+            "󰋩  Retour"
+    )"
+
+    [[ -n "$choice" ]] || return 0
+
+    case "$choice" in
+        *"Verrouiller")
+            dms ipc call lock lock
+            ;;
+
+        *"Mettre en veille")
+            systemctl suspend
+            ;;
+
+        *"Power Menu DMS")
+            dms ipc call powermenu toggle
+            ;;
+
+        *"Quitter Niri")
+            niri msg action quit
+            ;;
+
+        *"Retour")
+            main_menu
+            ;;
+    esac
+}
+
+main_menu() {
+    local choice
+    if [[ ${1:-} == --action ]]; then
+        choice=$2
+    else
+        dms ipc call spotlight toggle
+        return
+    fi
+
+    [[ -n "$choice" ]] || return 0
+
+    case "$choice" in
+        *"Zen Browser")
+            launch_gui "Zen" \
+                zen-browser \
+                zen
+            ;;
+
+        *"Ghostty")
+            run_bg ghostty
+            ;;
+
+        *"Obsidian")
+            launch_gui "Obsidian" \
+                obsidian
+            ;;
+
+        *"Neovim")
+            run_bg ghostty -e nvim
+            ;;
+
+        *"Vesktop")
+            launch_gui "Vesktop" \
+                vesktop
+            ;;
+
+        *"LiMusic")
+            launch_gui "Li[Mm]usic" \
+                limusic-app \
+                limusic
+            ;;
+
+        *"Yazi")
+            run_bg ghostty -e yazi
+            ;;
+
+        *"Toutes les applications")
+            walker -m desktopapplications
+            ;;
+
+        *"Presse-papiers")
+            walker -m clipboard
+            ;;
+
+        *"Capture d'écran")
+            screenshot_menu
+            ;;
+
+        *"Bluetooth")
+            walker -m bluetooth
+            ;;
+
+        *"Audio & média")
+            audio_menu
+            ;;
+
+        *"Écrans")
+            display_menu
+            ;;
+
+        *"Réglages DMS")
+            dms ipc call settings toggle
+            ;;
+
+        *"Verrouiller")
+            dms ipc call lock lock
+            ;;
+
+        *"Session / alimentation")
+            session_menu
+            ;;
+
+        *)
+            exit 0
+            ;;
+    esac
+}
+
+main_menu "$@"

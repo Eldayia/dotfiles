@@ -1,0 +1,22 @@
+{
+  "lockfileVersion": 1,
+  "plugins": {
+    "commandRunner": {
+      "repo": "https://github.com/devnullvoid/dms-command-runner",
+      "commit": "5c2cab404335ceb96c60cf9e97a9682994209cd4"
+    },
+    "dankKDEConnect": {
+      "repo": "https://github.com/AvengeMedia/dms-plugins",
+      "path": "DankKDEConnect",
+      "commit": "bb90a1db7d540e64ae049c5906afba9b24baa865"
+    },
+    "intelGpuMonitor": {
+      "repo": "https://github.com/rdannenbring/dms-intel-gpu-plugin",
+      "commit": "38a07800a648542a3b5f687cdd66c745d50078f6"
+    },
+    "niriDSA": {
+      "repo": "https://github.com/jdkamalakar/DMS-Niri_Display_Settings",
+      "commit": "0ac7b6ff093e5f14d2157a2aae463cc338ed97ed"
+    }
+  }
+}

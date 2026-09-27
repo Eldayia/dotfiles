@@ -1,9 +1,27 @@
 {
+  "currentThemeName": "custom",
+  "currentThemeCategory": "custom",
+  "customThemeFile": "~/.config/DankMaterialShell/themes/catppuccin-mocha.json",
+  "popupTransparency": 0.82,
   "cornerRadius": 12,
   "blurEnabled": true,
   "controlCenterShowMicPercent": true,
   "appIdSubstitutions": [],
   "greeterEnableFprint": true,
+  "rememberLastMode": false,
+  "spotlightSectionViewModes": {
+    "apps": "list",
+    "favorites": "grid",
+    "files": "list",
+    "fallback": "list"
+  },
+  "appDrawerSectionViewModes": {
+    "apps": "list",
+    "favorites": "grid"
+  },
+  "dankLauncherV2Size": "wide",
+  "dankLauncherV2IncludeFilesInAll": true,
+  "dankLauncherV2IncludeFoldersInAll": true,
   "networkPreference": "wifi",
   "cursorSettings": {
     "theme": "System Default",
@@ -22,6 +40,13 @@
     }
   },
   "fontFamily": "JetBrainsMono Nerd Font",
+  "acMonitorTimeout": 120,
+  "acLockTimeout": 120,
+  "acSuspendTimeout": 300,
+  "acPostLockMonitorTimeout": 120,
+  "lockBeforeSuspend": true,
+  "lockScreenPowerOffMonitorsOnLock": true,
+  "enableFprint": true,
   "osdPowerProfileEnabled": true,
   "barConfigs": [
     {
@@ -46,9 +71,11 @@
       "rightWidgets": [
         "systemTray",
         "clipboard",
+        "dankKDEConnect",
+        "notificationButton",
         "cpuUsage",
         "memUsage",
-        "notificationButton",
+        "intelGpuMonitor",
         "battery",
         "controlCenterButton"
       ],

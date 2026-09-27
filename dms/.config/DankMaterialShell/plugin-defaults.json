@@ -1,0 +1,5 @@
+{
+  "dankKDEConnect": { "enabled": true },
+  "intelGpuMonitor": { "enabled": true },
+  "commandRunner": { "enabled": true, "terminal": "ghostty", "execFlag": "-e", "trigger": ">" }
+}

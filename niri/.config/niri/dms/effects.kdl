@@ -37,8 +37,8 @@ window-rule {
 
     background-effect {
         blur true
-        // X-ray blur is much cheaper and works very well for tiled windows.
-        xray true
+        // Composite the real windows and layers below this surface.
+        xray false
     }
 }
 
@@ -73,14 +73,14 @@ layer-rule {
     }
 }
 
-// Keep the bar on efficient x-ray blur. It is almost always visible, so this
-// saves GPU/battery while retaining the glass appearance.
+// Keep the bar on true blur so its transparency reflects the actual windows
+// underneath it instead of only the wallpaper.
 layer-rule {
     match namespace="^dms:bar$"
 
     background-effect {
         blur true
-        xray true
+        xray false
     }
 }
 
@@ -91,7 +91,7 @@ layer-rule {
 
     background-effect {
         blur false
-        xray true
+        xray false
     }
 }
 
@@ -100,6 +100,6 @@ layer-rule {
 
     background-effect {
         blur false
-        xray true
+        xray false
     }
 }

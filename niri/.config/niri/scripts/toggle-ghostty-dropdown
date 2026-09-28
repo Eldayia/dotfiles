@@ -1,0 +1,22 @@
+#!/bin/sh
+
+app_id="com.mitchellh.ghostty.dropdown"
+
+window="$({ niri msg --json windows || exit 1; } | jq -c --arg app_id "$app_id" \
+    'first(.[] | select(.app_id == $app_id))')"
+
+if [ -z "$window" ] || [ "$window" = "null" ]; then
+    exec ghostty --class="$app_id" --gtk-single-instance=false
+fi
+
+window_id="$(printf '%s' "$window" | jq -r '.id')"
+
+if [ "$(printf '%s' "$window" | jq -r '.is_minimized')" = "true" ]; then
+    exec niri msg action unminimize-window --id "$window_id"
+fi
+
+if [ "$(printf '%s' "$window" | jq -r '.is_focused')" = "true" ]; then
+    exec niri msg action minimize-window --id "$window_id"
+fi
+
+exec niri msg action focus-window --id "$window_id"

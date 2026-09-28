@@ -197,7 +197,7 @@ window-rule {
 
     background-effect {
         blur true
-        xray true
+        xray false
     }
 }
 window-rule {
@@ -293,6 +293,7 @@ include optional=true "dms/binds.kdl"
 include optional=true "dms/outputs.kdl"
 include optional=true "dms/cursor.kdl"
 include optional=true "dms/input.kdl"
+include optional=true "dms/windowrules.kdl"
 include "custom/effects.kdl"
 include "custom/hdr-brightness.kdl"
 include "custom/tui.kdl"

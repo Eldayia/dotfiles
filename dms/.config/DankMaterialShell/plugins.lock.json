@@ -8,7 +8,16 @@
     "dankKDEConnect": {
       "repo": "https://github.com/AvengeMedia/dms-plugins",
       "path": "DankKDEConnect",
-      "commit": "bb90a1db7d540e64ae049c5906afba9b24baa865"
+      "commit": "e774a9756f2a50499c37a5513f28bee4ebe81d73"
+    },
+    "dankLauncherKeys": {
+      "repo": "https://github.com/AvengeMedia/dms-plugins",
+      "path": "DankLauncherKeys",
+      "commit": "e774a9756f2a50499c37a5513f28bee4ebe81d73"
+    },
+    "dankSoftwareDepot": {
+      "repo": "https://github.com/vinceecniv/DankSoftwareDepot",
+      "commit": "7de783ef64454f64c0ec9ab747e21644afe67d1b"
     },
     "intelGpuMonitor": {
       "repo": "https://github.com/rdannenbring/dms-intel-gpu-plugin",

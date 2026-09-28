@@ -13,8 +13,8 @@
     "background": "#181825",
     "backgroundText": "#cdd6f4",
     "outline": "#6c7086",
-    "surfaceContainer": "#313244",
-    "surfaceContainerHigh": "#45475a",
+    "surfaceContainer": "#66181825",
+    "surfaceContainerHigh": "#29313244",
     "error": "#f38ba8",
     "warning": "#f9e2af",
     "info": "#89b4fa"
@@ -33,8 +33,8 @@
     "background": "#181825",
     "backgroundText": "#cdd6f4",
     "outline": "#6c7086",
-    "surfaceContainer": "#313244",
-    "surfaceContainerHigh": "#45475a",
+    "surfaceContainer": "#66181825",
+    "surfaceContainerHigh": "#29313244",
     "error": "#f38ba8",
     "warning": "#f9e2af",
     "info": "#89b4fa"

@@ -57,6 +57,9 @@ zstyle ':completion:*' cache-path \
 # Filesystem
 # ------------------------------------------------------------
 
+# Include dotfiles and hidden directories in TAB/fzf-tab results.
+zstyle ':completion:*' glob-dots true
+
 zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' squeeze-slashes true
 
@@ -99,7 +102,7 @@ zstyle ':fzf-tab:*' group-colors \
 # ------------------------------------------------------------
 
 zstyle ':fzf-tab:complete:cd:*' fzf-preview \
-    'eza --tree --level=2 --color=always --icons=always "$realpath" 2>/dev/null'
+    'eza --tree --level=2 --all --color=always --icons=always "$realpath" 2>/dev/null'
 
 
 # ------------------------------------------------------------
@@ -108,7 +111,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview \
 
 zstyle ':fzf-tab:complete:*:*' fzf-preview \
     'if [[ -d "$realpath" ]]; then
-        eza --tree --level=2 --color=always --icons=always "$realpath" 2>/dev/null
+        eza --tree --level=2 --all --color=always --icons=always "$realpath" 2>/dev/null
      elif [[ -f "$realpath" ]]; then
         bat --color=always --style=numbers --line-range=:200 "$realpath" 2>/dev/null
      fi'

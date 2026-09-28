@@ -1,4 +1,14 @@
+window-rule {
+    match app-id=r#"^com\.mitchellh\.ghostty\.dropdown$"#
+
+    open-floating true
+    default-floating-position x=0 y=0 relative-to="top"
+    default-column-width { proportion 0.8; }
+    default-window-height { proportion 0.5; }
+}
+
 binds {
+    Mod+twosuperior hotkey-overlay-title="Dropdown Terminal" { spawn "/home/eldayia/.config/niri/scripts/toggle-ghostty-dropdown"; }
     Mod+Shift+B hotkey-overlay-title="Btop" { spawn "ghostty" "-e" "btop"; }
     Mod+Shift+Y hotkey-overlay-title="Yazi" { spawn "ghostty" "-e" "yazi"; }
     Mod+Shift+Z hotkey-overlay-title="Zellij" { spawn "ghostty" "-e" "zellij" "attach" "--create" "principal"; }

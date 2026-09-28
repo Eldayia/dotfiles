@@ -93,12 +93,6 @@ return {
             local argc = vim.fn.argc()
 
             if argc == 0 then
-              require("neo-tree.command").execute({
-                action = "show",
-                source = "filesystem",
-                position = "left",
-                dir = vim.fn.getcwd(),
-              })
               return
             end
 

@@ -15,7 +15,8 @@ window-rule {
 
     background-effect {
         blur true
-        xray true
+        // Composite the real windows and layers below this surface.
+        xray false
     }
 }
 
@@ -23,6 +24,75 @@ window-rule {
     match is-floating=true
 
     background-effect {
+        blur true
+        xray false
+    }
+}
+
+// DMS supplies precise blur regions for its visible panels. Only change the
+// blur source here: forcing blur on the whole layer would also blur invisible
+// host/click-catcher surfaces after a popup closes.
+layer-rule {
+    match namespace="^dms:.*$"
+
+    background-effect {
+        xray false
+    }
+}
+
+// These input-only surfaces cover large parts of the output and must never
+// receive a compositor-wide blur effect.
+layer-rule {
+    match namespace="^dms:.*:(dismiss|clickcatcher)$"
+
+    background-effect {
+        blur false
+        xray false
+    }
+}
+
+// Keep the full-screen wallpaper helper and background-only surfaces out of
+// the blur pass; they are not foreground glass panels.
+layer-rule {
+    match namespace="^dms:blurwallpaper$"
+
+    background-effect {
+        blur false
+        xray false
+    }
+}
+
+layer-rule {
+    match namespace="^dms:.*:background$"
+
+    background-effect {
+        blur false
+        xray false
+    }
+}
+
+// Glass effect for Code - OSS. The alternatives also cover upstream VS Code
+// packages that expose a slightly different Wayland application ID.
+window-rule {
+    match app-id=r#"^(code-oss|code|Code)$"#
+
+    opacity 0.93
+
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
+// Glass effect for CLion, whether it runs through XWayland or the native
+// JetBrains Wayland toolkit.
+window-rule {
+    match app-id=r#"^(jetbrains-clion|com\.jetbrains\.CLion)$"#
+
+    opacity 0.94
+
+    background-effect {
+        blur true
         xray false
     }
 }

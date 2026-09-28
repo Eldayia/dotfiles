@@ -116,8 +116,23 @@ sudo systemctl enable --now NetworkManager
 sudo systemctl enable --now bluetooth
 sudo systemctl enable --now power-profiles-daemon
 sudo systemctl enable --now smartd.service
+sudo systemctl enable --now ollama.service
 
 sudo systemctl enable fstrim.timer
+
+
+echo
+echo "======================================"
+echo " keyd : Super gauche → Command Center"
+echo "======================================"
+
+# Appui court : F24 (Command Center). Appui long : Super normal.
+sudo install -Dm644 \
+    "$ROOT/system/etc/keyd/command-center.conf" \
+    /etc/keyd/command-center.conf
+
+sudo systemctl enable --now keyd.service
+sudo keyd reload
 
 
 echo

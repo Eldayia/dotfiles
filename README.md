@@ -106,8 +106,9 @@ Le script :
 3. compile et installe `paru` s’il est absent ;
 4. installe `niri-spicy-git` et vérifie qu’il fournit la dépendance `niri` ;
 5. installe `dms-shell-niri`, puis le reste de `aur.txt` ;
-6. active et démarre NetworkManager, Bluetooth, `power-profiles-daemon` et smartd ;
-7. active `fstrim.timer` pour les démarrages suivants et crée les dossiers XDG.
+6. active et démarre NetworkManager, Bluetooth, `power-profiles-daemon`, smartd et Ollama ;
+7. installe le remappage keyd de Super gauche (`system/etc/keyd`) et active keyd ;
+8. active `fstrim.timer` pour les démarrages suivants et crée les dossiers XDG.
 
 DMS est volontairement installé après Niri-Spicy. Si la vérification du fournisseur `niri` échoue, le script s’arrête avant d’installer DMS.
 
@@ -144,6 +145,7 @@ Il traite aussi :
 - l’initialisation DMS/Niri, en conservant la configuration Niri déjà présente ;
 - les scripts et préférences Nautilus via `setup-nautilus.sh` ;
 - l’association du service utilisateur DMS à Niri ;
+- l’activation des services utilisateur Open WebUI, Elephant et Syncthing ;
 - l’ajout de l’utilisateur au groupe `docker`, si ce groupe existe ;
 - la validation de Zsh et de Niri.
 

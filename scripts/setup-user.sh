@@ -365,6 +365,30 @@ fi
 
 
 # ============================================================
+# USER SERVICES
+# ============================================================
+
+section "Services utilisateur"
+
+systemctl --user daemon-reload
+
+# Open WebUI (interface d'Ollama) : http://127.0.0.1:8080
+if command_exists uvx; then
+    systemctl --user enable --now open-webui.service
+else
+    echo "uv absent, Open WebUI ignoré."
+fi
+
+if command_exists elephant; then
+    systemctl --user enable --now elephant.service
+fi
+
+if command_exists syncthing; then
+    systemctl --user enable --now syncthing.service
+fi
+
+
+# ============================================================
 # DOCKER
 # ============================================================
 

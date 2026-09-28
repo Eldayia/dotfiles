@@ -45,6 +45,7 @@ ffmpeg
 file-roller
 flatpak
 fprintd
+fuse-overlayfs
 fwupd
 fzf
 gamemode
@@ -141,6 +142,9 @@ npm
 nvme-cli
 obsidian
 okular
+ollama
+ollama-vulkan
+opencode
 openssh
 pavucontrol
 pika-backup

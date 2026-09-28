@@ -1,0 +1,20 @@
+[Unit]
+Description=Open WebUI
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+WorkingDirectory=%h/.local/share/open-webui
+
+Environment="DATA_DIR=%h/.local/share/open-webui/data"
+Environment="OLLAMA_BASE_URL=http://127.0.0.1:11434"
+
+ExecStart=/usr/bin/uvx --python 3.11 open-webui@latest serve --host 127.0.0.1 --port 8080
+
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

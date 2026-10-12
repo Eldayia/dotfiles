@@ -1,0 +1,7 @@
+# Seules les valeurs modifiées ; pueued complète le reste au démarrage
+client:
+  restart_in_place: true
+  status_time_format: "%H:%M:%S"
+daemon:
+  default_parallel_tasks: 2
+  callback: 'notify-send "pueue" "Tâche {{ id }} : {{ result }}\n{{ command }}"'

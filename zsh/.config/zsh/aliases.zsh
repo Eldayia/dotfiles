@@ -55,6 +55,33 @@ alias iplocal='ip -brief address'
 
 alias ff='fastfetch'
 
+alias up='topgrade'
+
+alias bw='sudo bandwhich'
+
+alias trip='sudo trip'
+
+alias watch='viddy'
+
+alias pq='pueue'
+
+
+# ============================================================
+# FICHIERS / TEXTE
+# ============================================================
+
+alias mdr='glow'
+
+alias hex='hexyl'
+
+alias cx='ouch compress'
+
+alias dx='ouch decompress'
+
+alias lx='ouch list'
+
+alias j='just'
+
 # ============================================================
 # GIT
 # ============================================================
@@ -149,3 +176,15 @@ alias bt='btop'
 alias ld='lazydocker'
 alias ts='termscp'
 #alias zj='zellij attach --create principal'
+
+
+# ============================================================
+# KITTY (kittens, uniquement dans Kitty)
+# ============================================================
+
+if [[ "$TERM" == xterm-kitty ]]; then
+    alias icat='kitten icat'
+    alias kdiff='kitten diff'
+    alias kssh='kitten ssh'
+    alias kthemes='kitten themes'
+fi

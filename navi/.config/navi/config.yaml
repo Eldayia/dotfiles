@@ -1,0 +1,14 @@
+style:
+  tag:
+    color: magenta
+  comment:
+    color: blue
+  snippet:
+    color: white
+finder:
+  command: fzf
+cheats:
+  paths:
+    - ~/.config/navi/cheats
+shell:
+  command: zsh

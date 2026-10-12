@@ -1,0 +1,17 @@
+[misc]
+# Étapes non pertinentes ou gérées ailleurs
+disable = ["containers", "vim"]
+assume_yes = false
+cleanup = true
+notify_each_step = false
+
+[linux]
+arch_package_manager = "paru"
+# Snapper prend déjà des instantanés via snap-pac
+
+[git]
+repos = ["~/dotfiles"]
+pull_predefined = false
+
+[commands]
+"Neovim (lazy.nvim)" = "nvim --headless '+Lazy! sync' +qa"

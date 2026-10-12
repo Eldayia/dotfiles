@@ -96,3 +96,16 @@ window-rule {
         xray false
     }
 }
+
+// Kitty gère sa propre transparence (background_opacity 0.85) ; Niri floute
+// ce qui est derrière. Règle explicite pour survivre à un changement global.
+window-rule {
+    match app-id="^kitty$"
+
+    draw-border-with-background false
+
+    background-effect {
+        blur true
+        xray false
+    }
+}

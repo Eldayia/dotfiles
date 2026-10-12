@@ -91,3 +91,46 @@ if (( $+commands[mise] )); then
     eval "$(mise activate zsh)"
 
 fi
+
+
+# ============================================================
+# NAVI (Ctrl+G : aide-mémoire interactif)
+# ============================================================
+
+if (( $+commands[navi] )); then
+
+    eval "$(navi widget zsh)"
+
+fi
+
+
+# ============================================================
+# TELEVISION (Alt+T : finder par canaux)
+#
+# Pas de « tv init zsh » : Ctrl+T reste à fzf et Ctrl+R à Atuin.
+# ============================================================
+
+if (( $+commands[tv] )); then
+
+    _tv_widget() {
+        local result
+        result="$(tv </dev/tty)" || { zle reset-prompt; return }
+        [[ -n "$result" ]] && LBUFFER+="${(q)result}"
+        zle reset-prompt
+    }
+
+    zle -N _tv_widget
+    bindkey '^[t' _tv_widget
+
+fi
+
+
+# ============================================================
+# STARSHIP (à garder en dernier)
+# ============================================================
+
+if (( $+commands[starship] )); then
+
+    eval "$(starship init zsh)"
+
+fi

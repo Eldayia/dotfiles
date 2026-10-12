@@ -1,6 +1,6 @@
 # Outils terminal et WireGuard
 
-Paquets officiels listés dans pacman.txt ; aucun paquet AUR supplémentaire.
+Paquets officiels listés dans pacman.txt.
 Les thèmes sont Catppuccin Mocha, avec opacité Ghostty à 90 %.
 
 ## Déploiement
@@ -23,6 +23,34 @@ Ouvrir un nouveau terminal pour charger les fonctions et alias Zsh.
 
 Docker est activé via docker.service. Le groupe docker est déjà configuré.
 Les raccourcis sont dans niri/.config/niri/custom/tui.kdl.
+
+## Outils CLI
+
+Paquets officiels, sauf topgrade-bin et viddy-bin (AUR). Configs Stow : bat, git (delta),
+mise, navi, pueue, starship, tealdeer, television, topgrade.
+
+| Commande / raccourci | Outil | Rôle |
+| --- | --- | --- |
+| prompt | Starship | Remplace Powerlevel10k, palette Catppuccin Mocha |
+| `git diff`, `git log -p` | delta | Pager Git, thème catppuccin-mocha (thème git/.config/git/themes) |
+| `cat`, aperçus fzf | bat | Thème Catppuccin Mocha ; après changement : `bat cache --build` |
+| `tldr` | tealdeer | Pages fr puis en, mises à jour hebdomadaires |
+| Alt+T, `tv` | television | Finder par canaux ; Ctrl+T reste à fzf, Ctrl+R à Atuin |
+| Ctrl+G, `navi` | navi | Aide-mémoire ; cheats perso dans navi/.config/navi/cheats |
+| `mise use node@22` | mise | Versions d’outils par projet (mise.toml) |
+| `sd 'avant' 'après' f` | sd | Remplacement de texte |
+| `cx` / `dx` / `lx` | ouch | Compresser / décompresser / lister une archive |
+| `mdr fichier.md` | glow | Lecture Markdown (`md` reste `mkdir -p`) |
+| `hex` | hexyl | Vue hexadécimale |
+| `fx fichier.json` | fx | Explorateur JSON |
+| `j` | just | Tâches de projet (justfile) |
+| `watchexec -e c make` | watchexec | Relance à chaque modification |
+| `trip hôte` | trippy | Traceroute + ping (sudo) |
+| `gping hôte` | gping | Ping graphique |
+| `bw` | bandwhich | Débit réseau par processus (sudo) |
+| `watch` | viddy | `watch` avec historique et diff |
+| `pq` | pueue | File de tâches ; démon pueued.service (utilisateur) |
+| `up` | topgrade | Mise à jour globale (paru, flatpak, omz, Lazy.nvim, dépôt dotfiles) |
 
 ## WireGuard avec NetworkManager
 
@@ -56,6 +84,9 @@ Les directives PostUp/PostDown ne sont pas reproduites par cet import.
 
 - Btop : https://github.com/catppuccin/btop
 - Yazi : https://github.com/yazi-rs/flavors/tree/main/catppuccin-mocha.yazi
+- bat : https://github.com/catppuccin/bat
+- delta : https://github.com/catppuccin/delta
+- Starship : https://github.com/catppuccin/starship
 - TermSCP : https://github.com/veeso/termscp/blob/main/themes/catppuccin-moka.toml
 - Format TermSCP : https://docs.termscp.rs/en-US/configuration/themes.html
 

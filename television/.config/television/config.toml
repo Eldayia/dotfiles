@@ -1,0 +1,8 @@
+# Seules les valeurs modifiées ; le reste suit la config par défaut de tv
+[ui]
+theme = "catppuccin"
+ui_scale = 100
+
+[shell_integration]
+# Ctrl+T reste à fzf ; tv est lancé avec la commande tv ou Alt+T (voir keybindings.zsh)
+fallback_channel = "files"

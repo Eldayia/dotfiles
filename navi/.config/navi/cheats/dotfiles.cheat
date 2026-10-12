@@ -1,0 +1,65 @@
+% dotfiles, stow
+
+# Redéployer tous les liens Stow
+bash ~/dotfiles/scripts/stow-configs.sh
+
+# Simuler Stow pour un dossier
+stow --dir="$HOME/dotfiles" --target="$HOME" --simulate --restow <package>
+
+# Paquets installés absents des listes
+pacman -Qqe | grep -vxFf <(cat ~/dotfiles/packages/pacman.txt ~/dotfiles/packages/aur.txt)
+
+$ package: ls -d ~/dotfiles/*/ | xargs -n1 basename
+
+% snapper, btrfs
+
+# Lister les instantanés
+sudo snapper -c root list
+
+# Différences entre deux instantanés
+sudo snapper -c root status <avant>..<apres>
+
+# Créer un instantané manuel
+sudo snapper -c root create --description "<description>"
+
+% wireguard, nmcli
+
+# Monter un tunnel WireGuard
+sudo nmcli connection up <connexion>
+
+# Couper un tunnel WireGuard
+sudo nmcli connection down <connexion>
+
+$ connexion: nmcli -g NAME,TYPE connection show | awk -F: '$2=="wireguard"{print $1}'
+
+% systemd, journal
+
+# Erreurs du démarrage courant
+journalctl -b -p err --no-pager
+
+# Suivre les logs d'un service utilisateur
+journalctl --user -fu <service>
+
+# Services en échec
+systemctl --failed; systemctl --user --failed
+
+$ service: systemctl --user list-units --type=service --no-legend --plain | awk '{print $1}'
+
+% niri
+
+# Lister les fenêtres
+niri msg windows
+
+# Valider la configuration niri
+niri validate
+
+% pueue
+
+# Ajouter une tâche en file
+pueue add -- <commande>
+
+# Suivre la sortie d'une tâche
+pueue follow <id>
+
+# Statut de la file
+pueue status

@@ -24,7 +24,9 @@ python-pysvn
 rabbitvcs
 rabbitvcs-nautilus
 sgdboop
+topgrade-bin
 vesktop-bin
+viddy-bin
 vlc-git
 walker-bin
 xwayland-satellite-git

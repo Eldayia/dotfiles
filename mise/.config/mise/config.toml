@@ -1,0 +1,8 @@
+# Versions globales : les outils système (pacman) restent prioritaires.
+# Dans un projet : mise use node@22 python@3.12 → crée mise.toml local.
+[tools]
+
+[settings]
+experimental = false
+# Lit aussi les .nvmrc, .python-version, .tool-versions
+idiomatic_version_file_enable_tools = ["node", "python"]

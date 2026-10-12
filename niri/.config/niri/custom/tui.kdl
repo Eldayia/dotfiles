@@ -9,6 +9,7 @@ window-rule {
 
 binds {
     Mod+twosuperior hotkey-overlay-title="Dropdown Terminal" { spawn "/home/eldayia/.config/niri/scripts/toggle-ghostty-dropdown"; }
+    Mod+Alt+T hotkey-overlay-title="Kitty (terminal de secours)" { spawn "kitty"; }
     Mod+Shift+B hotkey-overlay-title="Btop" { spawn "ghostty" "-e" "btop"; }
     Mod+Shift+Y hotkey-overlay-title="Yazi" { spawn "ghostty" "-e" "yazi"; }
     Mod+Shift+Z hotkey-overlay-title="Zellij" { spawn "ghostty" "-e" "zellij" "attach" "--create" "principal"; }

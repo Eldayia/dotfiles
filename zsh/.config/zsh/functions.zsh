@@ -232,19 +232,19 @@ qsync() {
     rsync -av --delete \
         --exclude='.obsidian/' \
         --exclude='.trash/' \
-        "$HOME/Documents/42-Piscine/Public/" \
-        "$HOME/Sites/42-notes/content/"
+        "/home/eldayia/Workspace/42/notes/vault/Public" \
+        "/home/eldayia/Workspace/42/notes/42-notes/content/"
 }
 
 qserve() {
     qsync || return 1
-    cd "$HOME/Sites/42-notes" || return 1
+    cd "/home/eldayia/Workspace/42/notes/42-notes" || return 1
     npx quartz build --serve
 }
 
 qdeploy() {
     qsync || return 1
-    cd "$HOME/Sites/42-notes" || return 1
+    cd "/home/eldayia/Workspace/42/notes/42-notes" || return 1
     npx quartz sync
 }
 

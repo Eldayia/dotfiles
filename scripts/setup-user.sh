@@ -71,28 +71,6 @@ fi
 
 
 # ============================================================
-# POWERLEVEL10K
-# ============================================================
-
-section "Powerlevel10k"
-
-P10K="$ZSH_CUSTOM/themes/powerlevel10k"
-
-if [[ ! -d "$P10K" ]]; then
-
-    git clone \
-        --depth=1 \
-        https://github.com/romkatv/powerlevel10k.git \
-        "$P10K"
-
-else
-
-    echo "Powerlevel10k déjà installé."
-
-fi
-
-
-# ============================================================
 # FZF-TAB
 # ============================================================
 
@@ -213,6 +191,31 @@ if command_exists pkgfile; then
     echo "Mise à jour de la base pkgfile..."
 
     sudo pkgfile -u
+
+fi
+
+
+# ============================================================
+# OUTILS CLI
+# ============================================================
+
+section "Outils CLI"
+
+if command_exists bat; then
+
+    bat cache --build
+
+fi
+
+if command_exists tldr; then
+
+    tldr --update
+
+fi
+
+if command_exists pueued; then
+
+    systemctl --user enable --now pueued.service
 
 fi
 

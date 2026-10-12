@@ -36,7 +36,7 @@ Modifier le fichier depuis `~/.config` ou depuis le dépôt revient donc à modi
 | Ensemble | Contenu |
 | :--- | :--- |
 | **Bureau** | Niri-Spicy, effets de flou, DankMaterialShell, écran de connexion greetd/DMS |
-| **Terminal** | Ghostty, Zsh, Oh My Zsh, Powerlevel10k, complétions et raccourcis |
+| **Terminal** | Ghostty, Kitty (secours), Zsh, Oh My Zsh, Starship, complétions, raccourcis et [outils CLI](packages/TUI.md) |
 | **Apparence** | Catppuccin, GTK, Qt, Kvantum, Cava et Fastfetch |
 | **Développement** | Git, Neovim, VS Code, CLion, Lazygit, GitFourchette et Lazydocker |
 | **Fichiers** | Nautilus et ses scripts, Yazi, TermSCP, aperçus et archives |
@@ -134,7 +134,7 @@ Cette étape permet notamment à `setup-user.sh` de trouver la configuration Nir
 bash scripts/setup-user.sh
 ```
 
-Le script prépare les dossiers utilisateur, installe **Oh My Zsh**, **Powerlevel10k** et **fzf-tab**, puis déploie les configurations avec Stow. Il définit Zsh comme shell par défaut si nécessaire.
+Le script prépare les dossiers utilisateur, installe **Oh My Zsh** et **fzf-tab**, prépare bat, tealdeer et pueue, puis déploie les configurations avec Stow. Il définit Zsh comme shell par défaut si nécessaire.
 
 Il traite aussi :
 
